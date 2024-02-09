@@ -1,0 +1,14 @@
+*.aux
+*.idx
+*.ilg
+*.ind
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xmpdata
+*.xmpi
+
+diploma-primer-razclenjen.zip
+auto
+.git

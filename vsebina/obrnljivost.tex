@@ -1,0 +1,86 @@
+\section{Podtipi}
+
+\begin{trditev}
+  \label{full-subtype}
+  Naj bo \(A\) tip, \(P\) predikat na \(A\), \(B\) pa družina tipov nad \(A\). Denimo, da
+  obstaja funkcija \(\typejudgment{s}{\pitype{x}{A}{Bx \to Px}}\). Tedaj velja ekvivalenca
+  \[\sumtype{x}{A}{Bx} \simeq \sumtype{t}{\sumtype{x}{A}{Px}}{B (pr_{1} t)}.\]
+\end{trditev}
+
+\begin{dokaz}
+  Po asociativnosti sigma tipov je desna stran ekvivalence ekvivalentna tipu
+  \(\sumtype{x}{A}{\sumtype{p}{Px}{Bx}} = \sumtype{x}{A}{Px \times Bx}\).
+  Po trditvi (TODO equiv-tot) torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
+  obstaja ekvivalenca \(Bx \simeq Px \times Bx\).
+
+  Funkcijo \(\defun{f}{Bx}{Px \times Bx}\) definiramo kot
+  \(\lambda \, y. \left(s(x,y),\, y\right)\), za funkcijo \(\defun{g}{Px \times Bx}{Bx}\) pa
+  lahko vzamemo drugo projekcijo. Očitno velja enakost \(g(f(y)) = y\), ker pa je \(P\)
+  predikat, velja tudi enakost
+  \(f(g\left(p, y\right)) = \left(s(x, y), y\right) = \left(p, y\right)\).
+\end{dokaz}
+
+\begin{trditev}
+  \label{subtype-id}
+  TODO subtype identity principle
+\end{trditev}
+
+\section{Karakterizacija obrnljivosti}
+
+\begin{definicija}
+  \emph{Prosta zanka} na tipu \(A\) je sestavljena iz točke \(\typejudgment{a}{A}\) in
+  identifikacije \(a = a\). Tip vseh prostih zank na tipu \(A\) označimo s
+  \[\typename{free-loop}(A) := \sumtype{x}{A}{x = x}.\]
+\end{definicija}
+
+\begin{izrek}
+  Tip prostih zank na tipu \(A \simeq B\) je ekvivalenten tipu obrnljivih funkcij
+  med \(A\) in \(B\).
+\end{izrek}
+
+\begin{dokaz}
+  Želimo konstruirati ekvivalenco med tipom \(\sumtype{e}{A \simeq B}{e = e}\) in tipom
+  \(\sumtype{f}{A \to B}{\isinv(f)}\).
+  Ker je \(\isequiv\) predikat in za vsako funkcijo \(f\) obstaja funkcija
+  \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
+  trditvi \ref{full-subtype} velja ekvivalenca
+  \[\sumtype{f}{A \to B}{\isinv(f)} \simeq
+    \sumtype{e}{A \simeq B}{\isinv(\map e).}
+  \]
+  (TODO define \map) Po trditvi (TODO equiv-tot)
+  torej zadošča pokazati, da za vsako ekvivalenco \(\dequiv{e}{A}{B}\) obstaja ekvivalenca
+  \[(e = e) \simeq \isinv(\map \, e).\]
+  Oglejmo si tip \[\isinv(\map e) = \sumtype{g}{B \to A}{(\map e \circ g \sim id) \times (g \circ \map e \sim id)}.\] Po
+  asociativnosti tipa odvisne vsote je ta ekvivalenten tipu
+  \begin{align*}
+    & \sumtype{H}{\sumtype{g}{B \to A}{\map e \circ g \sim id}}{(\map H \circ \map e \sim id)} = \\
+    & \sumtype{H}{\typename{section}(\map e)}{(\map H \circ \map e \sim id)},
+  \end{align*}
+  ker pa imajo po trditvi TODO ekvivalence kontraktibilen tip prerezov, po trditvi
+  (TODO kontraktibilen bazni prostor) velja še ekvivalenca
+  \[\sumtype{H}{\typename{section}(\map e)}{(\map H \circ \map e \sim id)} \simeq
+    \left(\typename{sec} e \circ \map e \sim id\right).\]
+  Sledi, da velja \(\isinv(\map e) \simeq (\typename{sec} e \circ \map e \sim id)\), dokaz pa
+  zaključimo še z zaporedjem ekvivalenc, ki jih argumentiramo spodaj.
+  \begin{align*}
+    & (\typename{sec} e \circ \map e \sim id) \simeq \\
+    & (\map e \circ \typename{sec}e \circ \map e \sim \map e) \simeq \\
+    & (\map e \sim \map e) \simeq \\
+    & (\map e = \map e) \simeq \\
+    & (e = e)
+  \end{align*}
+  \begin{itemize}
+  \item Ker je \(e\) ekvivalenca, je po trditvi TODO ekvivalenca tudi delovanje \(\map e\)
+    na homotopije.
+  \item Funkcija \(\typename{sec}e\) je prerez funkcije \(\map e\).
+  \item TODO funext
+  \item Po trditvi \ref{subtype-id} lahko zanko na funkciji \(\map e\) dvignemo do
+    zanke na pripadajoči ekvivalenci \(e\).
+  \end{itemize}
+\end{dokaz}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Najdovski-27191110-2023"
+%%% End:
