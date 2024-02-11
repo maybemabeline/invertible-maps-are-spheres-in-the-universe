@@ -1,30 +1,3 @@
-\section{Podtipi}
-
-\begin{trditev}
-  \label{full-subtype}
-  Naj bo \(A\) tip, \(P\) predikat na \(A\), \(B\) pa družina tipov nad \(A\). Denimo, da
-  obstaja funkcija \(\typejudgment{s}{\pitype{x}{A}{Bx \to Px}}\). Tedaj velja ekvivalenca
-  \[\sumtype{x}{A}{Bx} \simeq \sumtype{t}{\sumtype{x}{A}{Px}}{B (pr_{1} t)}.\]
-\end{trditev}
-
-\begin{dokaz}
-  Po asociativnosti sigma tipov je desna stran ekvivalence ekvivalentna tipu
-  \(\sumtype{x}{A}{\sumtype{p}{Px}{Bx}} = \sumtype{x}{A}{Px \times Bx}\).
-  Po trditvi (TODO equiv-tot) torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
-  obstaja ekvivalenca \(Bx \simeq Px \times Bx\).
-
-  Funkcijo \(\defun{f}{Bx}{Px \times Bx}\) definiramo kot
-  \(\lambda \, y. \left(s(x,y),\, y\right)\), za funkcijo \(\defun{g}{Px \times Bx}{Bx}\) pa
-  lahko vzamemo drugo projekcijo. Očitno velja enakost \(g(f(y)) = y\), ker pa je \(P\)
-  predikat, velja tudi enakost
-  \(f(g\left(p, y\right)) = \left(s(x, y), y\right) = \left(p, y\right)\).
-\end{dokaz}
-
-\begin{trditev}
-  \label{subtype-id}
-  TODO subtype identity principle
-\end{trditev}
-
 \section{Karakterizacija obrnljivosti}
 
 \begin{definicija}
