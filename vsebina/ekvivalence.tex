@@ -8,6 +8,7 @@
   \emph{tip retrakcij funkcije f}. Za funkcijo \(f\) pravimo, da \emph{ima retrakcijo}, če
   obstaja element tipa \(\ret(f)\), imenovan \emph{retrakcija f}.
 \end{definicija}
+
 \begin{definicija}
   Pravimo, da je funkcija \(f\) \emph{ekvivalenca}, če ima tako prerez kot retrakcijo,
   torej, da obstaja element tipa \[\isequiv(f) := \sect(f) \times \ret(f).\]
@@ -43,36 +44,32 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   homotopijo \(\homotopy{H}{f \circ s}{id}\) in njeno retrakcijo \(r\) s homotopijo
   \(\homotopy{K}{r \circ f}{id}\), s katerimi lahko konstruiramo homotopijo tipa
   \(s \circ f \sim id\) po sledečem izračunu:
-  \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\].
+  \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\]
 \end{dokaz}
 
+\begin{definicija}
+  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
+  Definiramo (TODO prevedi total) funkcijo
+  \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
+  \(\tot(f)(x, y) = (x, f(x, y))\).
+\end{definicija}
 
-\section{Podtipi}
+\begin{izrek}
+  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
+  Tedaj je \(\tot(f)\) ekvivalenca natanko tedaj, ko je \(f\) družina ekvivalenc, torej
+  ko je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\).
+\end{izrek}
 
-\begin{trditev}
-  \label{full-subtype}
-  Naj bo \(A\) tip, \(P\) predikat na \(A\), \(B\) pa družina tipov nad \(A\). Denimo, da
-  obstaja funkcija \(\typejudgment{s}{\pitype{x}{A}{Bx \to Px}}\). Tedaj velja ekvivalenca
-  \[\sumtype{x}{A}{Bx} \simeq \sumtype{t}{\sumtype{x}{A}{Px}}{B (pr_{1} t)}.\]
-\end{trditev}
+Zgornji izrek je pomemben, saj nam omogoči, da konstrukcijo ekvivalence med sigma tipi
+nad istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc, kar je pogosto
+veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
 
-\begin{dokaz}
-  Po asociativnosti sigma tipov je desna stran ekvivalence ekvivalentna tipu
-  \(\sumtype{x}{A}{\sumtype{p}{Px}{Bx}} = \sumtype{x}{A}{Px \times Bx}\).
-  Po trditvi (TODO equiv-tot) torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
-  obstaja ekvivalenca \(Bx \simeq Px \times Bx\).
-
-  Funkcijo \(\defun{f}{Bx}{Px \times Bx}\) definiramo kot
-  \(\lambda \, y. \left(s(x,y),\, y\right)\), za funkcijo \(\defun{g}{Px \times Bx}{Bx}\) pa
-  lahko vzamemo drugo projekcijo. Očitno velja enakost \(g(f(y)) = y\), ker pa je \(P\)
-  predikat, velja tudi enakost
-  \(f(g\left(p, y\right)) = \left(s(x, y), y\right) = \left(p, y\right)\).
-\end{dokaz}
-
-\begin{trditev}
-  \label{subtype-id}
-  TODO subtype identity principle
-\end{trditev}
+\begin{posledica}
+  \label{equiv-tot}
+  Naj bo \(A\) tip, \(B\) in \(C\) družini tipov nad \(A\) in denimo, da velja
+  \(B(x) \simeq C(x)\) za vsak \(\typejudgment{x}{A}\).
+  Tedaj velja \(\sumtype{x}{A}{B(x)} \simeq \sumtype{x}{A}{C(x)}\).
+\end{posledica}
 
 %%% Local Variables:
 %%% mode: latex
