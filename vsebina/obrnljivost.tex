@@ -14,13 +14,14 @@
 \begin{dokaz}
   Želimo konstruirati ekvivalenco med tipom \(\sumtype{e}{A \simeq B}{e = e}\) in tipom
   \(\sumtype{f}{A \to B}{\isinv(f)}\).
-  Ker je \(\isequiv\) predikat in za vsako funkcijo \(f\) obstaja funkcija
+  Ker je \(\isequiv\) predikat in ker po trditvi \ref{inv-of-equiv}
+  za vsako funkcijo \(f\) obstaja funkcija
   \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
   trditvi \ref{full-subtype} velja ekvivalenca
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq
     \sumtype{e}{A \simeq B}{\isinv(\map e).}
   \]
-  (TODO define \map) Po posledici \ref{equiv-tot}
+  Po posledici \ref{equiv-tot}
   torej zadošča pokazati, da za vsako ekvivalenco \(\dequiv{e}{A}{B}\) obstaja ekvivalenca
   \[(e = e) \simeq \isinv(\map \, e).\]
   Oglejmo si tip \[\isinv(\map e) = \sumtype{g}{B \to A}{(\map e \circ g \sim id) \times (g \circ \map e \sim id)}.\] Po

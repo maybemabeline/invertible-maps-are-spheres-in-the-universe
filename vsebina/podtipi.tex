@@ -3,13 +3,14 @@
 \begin{trditev}
   \label{full-subtype}
   Naj bo \(A\) tip, \(P\) predikat na \(A\), \(B\) pa družina tipov nad \(A\). Denimo, da
-  obstaja funkcija \(\typejudgment{s}{\pitype{x}{A}{Bx \to Px}}\). Tedaj velja ekvivalenca
+  obstaja družina funkcij \(\typejudgment{s}{\pitype{x}{A}{(Bx \to Px)}}\).
+  Tedaj velja ekvivalenca
   \[\sumtype{x}{A}{Bx} \simeq \sumtype{t}{\sumtype{x}{A}{Px}}{B (pr_{1} t)}.\]
 \end{trditev}
 
 \begin{dokaz}
   Po asociativnosti sigma tipov je desna stran ekvivalence ekvivalentna tipu
-  \(\sumtype{x}{A}{\sumtype{p}{Px}{Bx}} = \sumtype{x}{A}{Px \times Bx}\).
+  \(\sumtype{x}{A}{\sumtype{p}{Px}{Bx}} = \sumtype{x}{A}{(Px \times Bx)}\).
   Po posledici \ref{equiv-tot} torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
   obstaja ekvivalenca \(Bx \simeq Px \times Bx\).
 
