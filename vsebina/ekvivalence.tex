@@ -47,12 +47,35 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\]
 \end{dokaz}
 
+\begin{comment}
+\begin{definicija}
+  Naj bo \(\defun{f}{A}{B}\) funkcija in \(\typejudgment{b}{B}\). Tip
+  \[\fib{f}{b} := \sumtype{x}{A}{f(x) = b}\]
+  imenujemo \emph{vlakno funkcije f pri točki b}.
+\end{definicija}
+
+\begin{trditev}
+  Funkcija \(f\) je obrnljiva natanko tedaj, ko je vlakno funkcije \(f\) pri \(y\)
+  kontraktibilno za vsak \(\typejudgment{y}{B}\).
+\end{trditev}
+
+\begin{dokaz}
+  Denimo najprej, da je funkcija \(\defun{f}{A}{B}\) obrnljiva in naj bo
+  \(\typejudgment{y}{B}\). Dokazati želimo, da je tip
+  \(\fib{f}{y} = \sumtype{x}{A}{fx = y}\)
+  kontraktibilen. Ker je funkcija \(f\) obrnljiva, obstaja funkcija \(\defun{g}{B}{A}\)
+  in homotopija \(\homotopy{H}{f \circ g}{id}\), zato lahko za center kontrakcije
+  tipa \(\fib{f}{y}\) izberemo element \(\left(g(y), H(y)\right)\). Da bi konstruirali
+\end{dokaz}
+
 \begin{definicija}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
   Definiramo (TODO prevedi total) funkcijo
   \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
   \(\tot(f)(x, y) = (x, f(x, y))\).
 \end{definicija}
+\end{comment}
+
 
 \begin{izrek}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
@@ -60,7 +83,7 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   ko je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\).
 \end{izrek}
 
-Zgornji izrek je pomemben, saj nam omogoči, da konstrukcijo ekvivalence med sigma tipi
+Zgornji izrek je pomemben, saj nam omogoči, da konstrukcijo ekvivalenc med sigma tipi
 nad istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc, kar je pogosto
 veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
 
