@@ -1,9 +1,11 @@
 \section{Ekvivalence in obrnljive funkcije}
+
 \begin{definicija}
   Naj bo \(\defun{f}{A}{B}\) funkcija. Tip
   \[\sect f := \sumtype{g}{B \to A}{f \circ g \sim id}\]
   imenujemo \emph{tip prerezov funkcije f}. Za funkcijo \(f\) pravimo, da
   \emph{ima prerez}, če obstaja element tipa \(\sect(f)\), imenovan \emph{prerez f}.
+
   Tip \[\ret(f) := \sumtype{g}{B \to A}{g \circ f \sim id}\] imenujemo
   \emph{tip retrakcij funkcije f}. Za funkcijo \(f\) pravimo, da \emph{ima retrakcijo}, če
   obstaja element tipa \(\ret(f)\), imenovan \emph{retrakcija f}.
@@ -11,7 +13,7 @@
 
 \begin{definicija}
   Pravimo, da je funkcija \(f\) \emph{ekvivalenca}, če ima tako prerez kot retrakcijo,
-  torej, da obstaja element tipa \[\isequiv(f) := \sect(f) \times \ret(f).\]
+  torej, če obstaja element tipa \[\isequiv(f) := \sect(f) \times \ret(f).\]
   Pravimo, da je tip \(A\) \emph{ekvivalenten} tipu \(B\), če obstaja ekvivalenca med
   njima, torej element tipa \(A \simeq B := \sumtype{f}{A \to B}{\isequiv(f)}\).
 \end{definicija}
@@ -40,8 +42,8 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   Denimo, da je funkcija \(f\) obrnljiva. Tedaj lahko njen inverz podamo tako kot njen
   prerez, kot njeno retrakcijo, kar pokaže, da je ekvivalenca.
 
-  Obratno denimo, da je funkcija \(f\) ekvivalenca. Podan imamo njen prerez \(s\) s
-  homotopijo \(\homotopy{H}{f \circ s}{id}\) in njeno retrakcijo \(r\) s homotopijo
+  Obratno denimo, da je funkcija \(f\) ekvivalenca. Podano imamo funkcijo \(s\) s
+  homotopijo \(\homotopy{H}{f \circ s}{id}\) in funkcijo \(r\) s homotopijo
   \(\homotopy{K}{r \circ f}{id}\), s katerimi lahko konstruiramo homotopijo tipa
   \(s \circ f \sim id\) po sledečem izračunu:
   \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\]
@@ -67,21 +69,28 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   in homotopija \(\homotopy{H}{f \circ g}{id}\), zato lahko za center kontrakcije
   tipa \(\fib{f}{y}\) izberemo element \(\left(g(y), H(y)\right)\). Da bi konstruirali
 \end{dokaz}
+\end{comment}
 
 \begin{definicija}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
   Definiramo (TODO prevedi total) funkcijo
-  \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
+  \(\typejudgment{\tot(f)}{\sumtype{x}{A}{B(x)}} \to \sumtype{x}{A}{C(x)}\) s predpisom
   \(\tot(f)(x, y) = (x, f(x, y))\).
 \end{definicija}
-\end{comment}
-
 
 \begin{izrek}
-  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
-  Tedaj je \(\tot(f)\) ekvivalenca natanko tedaj, ko je \(f\) družina ekvivalenc, torej
-  ko je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\).
+  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij
+  in denimo, da je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\). Tedaj je
+  ekvivalenca tudi funkcija \(\tot(f)\).
 \end{izrek}
+
+\begin{dokaz}
+  Ker je funkcija \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\),
+  lahko tvorimo družino funkcij
+  \(\typejudgment{s}{\pitype{x}{A}{\left(C(x) \to B(x)\right)}}\), kjer je \(s(x)\)
+  funkcija, pripadajoča prerezu funkcije \(f(x)\).
+  Trdimo,
+\end{dokaz}
 
 Zgornji izrek je pomemben, saj nam omogoči, da konstrukcijo ekvivalenc med sigma tipi
 nad istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc, kar je pogosto
