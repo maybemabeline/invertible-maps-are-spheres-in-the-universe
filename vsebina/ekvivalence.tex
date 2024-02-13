@@ -1,5 +1,5 @@
 \section{Ekvivalence in obrnljive funkcije}
-
+\subsection{Definicije}
 \begin{definicija}
   Za funkcijo \(f\) pravimo, da \emph{ima prerez}, če obstaja element tipa
   \[\sect f := \sumtype{g}{B \to A}{f \circ g \sim id},\]
@@ -30,6 +30,8 @@
   Funkcije, pripadajoče elementom \(\isinv(f)\), imenujemo \emph{inverzi funkcije f}.
 \end{definicija}
 
+\subsection{Osnovne lastnosti}
+
 V definiciji obrnljivosti smo zahtevali, da ima funkcija obojestranski inverz, v
 definiciji ekvivalence pa smo zahtevali le, da ima ločen levi in desni inverz.
 To bi nas lahko
@@ -53,28 +55,6 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   \(s \circ f \sim id\) po sledečem izračunu:
   \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\]
 \end{dokaz}
-
-\begin{comment}
-\begin{definicija}
-  Naj bo \(\defun{f}{A}{B}\) funkcija in \(\typejudgment{b}{B}\). Tip
-  \[\fib{f}{b} := \sumtype{x}{A}{f(x) = b}\]
-  imenujemo \emph{vlakno funkcije f pri točki b}.
-\end{definicija}
-
-\begin{trditev}
-  Funkcija \(f\) je obrnljiva natanko tedaj, ko je vlakno funkcije \(f\) pri \(y\)
-  kontraktibilno za vsak \(\typejudgment{y}{B}\).
-\end{trditev}
-
-\begin{dokaz}
-  Denimo najprej, da je funkcija \(\defun{f}{A}{B}\) obrnljiva in naj bo
-  \(\typejudgment{y}{B}\). Dokazati želimo, da je tip
-  \(\fib{f}{y} = \sumtype{x}{A}{fx = y}\)
-  kontraktibilen. Ker je funkcija \(f\) obrnljiva, obstaja funkcija \(\defun{g}{B}{A}\)
-  in homotopija \(\homotopy{H}{f \circ g}{id}\), zato lahko za center kontrakcije
-  tipa \(\fib{f}{y}\) izberemo element \(\left(g(y), H(y)\right)\). Da bi konstruirali
-\end{dokaz}
-\end{comment}
 
 \begin{definicija}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij.

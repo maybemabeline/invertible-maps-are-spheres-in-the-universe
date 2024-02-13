@@ -1,4 +1,33 @@
-\section{Podtipi}
+\section{Osnovne definicije homotopske teorije tipov}
+
+\subsection{Sigma tipi in odvisne funkcije}
+
+\begin{definicija}
+  Naj bo \(A\) tip in \(B\) družina tipov nad \(A\). Tvorimo tip \[\sumtype{x}{A}{Bx},\]
+  imenovan \emph{sigma tip družine B nad A}. Elementi \(\sumtype{x}{A}{Bx}\) so pari
+  \(\left(x, y\right)\), kjer je \(\typejudgment{x}{A}\) in \(\typejudgment{y}{Bx}\).
+\end{definicija}
+
+\begin{trditev}
+  \label{eq-Sigma}
+  TODO karakterizacija enakosti v sigma tipih
+\end{trditev}
+
+\begin{definicija}
+  Naj bo \(A\) tip in \(B\) družina tipov nad \(A\). Tvorimo tip \[\pitype{x}{A}{Bx},\]
+  imenovan \emph{tip odvisnih funkcij med A in B}. Elementi
+  \(\pitype{x}{A}{Bx}\) so predpisi \(f\), ki vsakemu elementu \(\typejudgment{x}{A}\)
+  priredijo element \(\typejudgment{f(x)}{Bx}\), imenujemo pa jih
+  \emph{odvisne funkcije med A in B}.
+\end{definicija}
+
+\subsection{Podtipi}
+
+\begin{definicija}
+  Naj bo \(A\) tip in \(P\) družina tipov nad \(A\). Pravimo, da je \(P\) \emph{predikat},
+  če velja \(\isprop(Px)\) za vsak \(\typejudgment{x}{A}\).
+\end{definicija}
+Kadar imamo podan
 
 \begin{trditev}
   \label{full-subtype}
@@ -26,6 +55,7 @@
   \label{subtype-id}
   TODO subtype identity principle
 \end{trditev}
+
 
 %%% Local Variables:
 %%% mode: latex
