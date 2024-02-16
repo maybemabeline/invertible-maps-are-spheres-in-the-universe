@@ -2,7 +2,7 @@
 \subsection{Definicije}
 \begin{definicija}
   Za funkcijo \(f\) pravimo, da \emph{ima prerez}, če obstaja element tipa
-  \[\sect f := \sumtype{g}{B \to A}{f \circ g \sim id},\]
+  \[\sect(f) := \sumtype{g}{B \to A}{f \circ g \sim id},\]
   imenovanega \emph{tip prerezov funkcije f}.
 
   Funkcije, pripadajoče elementom tipa \(\sect f\) imenujemo \emph{prerezi funkcije f}.
@@ -60,14 +60,14 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij.
   Definiramo funkcijo
   \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
-  \(\tot(f)(x, y) = (x, f(x, y))\).
+  \(\tot(f)(x, y) = (x, f(x)(y))\).
 \end{definicija}
 
-\begin{izrek}
+\begin{trditev}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij
   in denimo, da je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\). Tedaj je
   ekvivalenca tudi funkcija \(\tot(f)\).
-\end{izrek}
+\end{trditev}
 
 \begin{dokaz}
   Ker je funkcija \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\),
@@ -76,13 +76,13 @@ kar pokaže, da je \(f\) tudi obrnljiva.
   prerez funkcije \(f(x)\).
   Trdimo, da je tedaj \(\tot(s)\) prerez funkcije \(\tot(f)\), saj
   za vsak \(\typejudgment{(x, y)}{\sumtype{x}{A}{Cx}}\) velja enakost
-  \[\tot(f)(\tot(s)(x, y)) = \tot(f)(x, s(x, y)) = (x, f(x, s(x, y))) = (x, y).\]
+  \[\tot(f)(\tot(s)(x, y)) = \tot(f)(x, s(x)(y)) = (x, f(x)(s(x)(y))) = (x, y).\]
   Analogno lahko konstruiramo retrakcijo funkcije \(\tot(f)\), kar zaključi dokaz.
 \end{dokaz}
 
-Zgornji izrek je pomemben, saj nam omogoči, da konstrukcijo ekvivalenc med sigma tipi
-nad istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc, kar je pogosto
-veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
+Zgornja trditev je pomembna, saj nam omogoči, da konstrukcijo ekvivalence med odvisnima
+vsotama z istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc,
+kar je pogosto veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
 
 \begin{posledica}
   \label{equiv-tot}

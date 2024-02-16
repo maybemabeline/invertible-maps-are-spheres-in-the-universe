@@ -12,8 +12,8 @@
 \end{izrek}
 
 \begin{dokaz}
-  Želimo konstruirati ekvivalenco med tipom \(\sumtype{e}{A \simeq B}{e = e}\) in tipom
-  \(\sumtype{f}{A \to B}{\isinv(f)}\).
+  Želimo konstruirati ekvivalenco tipa
+  \[\sumtype{e}{A \simeq B}{(e = e)} \simeq \sumtype{f}{A \to B}{\isinv(f)}.\]
   Ker je \(\isequiv\) predikat in ker po trditvi \ref{inv-of-equiv}
   za vsako funkcijo \(f\) obstaja funkcija
   \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
@@ -23,9 +23,9 @@
   \]
   Po posledici \ref{equiv-tot}
   torej zadošča pokazati, da za vsako ekvivalenco \(\dequiv{e}{A}{B}\) obstaja ekvivalenca
-  \[(e = e) \simeq \isinv(\map \, e).\]
+  \[(e = e) \simeq \isinv(\map e).\]
   Oglejmo si tip \[\isinv(\map e) = \sumtype{g}{B \to A}{(\map e \circ g \sim id) \times (g \circ \map e \sim id)}.\]
-  Po asociativnosti sigma tipov ta ekvivalenten tipu
+  Po asociativnosti odvisne vsote ta ekvivalenten tipu
   \begin{align*}
     & \sumtype{H}{\sumtype{g}{B \to A}{\map e \circ g \sim id}}{(\map H \circ \map e \sim id)} = \\
     & \sumtype{H}{\typename{section}(\map e)}{(\map H \circ \map e \sim id)},
