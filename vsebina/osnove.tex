@@ -9,11 +9,6 @@
   \(\left(x, y\right)\), kjer je \(\typejudgment{x}{A}\) in \(\typejudgment{y}{Bx}\).
 \end{definicija}
 
-\begin{trditev}
-  \label{eq-Sigma}
-  TODO karakterizacija enakosti v odvisnih vsotah
-\end{trditev}
-
 \begin{definicija}
   Naj bo \(A\) tip in \(B\) družina tipov nad \(A\).
   Definiramo tip \[\pitype{x}{A}{Bx},\]
@@ -23,13 +18,46 @@
   \emph{odvisne funkcije med A in B}.
 \end{definicija}
 
+
 \subsection{Enakost in homotopija}
 
 \begin{definicija}
   Naj bo \(A\) tip in \(\typejudgment{x, y}{A}\). Definiramo tip \(x = y\), imenovan
-  \emph{tip identifikacij med x in y}, elemente katerega imenujemo
+  \emph{tip identifikacij med x in y}, elemente katerega pa imenujemo
   \emph{identifikacije med x in y}. Za vsak \(\typejudgment{x}{A}\) obstaja identifikacija
-  \(\eqtype{\refl{x}}{x}{x}\).
+  \(\eqtype{\refl{x}}{x}{x}\). TODO induction principle
+\end{definicija}
+
+Iz indukcijskega pravila za tip identifikacij lahko izpeljemo mnoge znane lastnosti
+enakosti. Pokazali bomo, da obstoj identifikacij tvori ekvivalenčno relacijo in da vsaka
+funkcija to relacijo ohranja,
+konstruirali pa bomo še tako imenovano funkcijo \emph{transport}.
+
+\begin{definicija}
+  Naj bo \(A\) tip. Definiramo operacijo \emph{konkatenacije}
+  \[\typejudgment{\typename{concat}}{\pitype{x, y, z}{A}
+      {(x = y) \to ((y = z) \to (x = z))}}\]
+  in operacijo \emph{inverza}
+  \[\typejudgment{\typename{inv}}{\pitype{x, y}{A}{(x = y) \to (y = x)}}.\]
+  Za \(\typename{concat}(x, y, z, p, q)\) bomo pogosteje pisali \(p \cdot q\), za
+  \(\typename{inv}(x, y, p)\) pa \(p^{-1}\).
+\end{definicija}
+
+\begin{konstrukcija}
+  Da bi definirali operacijo \(\typename{concat}\), po indukcijskem pravilu za
+  identifikacije zadošča, da podamo \(\typename{concat}(x, x, z, \refl{x}, q)\)
+\end{konstrukcija}
+
+\begin{trditev}
+  \label{eq-Sigma}
+  TODO karakterizacija enakosti v odvisnih vsotah
+\end{trditev}
+
+\begin{definicija}
+  Naj bosta \(\defun{f, g}{A}{B}\) funkcij. Pravimo, da sta funkciji \(f\) in \(g\)
+  \emph{homotopni}, če obstaja element tipa
+  \[f \sim g := \sumtype{x}{A}{f(x) = g(x)}.\]
+  Elemente \(\homotopy{H}{f}{g}\) imenujemo \emph{homotopije med f in g}.
 \end{definicija}
 
 %%% Local Variables:
