@@ -179,8 +179,8 @@
   zanje velja, da so kontraktibilni, čim vsebujejo točko.
 
   Pokazali bomo, da ekvivalence ohranjajo lastnost \(\isprop\), torej, da
-  če velja \(A \simeq B\) in \(\isprop(A)\), da tedaj velja tudi \(\isprop(B)\), za tem
-  pa skicirali dokaz trditve \(\isprop(\isequiv(f))\) za poljubno funkcijo \(f\).
+  če velja \(A \simeq B\) in \(\isprop(A)\), da tedaj velja tudi \(\isprop(B)\), za tem pa še
+  skicirali dokaz trditve \(\isprop(\isequiv(f))\) za poljubno funkcijo \(f\).
   Dokaz trditve je precej tehničen, njena vsebina pa ni nepričakovana:
   če ima funkcija levi in desni inverz, sta ta do homotopije natanko enolično določena.
   Trditev pa nam pravzaprav pove še več,
@@ -189,21 +189,22 @@
 
   Sedaj je dokaz neekvivalence med \(\isequiv(f)\) in \(\isinv(f)\) na dlani: če bi taka
   ekvivalenca obstajala, bi ohranjala lastnost \(\isprop\) tipa \(\isequiv(f)\), torej
-  moramo poiskati funkcijo \(f\), za katero \(\isprop(\isinv(f))\) ne velja, vendar se
-  izkaže, da v teoriji tipov, s katero smo delali do sedaj, te trditve ne moremo ne
-  dokazati ne ovreči. V namen sintetične homotopske terorije tipov pa našo teorijo tipov
-  pogosto razširimo z \emph{višjimi induktivnimi tipi}: to so tipi za katere ne
+  moramo le še poiskati funkcijo \(f\), za katero \(\isprop(\isinv(f))\) ne velja.
+  Izkaže pa se, da v teoriji tipov, s katero smo delali do sedaj, obstoja take funkcije
+  ne moremo ne dokazati, ne ovreči, pokazali pa bomo, da ga lahko dokažemo v določeni
+  razširitvi. V namen sintetične homotopske teorije našo teorijo tipov
+  pogosto razširimo z različnimi \emph{višjimi induktivnimi tipi}: to so tipi za katere ne
   predpostavimo samo sklepov za konstrukcijo točk, temveč tudi sklepe za konstrukcijo
   identifikacij. Predstavili bomo enega od najpomembnejših primerov višjih induktivnih
   tipov, \emph{sfere} \(\mathbb{S}^{n}\), in pokazali da identitetna funkcija
   na \(\mathbb{S}^{1}\) ne zadošča \(\isprop(\isinv(\mathrm{id}_{\mathbb{S}^{1}}))\). Za
-  podrobnosti o konstrukcijah z višjimi induktivnimi tipi se skličemo na
+  podrobnosti o konstrukcijah z višjimi induktivnimi tipi se bomo sklicali na
   \cite{hottbook} in \cite{ljungström2024symmetric}
 \end{section}
 
 \begin{section}{Karakterizacija obrnljivosti}
-  V zadnjem poglavju bomo predstavili novo karakterizacijo tipa obrnljivih funkcij, torej
-  tipa vseh obrnljivih funkcij med tipoma \(A\) in \(B\):
+  V zadnjem poglavju bomo predstavili novo karakterizacijo
+  tipa obrnljivih funkcij med tipoma \(A\) in \(B\):
   \begin{equation}
     \label{mjau}
       \typename{invertible-map}(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.
@@ -212,7 +213,7 @@
   \[\typename{invertible-map}(A, B) \simeq \sumtype{e}{A \simeq B}{e = e},\]
   formalizacija česar je tudi dostopna v knjižnici formalizirane matematike z dokazovalnim
   pomočnikom Agda \cite{agda-unimath}.
-  Na koncu vpeljemo še tako imenovane \emph{svetove} \(\mathcal{U}\), tipe, katerih elementi so
+  Na koncu bomo vpeljali še tako imenovane \emph{svetove} \(\mathcal{U}\), tipe, katerih elementi so
   tipi, in aksiom \emph{univalence}, ki opisuje tipe identifikacij na svetovih.
   Preko univerzalnih lastnosti sfer, aksioma univalence in trditve \ref{mjau}
   bomo dokazali še sledečo ekvivalenco:
