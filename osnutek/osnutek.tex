@@ -2,6 +2,7 @@
 \usepackage[slovene]{babel}
 \usepackage[style=numeric, backend=biber]{biblatex}
 \usepackage{amsfonts}
+\usepackage{hyperref}
 
 \title{Obrnljive funkcije so sfere v svetu}
 \author{
@@ -195,7 +196,7 @@
   predpostavimo samo sklepov za konstrukcijo točk, temveč tudi sklepe za konstrukcijo
   identifikacij. Predstavili bomo enega od najpomembnejših primerov višjih induktivnih
   tipov, \emph{sfere} \(\mathbb{S}^{n}\), in pokazali da identitetna funkcija
-  na \(\mathbb{S}^{1}\) ne zadošča \(\isprop(\isinv(id_{\mathbb{S}^{1}}))\). Za
+  na \(\mathbb{S}^{1}\) ne zadošča \(\isprop(\isinv(\mathrm{id}_{\mathbb{S}^{1}}))\). Za
   podrobnosti o konstrukcijah z višjimi induktivnimi tipi se skličemo na
   \cite{hottbook} in \cite{ljungström2024symmetric}
 \end{section}
@@ -214,7 +215,7 @@
   Na koncu vpeljemo še tako imenovane \emph{svetove} \(\mathcal{U}\), tipe, katerih elementi so
   tipi, in aksiom \emph{univalence}, ki opisuje tipe identifikacij na svetovih.
   Preko univerzalnih lastnosti sfer, aksioma univalence in trditve \ref{mjau}
-  dokažemo še sledečo ekvivalenco:
+  bomo dokazali še sledečo ekvivalenco:
   \[\sumtype{A}{\mathcal{U}}{\sumtype{B}{\mathcal{U}}{(\typename{invertible-map}(A, B))}} \simeq
     (\mathbb{S}^{2} \to \mathcal{U}).\]
 \end{section}
