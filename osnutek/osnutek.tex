@@ -1,0 +1,198 @@
+\documentclass[a4paper, slovene]{article}
+\usepackage[slovene]{babel}
+\usepackage[style=numeric, backend=biber]{biblatex}
+
+\title{Obrnljive funkcije so sfere v svetu}
+\author{
+  Timon Najdovski \and
+  Mentor: prof.~dr.~Andrej~Bauer \and
+  Somentor: asist.~-~razisk.~PhD.~Egbert~Marteen~Rijke
+}
+
+
+\date{\today}
+\addbibresource{literatura.bib}
+\input{../definicije.tex}
+
+\begin{document}
+\maketitle
+
+\begin{section}{Osnove Martin-Löfove odvisne teorije tipov}
+  Sledeč \cite{rijke2022introduction} bomo v tem poglavju predstavili
+  osnovne koncepte Martin-Löfove odvisne teorije tipov. Zaradi njihove razsežnosti se ne
+  bomo spustili v podrobnosti formalnih definicij, vendar bomo osnove opisali v nekoliko
+  neformalnem slogu.
+
+  Osnovni objekti, s katerimi bomo delali, so \emph{tipi}, ki jih bomo označevali z
+  velikimi tiskanimi črkami, kot so \(A, B\) in \(C\). Tipi lahko vsebujejo
+  \emph{elemente}, kar bomo označili z zapisom \(\typejudgment{x}{A}\), ki ga preberemo
+  kot \emph{x je tipa A}. Zapis \(\typejudgment{x}{A}\) je v mnogih pogledih
+  podoben relaciji \(x \in A\) iz formalizma teorije množic, vendar se od nje razlikuje
+  v nekaj pomembnih pogledih. Elementi v teoriji tipov obstajajo samo znotraj svojih
+  tipov, kar pomeni, da za element \(\typejudgment{x}{A}\) vprašanje
+  ``Ali velja \(\typejudgment{x}{B}\)?'' sploh ni smiselno. V nasprotju s tem
+  lahko v teoriji tipov \(\typejudgment{x}{A}\) le predpostavimo, ali pa
+  konstruiramo po nekem zaporedju sklepov.
+
+  Iz znanih tipov lahko tvorimo mnoge sestavljene tipe, nekaj od katerih naštejemo spodaj.
+  Sestavljene tipe podamo s sklepi, ki nam omogočajo delo z njihovimi elementi, in
+  z enačbami, ki nam omogočajo, da en izraz nadomestimo z drugim.
+
+  \begin{itemize}
+  \item \emph{Koprodukt} \(A + B\), za katerega veljata sklepa:
+    \begin{itemize}
+    \item Če velja \(\typejudgment{x}{A}\), velja \(\typejudgment{\iota_{1}(a)}{A + B}\).
+    \item Če velja \(\typejudgment{y}{B}\), velja \(\typejudgment{\iota_{2}(b)}{A + B}\).
+    \end{itemize}
+  \item \emph{Produkt} \(A \times B\), za katerega veljajo sklepi:
+    \begin{itemize}
+    \item Če velja \(\typejudgment{t}{A \times B}\), velja \(\typejudgment{\pi_{1}(t)}{A}\).
+    \item Če velja \(\typejudgment{t}{A \times B}\), velja \(\typejudgment{\pi_{2}(t)}{B}\).
+    \item Če veljata \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B}\), velja
+      \(\typejudgment{(x, y)}{A \times B}\).
+    \item Za vsak \(\typejudgment{a}{A}\) in \(\typejudgment{b}{B}\) velja
+      \(\pi_{1}(a, b) \doteq a\) in \(\pi_{2}(a, b) \doteq b \).
+    \end{itemize}
+  \item \emph{Funkcijski tip} \(A \to B\), za katerega veljajo sklepi:
+    \begin{itemize}
+    \item Če veljata \(\typejudgment{x}{A}\) in \(\defun{f}{A}{B}\), velja
+      \(\typejudgment{f(x)}{B}\).
+    \item Če pod predpostavko \(\typejudgment{x}{A}\) velja \(\typejudgment{b(x)}{B}\),
+      velja \(\typejudgment{\lambda x.b(x)}{A \to B}\).
+    \item Za vsak \(\typejudgment{a}{A}\) velja enakost \((\lambda x.b(x))(a) \doteq b(a)\).
+    \item Za vsako funkcijo \(\defun{f}{A}{B}\) velja enakost \(\lambda x.f(x) \doteq f\).
+    \end{itemize}
+  \end{itemize}
+
+  S tipi ne želimo predstaviti samo matematičnih objektov,
+  temveč tudi matematične trditve, kar bomo dosegli preko tako imenovane interpretacije
+  \emph{izjave kot tipi} (ang. \emph{propositions as types}). V tej interpretaciji
+  vsaki trditvi dodelimo tip, elementi katerega so dokazila, da ta trditev velja.
+  Tako konstrukcija elementa \(\typejudgment{p}{P}\) postane konstrukcija dokazila
+  veljavnosti trditve \(P\), kar pa ustreza dokazu trditve \(P\). Če si sedaj zopet
+  ogledamo konstrukcije koprodukta, produkta in funkcijskih tipov, vidimo, da ustrezajo
+  disjunkciji, konjunkciji in implikaciji med trditvami.
+
+  Kadar lahko pod predpostavko \(\typejudgment{x}{A}\) tvorimo tip \(B(x)\), takrat \(B\)
+  imenujemo \emph{odvisen tip} oz. \emph{družina tipov nad A}.
+  Za \(A\) tip in \(B\) družino tipov nad \(A\) definiramo še dva sestavljena tipa:
+
+  \begin{enumerate}
+  \item \emph{Odvisna vsota} \(\sumtype{x}{A}{B(x)}\), za katero veljajo sklepi:
+    \begin{itemize}
+    \item Če velja \(\typejudgment{t}{\sumtype{x}{A}{B(x)}}\),
+      velja \(\typejudgment{\pi_{1}(t)}{A}\).
+    \item Če velja \(\typejudgment{t}{\sumtype{x}{A}{B(x)}}\),
+      velja \(\typejudgment{\pi_{2}(t)}{B(\pi_{1}(t))}\).
+    \item Če veljata \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B(x)}\), velja
+      \(\typejudgment{(x, y)}{\sumtype{x}{A}{B(x)}}\).
+    \item Za vsak \(\typejudgment{a}{A}\) in \(\typejudgment{b}{B(a)}\) velja
+      \(\pi_{1}(a, b) \doteq a\) in \(\pi_{2}(a, b) \doteq b \).
+    \end{itemize}
+  \item \emph{Odvisni produkt} \(\pitype{x}{A}{B(x)}\), za katerega veljajo sklepi:
+    \begin{itemize}
+    \item Če veljata \(\typejudgment{x}{A}\) in
+      \(\typejudgment{y}{\pitype{x}{A}{B(x)}}\), velja
+      \(\typejudgment{f(x)}{B(x)}\).
+    \item Če pod predpostavko \(\typejudgment{x}{A}\) velja \(\typejudgment{b(x)}{B(x)}\),
+      velja \(\typejudgment{\lambda x.b(x)}{\pitype{x}{A}{B(x)}}\).
+    \item Za vsak \(\typejudgment{a}{A}\) velja enakost \((\lambda x.b(x))(a) \doteq b(a)\).
+    \item Za vsako element \(\typejudgment{f}{\pitype{x}{A}{B(x)}}\)
+      velja enakost \(\lambda x.f(x) \doteq f\).
+    \end{itemize}
+  \end{enumerate}
+
+  V interpretaciji \emph{izjave kot tipi} odvisna vsota ustreza
+  eksistenčni kvantifikaciji,
+  odvisni produkt pa univerzalni kvantifikaciji.
+  Če je namreč \(A\) tip in \(P\) družina tipov nad \(A\), lahko tedaj
+  element \(\typejudgment{p}{P(a)}\) razumemo kot dokazilo, da
+  \emph{predikat P velja za element a}. Tako lahko par
+  \(\typejudgment{(a, p)}{\sumtype{x}{A}{P(x)}}\) razumemo kot dokazilo, da
+  \emph{obstaja a, za katerega velja P(a)}, funkcijo
+  \(\typejudgment{f}{\pitype{x}{A}{P(x)}}\) pa kot prireditev, ki vsakemu elementu
+  \(\typejudgment{x}{A}\) priredi dokazilo \(\typejudgment{f(x)}{P(x)}\), torej kot
+  dokazilo, da \emph{za vsak x velja P(x)}.
+\end{section}
+
+\begin{section}{Sintetična homotopska teorija}
+  V tem poglavju bomo predstavili, kako lahko odvisno teorijo tipov uprabimo za razvoj
+  tako imenovane \emph{sintetične homotopske teorije}. V tej interpretaciji bomo družine
+  tipov \(B\) nad \(A\) razumeli kot \emph{vlaknenja nad A}, kjer vsaki točki \(x\)
+  prostora \(A\) priredimo prostor \(B(x)\), ki \emph{leži nad x}. Odvisno vsoto
+  \(\sumtype{x}{A}{B(x)}\) lahko tako razumemo kot \emph{totalni prostor vlaknenja B},
+  odvisni produkt \(\pitype{x}{A}{B(x)}\) pa kot \emph{prostor prerezov vlaknenja B}.
+
+  Za homotopsko interpretacijo
+  odvisne teorije tipov bo ključna vključitev \emph{tipa identifikacij}: za vsaki točki
+  \(\typejudgment{x, y}{A}\) bomo definiramo tip \(\typename{Id}(x, y)\),
+  ki ga bomo razumeli
+  kot \emph{tip poti med točkama x in y v prostoru A}. Identifikacije med točkami
+  lahko razširimo do \emph{homotopije med funkcijami}: za funkciji \(\defun{f, g}{A}{B}\)
+  definiramo tip
+  \[f \sim g := \pitype{x}{A}{\typename{Id}(f(x), g(x))}.\]
+  Elementi \(f \sim g\) so torej dokazila, da za vsako točko \(\typejudgment{x}{A}\) obstaja
+  pot med točkama \(f(x)\) in \(g(x)\), kar ustreza klasični definiciji homotopije.
+
+  Za funkcijo \(\defun{f}{A}{B}\) lahko sedaj definiramo \emph{tip prerezov}
+  \[\sect(f) := \sumtype{g}{B \to A}{(f \circ g \sim id)}\] in \emph{tip retrakcij}
+  \[\ret(f) := \sumtype{g}{B \to A}{(g \circ f \sim id)}.\]
+  Preko pojmov prereza in retrakcije lahko definiramo \emph{ekvivalenco tipov},
+  ki ustreza homotopski ekvivalenci
+  med prostori. Pravimo, da je funkcija \(f\) \emph{ekvivalenca}, če ima tako prerez, kot
+  retrakcijo, torej če obstaja element tipa
+  \[\isequiv(f) := \sect(f) \times \ret(f),\] za tipa \(A\) in \(B\) pa pravimo, da sta
+  \emph{ekvivalentna}, če obstaja ekvivalenca med njima, torej element tipa
+  \[A \simeq B := \sumtype{f}{A \to B}{\isequiv(f)}.\]
+  Elementi \(A \simeq B\) so torej peterice \((f, g, H, h, K)\), kjer je \(H\) homotopija,
+  ki dokazuje, da je \(g\) prerez \(f\), \(K\) pa homotopija, ki dokazuje, da je \(h\)
+  retrakcija \(f\).
+
+  V definiciji ekvivalence smo zahtevali, da ima dana funkcija \(f\)
+  ločen levi in desni inverz, lahko pa bi lahko zahtevali tudi,
+  da ima obojestranski inverz, kar lahko izrazimo s tipom
+  \[\isinv(f) := \sumtype{g}{B \to A}{((f \circ g \sim id) \times (g \circ f \sim id))},\]
+  ki ga imenujemo \emph{tip inverzov funkcije f}. Če obstaja element tega tipa, tedaj
+  za funkcijo \(f\)
+  pravimo, da je \emph{obrnljiva}. Čeprav se na prvi pogled zdi,
+  da je pojem inverza močnejši od pojma ekvivalence, bomo pokazali, da sta pravzaprav
+  logično ekvivalentna. Dokaz je povsem analogen dokazom v algebri, kjer lahko pokažemo,
+  da ima element z levim in desnim inverzom enoličen obojestranski inverz, le da dokaz
+  poteka na nivoju homotopij, namesto enakosti.
+
+  Kljub temu pa med obrnljivostjo in ekvivalenco obstaja
+  razlika: pokazali bomo, da pod predpostavko obstoja tako imenovanih
+  \emph{višjih induktivnih tipov} obstajajo funkcije \(f\), za katere ne obstaja
+  ekvivalenca \(\isequiv(f) \simeq \isinv(f)\). Da bi to razliko bolje razumeli, bomo vpeljali
+  pojem \emph{kontraktibilnosti tipov}: pravimo, da je tip \(A\) \emph{kontraktibilen},
+  če obstaja element tipa
+  \[\iscontr(A) := \sumtype{c}{A}{\pitype{x}{A}{\typename{Id}(c, x)}},\]
+  kar pove, da v tipu \(A\) obstaja odlikovana točka \(c\), s katero so identificirane
+  vse ostale točke.
+  Preko kontraktibilnosti definiramo še sledeč tip:
+  \[\isprop(A) := A \to \iscontr(A).\]
+  Kontraktibilne tipe lahko razumemo kot tipe, ki imajo \emph{natanko eno točko},
+  tipe, za katere velja \(\isprop\), pa kot tipe, ki imajo \emph{največ eno točko}, saj
+  zanje velja, da so kontraktibilni, čim vsebujejo točko.
+
+  Pokazali bomo, da ekvivalence ohranjajo lastnost \(\isprop\), torej, da
+  če velja \(A \simeq B\) in \(\isprop(A)\), da tedaj velja tudi \(\isprop(B)\), za tem
+  pa skicirali dokaz trditve \(\isprop(\isequiv(f))\) za poljubno funkcijo \(f\).
+  Dokaz trditve je precej tehničen, njena vsebina pa ni nepričakovana:
+  če ima funkcija levi in desni inverz, sta ta do homotopije natanko enolično določena.
+  Trditev pa nam pravzaprav pove še več,
+  poleg enoličnosti levega in desnega inverza nam da tudi enoličnost homotopij, ki to
+  potrjujeta.
+
+
+
+
+
+\end{section}
+
+\printbibliography
+\end{document}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

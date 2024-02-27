@@ -8,6 +8,11 @@
 *.toc
 *.xmpdata
 *.xmpi
+*.blg
+*.bbl
+*.bcf
+*.run.xml
+*~
 
 diploma-primer-razclenjen.zip
 auto
