@@ -1,6 +1,7 @@
 \documentclass[a4paper, slovene]{article}
 \usepackage[slovene]{babel}
 \usepackage[style=numeric, backend=biber]{biblatex}
+\usepackage{amsfonts}
 
 \title{Obrnljive funkcije so sfere v svetu}
 \author{
@@ -11,7 +12,7 @@
 
 
 \date{\today}
-\addbibresource{literatura.bib}
+\addbibresource{../literatura.bib}
 \input{../definicije.tex}
 
 \begin{document}
@@ -117,8 +118,9 @@
 
 \begin{section}{Sintetična homotopska teorija}
   V tem poglavju bomo predstavili, kako lahko odvisno teorijo tipov uprabimo za razvoj
-  tako imenovane \emph{sintetične homotopske teorije}. V tej interpretaciji bomo družine
-  tipov \(B\) nad \(A\) razumeli kot \emph{vlaknenja nad A}, kjer vsaki točki \(x\)
+  tako imenovane \emph{sintetične homotopske teorije}. V tej interpretaciji
+  bomo tipe razumeli kot \emph{prostore}, njihove elemente kot \emph{točke}, družine
+  tipov \(B\) nad \(A\) pa kot \emph{vlaknenja nad A}, kjer vsaki točki \(x\)
   prostora \(A\) priredimo prostor \(B(x)\), ki \emph{leži nad x}. Odvisno vsoto
   \(\sumtype{x}{A}{B(x)}\) lahko tako razumemo kot \emph{totalni prostor vlaknenja B},
   odvisni produkt \(\pitype{x}{A}{B(x)}\) pa kot \emph{prostor prerezov vlaknenja B}.
@@ -156,7 +158,7 @@
   za funkcijo \(f\)
   pravimo, da je \emph{obrnljiva}. Čeprav se na prvi pogled zdi,
   da je pojem inverza močnejši od pojma ekvivalence, bomo pokazali, da sta pravzaprav
-  logično ekvivalentna. Dokaz je povsem analogen dokazom v algebri, kjer lahko pokažemo,
+  logično ekvivalentna; dokaz je povsem analogen dokazu v algebri, kjer lahko pokažemo,
   da ima element z levim in desnim inverzom enoličen obojestranski inverz, le da dokaz
   poteka na nivoju homotopij, namesto enakosti.
 
@@ -184,12 +186,38 @@
   poleg enoličnosti levega in desnega inverza nam da tudi enoličnost homotopij, ki to
   potrjujeta.
 
-
-
-
-
+  Sedaj je dokaz neekvivalence med \(\isequiv(f)\) in \(\isinv(f)\) na dlani: če bi taka
+  ekvivalenca obstajala, bi ohranjala lastnost \(\isprop\) tipa \(\isequiv(f)\), torej
+  moramo poiskati funkcijo \(f\), za katero \(\isprop(\isinv(f))\) ne velja, vendar se
+  izkaže, da v teoriji tipov, s katero smo delali do sedaj, te trditve ne moremo ne
+  dokazati ne ovreči. V namen sintetične homotopske terorije tipov pa našo teorijo tipov
+  pogosto razširimo z \emph{višjimi induktivnimi tipi}: to so tipi za katere ne
+  predpostavimo samo sklepov za konstrukcijo točk, temveč tudi sklepe za konstrukcijo
+  identifikacij. Predstavili bomo enega od najpomembnejših primerov višjih induktivnih
+  tipov, \emph{sfere} \(\mathbb{S}^{n}\), in pokazali da identitetna funkcija
+  na \(\mathbb{S}^{1}\) ne zadošča \(\isprop(\isinv(id_{\mathbb{S}^{1}}))\). Za
+  podrobnosti o konstrukcijah z višjimi induktivnimi tipi se skličemo na
+  \cite{hottbook} in \cite{ljungström2024symmetric}
 \end{section}
 
+\begin{section}{Karakterizacija obrnljivosti}
+  V zadnjem poglavju bomo predstavili novo karakterizacijo tipa obrnljivih funkcij, torej
+  tipa vseh obrnljivih funkcij med tipoma \(A\) in \(B\):
+  \begin{equation}
+    \label{mjau}
+      \typename{invertible-map}(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.
+  \end{equation}
+  Dokazali bomo, da velja ekvivalenca
+  \[\typename{invertible-map}(A, B) \simeq \sumtype{e}{A \simeq B}{e = e},\]
+  formalizacija česar je tudi dostopna v knjižnici formalizirane matematike z dokazovalnim
+  pomočnikom Agda \cite{agda-unimath}.
+  Na koncu vpeljemo še tako imenovane \emph{svetove} \(\mathcal{U}\), tipe, katerih elementi so
+  tipi, in aksiom \emph{univalence}, ki opisuje tipe identifikacij na svetovih.
+  Preko univerzalnih lastnosti sfer, aksioma univalence in trditve \ref{mjau}
+  dokažemo še sledečo ekvivalenco:
+  \[\sumtype{A}{\mathcal{U}}{\sumtype{B}{\mathcal{U}}{(\typename{invertible-map}(A, B))}} \simeq
+    (\mathbb{S}^{2} \to \mathcal{U}).\]
+\end{section}
 \printbibliography
 \end{document}
 %%% Local Variables:
