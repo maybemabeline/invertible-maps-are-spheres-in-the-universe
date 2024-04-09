@@ -210,13 +210,13 @@
       \typename{invertible-map}(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.
   \end{equation}
   Dokazali bomo, da velja ekvivalenca
-  \[\typename{invertible-map}(A, B) \simeq \sumtype{e}{A \simeq B}{e = e},\]
+  \[\typename{invertible-map}(A, B) \simeq \sumtype{e}{A \simeq B}{\typename{Id}(e, e)},\]
   formalizacija česar je tudi dostopna v knjižnici formalizirane matematike z dokazovalnim
   pomočnikom Agda \cite{agda-unimath}.
   Na koncu bomo vpeljali še tako imenovane \emph{svetove} \(\mathcal{U}\), tipe, katerih elementi so
   tipi, in aksiom \emph{univalence}, ki opisuje tipe identifikacij na svetovih.
   Preko univerzalnih lastnosti sfer, aksioma univalence in trditve \ref{mjau}
-  bomo dokazali še sledečo ekvivalenco:
+  bomo dokazali sledečo ekvivalenco:
   \[\sumtype{A}{\mathcal{U}}{\sumtype{B}{\mathcal{U}}{(\typename{invertible-map}(A, B))}} \simeq
     (\mathbb{S}^{2} \to \mathcal{U}).\]
 \end{section}
