@@ -170,12 +170,15 @@ pripadajočega tipa \(B(x)\).
     \((\proj{1}(t), \proj{2}(t)) \doteq t\).
   \end{enumerate}
 \end{definicija}
+
+\begin{opomba}
+  \label{neodvisna-vsota}
 Opazimo lahko podobnost med pravili sklepanja za odvisne produkte in
 funkcije ter za odvisne vsote in produkte. Ta podobnost ni naključje, saj če
 je \(A\) tip in \(B\) tip, neodvisen od \(A\), lahko nanj kljub temu gledamo kot na tip,
 \emph{trivialno} odvisen od \(A\). V tem primeru veljata enakosti
 \(\sumtype{x}{A}{B} \doteq A \times B\) in \(\pitype{x}{A}{B} \doteq A \to B\).
-\pagebreak
+\end{opomba}
 
 \begin{primer}
   S pomočjo odvisnih produktov lahko podamo specifikacijo tipa
@@ -191,6 +194,7 @@ je \(A\) tip in \(B\) tip, neodvisen od \(A\), lahko nanj kljub temu gledamo kot
     Tedaj velja
     \(\typejudgment{\typename{ind}_{\N}(b_{\natzero}, b_{\natsucc})}{\pitype{n}{\N}{B(n)}}\).
   \item Veljata enakosti
+    \label{naturals}
     \(\typename{ind}(b_{\natzero}, b_{\natsucc}, \natzero) \doteq b_{\natzero}\) in
     \(\typename{ind}(b_{\natzero}, b_{\natsucc}, \natsucc(n)) \doteq
       b_{\natsucc}(n, \typename{ind}(b_{\natzero}, b_{\natsucc}, n)\).
@@ -207,7 +211,7 @@ je \(A\) tip in \(B\) tip, neodvisen od \(A\), lahko nanj kljub temu gledamo kot
 S tipi ne želimo predstaviti samo matematičnih objektov, temveč tudi matematične trditve,
 kar bomo dosegli preko tako imenovane interpretacije \emph{izjave kot tipi}
 (ang. \emph{propositions as types}). V tej interpretaciji vsaki trditvi \(P\) dodelimo
-tip z istim imenom, elementi katerega so dokazi oz. \emph{priče}, da ta trditev velja.
+tip z istim imenom, elementi katerega so dokazi oz.~\emph{priče}, da ta trditev velja.
 Konstrukcija
 elementa \(\typejudgment{p}{P}\) tako postane konstrukcija priče \(p\), ki potrjuje
 veljavnost trditve \(P\), to pa ustreza dokazu trditve \(P\).

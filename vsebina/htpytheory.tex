@@ -1,0 +1,257 @@
+\section{Sintetična homotopska teorija}
+
+
+\subsection{Identifikacije in homotopije}
+Osnovna motivacija za vpeljavo tipa identifikacij je dejstvo, da je pojem sodbene enakosti
+\emph{prestrog} in da prek nje pogosto ne moremo identificirati vseh izrazov, ki bi
+jih želeli. Poleg tega si v skladu z interpretacijo \emph{izjave kot tipi} želimo tip, elementi
+katerega bi predstavljali dokaze enakosti med dvema elementoma.
+
+Pomankljivost sodbene enakosti si lahko ogledamo na primeru
+komutativnosti naravnih števil.
+
+\begin{primer}
+  Seštevanje naravnih števil bomo definirali kot funkcijo
+  \[\defun{\typename{sum}}{\N}{(\N \to \N)},\] njeno evaluacijo \(\typename{sum}(m, n)\)
+  pa bomo kot običajno pisali kot \(m + n\).
+  Ker je tip \(\N \to (\N \to \N)\) po opombi \ref{neodvisna-vsota} sodbeno enak tipu
+  \(\pitype{n}{\N}{\N \to \N}\), lahko njegove elemente konstruiramo po indukcijskem
+  principu naravnih števil.
+  Izpuščajoč nekaj podrobnosti to pomeni, da želimo vrednost izraza \(m + n\) definirati z
+  indukcijo na \(n\), torej moramo v baznem primeru podati vrednost izraza \(m + \natzero\),
+  v primeru koraka pa moramo pod predpostavko, da poznamo vrednost izraza \(m + n\),
+  podati vrednost izraza \(m + \natsucc(n)\). Naravno je,
+  da izberemo \(m + \natzero :\doteq m\) in \(m + \natsucc(n) :\doteq\natsucc(m + n)\).
+  Za poljubni \emph{fiksni} naravni števili, recimo
+  \(\typename{4}\) in \(\typename{5}\), lahko sedaj z uporabo pravil sklepanja za naravna
+  števila pod točko \ref{naturals} dokažemo, da velja
+  \(\typename{4} + \typename{5} \doteq \typename{5} + \typename{4}\). Če pa sta po drugi strani
+  \(m\) in \(n\)
+  \emph{spremenljivki} tipa \(\N\), tedaj zaradi asimetričnosti definicije seštevanja
+  enakosti \(n + m \doteq m + n\) ne moremo
+  dokazati. Potrebujemo tip \emph{identifikacij} \(\Id{\N}\), z uporabo katerega bi
+  lahko z indukcijo pokazali, da velja \[\pitype{m, n}{\N}{\Id{\N}(n + m, m + n)}.\]
+\end{primer}
+
+\begin{definicija}
+  Naj bo \(A\) tip in \(\typejudgment{a, x}{A}\). Tedaj lahko tvorimo tip
+  \(\Id{A}(a, x)\),
+  imenovan \emph{tip identifikacij med elementoma a in x}. Zanj veljajo sledeča pravila
+  sklepanja:
+  \begin{enumerate}
+  \item Za vsak element \(\typejudgment{a}{A}\) obstaja identifikacija
+    \(\typejudgment{\refl{a}}{\Id{A}(a, a)}\).
+  \item Velja sledeč princip \emph{eliminacije identifikacij}.
+    Naj bo \(\typejudgment{a}{A}\), \(B\) družina tipov, indeksirana z
+    \(\typejudgment{x}{A}\) ter \(\typejudgment{p}{\Id{A}(a, x)}\) in denimo, da velja
+    \(\typejudgment{r(a)}{B(a, \refl{a})}\). Tedaj velja
+    \[\typejudgment{\typename{ind}_{\Id{A}}(a, r(a))}
+      {\pitype{x}{A}{\pitype{p}{\Id{A}(a, x)}{B(x, p)}}}\]
+  \item Za vsak \(\typejudgment{a}{A}\) velja enakost
+    \(\typename{ind}_{\Id{A}}(a, r(a))(a, \refl{a}) \doteq r(a)\).
+  \end{enumerate}
+  Tip identifikacij \(\Id{A}(a, x)\) bomo od sedaj pisali kar kot \(a = x\) in za boljšo
+  berljivost izpuščali ekspliciten zapis tipa \(A\). Kadar je \(p\) identifikacija
+  med \(a\) in \(x\), bomo torej pisali \(\eqtype{p}{a}{x}\).
+
+  Konstruktor \(\eqtype{\refl{a}}{a}{a}\)
+  nam zagotavlja, da za vsak element \(\typejudgment{a}{A}\) obstaja kanonična
+  identifikacija elementa samega s sabo. Princip eliminacije identifikacij nato zatrdi,
+  da če želimo za vsako identifikacijo \(\eqtype{p}{a}{x}\) konstruirati element tipa
+  \(B(x, p)\), tedaj zadošča, da konstruiramo le element tipa \(B(a, \refl{a})\).
+  Pravimo tudi, da je družina tipov \(a = x\) \emph{induktivno definirana} s
+  konstruktorjem \(\refl{a}\).
+.\end{definicija}
+
+  Resnična motivacija za takšno definicijo tipa identifikacij sega pregloboko, da bi se
+  vanjo spustili v tem delu, povemo pa lahko, da lahko preko nje dokažemo vse željene
+  lastnosti, ki bi jih od identifikacij pričakovali. Nekaj od teh vključuje:
+\begin{enumerate}
+\item Velja \emph{simetričnost}: za vsaka elementa \(\typejudgment{x, y}{A}\) obstaja
+  funkcija \[\defun{\typename{sym}}{(x = y)}{(y = x)}.\] Identifikacijo \(\typename{sym}(p)\)
+  imenujemo \emph{inverz} identifikacije \(p\) in ga pogosto označimo z \(p^{-1}\).
+\item Velja \emph{tranzitivnost}: za vsake elemente \(\typejudgment{x, y, z}{A}\) obstaja
+  funkcija \[\defun{\typename{concat}}{(x = y)}{((y = z) \to (x = z))},\] ki jo imenujemo
+  \emph{konkatenacija identifikacij}, \(\typename{concat}(p, q)\) pa pogosto označimo
+  z \(p \cdot q\).
+\item Funkcije ohranjajo identifikacije: za vsaka elementa \(\typejudgment{x, y}{A}\)
+  in vsako funkcijo \(\defun{f}{A}{B}\) obstaja funkcija
+  \[\defun{\typename{ap}_{f}}{(x = y)}{(f(x) = f(y))},\]
+  ki jo imenujemo \emph{aplikacija} funkcije \(f\) na identifikacije v \(A\).
+\item Družine tipov spoštujejo identifikacije: za vsaka elementa
+  \(\typejudgment{x, y}{A}\), identifikacijo \(\eqtype{p}{x}{y}\) in družino tipov
+  \(B\) nad \(A\) obstaja funkcija
+  \[\defun{\typename{tr}_{B}(p)}{B(x)}{B(y)}.\] To pomeni, da lahko elemente tipa
+  \(B(x)\) \emph{transportiramo} vzdolž identifikacije \(\eqtype{p}{x}{y}\), da dobimo
+  elemente \(B(y)\).
+  V interpretaciji \emph{izjave kot tipi} to pomeni, da če je \(P\) predikat na \(A\)
+  in velja identifikacija \(x = y\), da tedaj \(P(x)\) velja natanko tedaj kot \(P(y)\),
+  saj lahko transport uporabimo tudi na \(p^{-1}\).
+\end{enumerate}
+Konstrukcije naštetih funkcij lahko poiščemo v 5.~poglavju (TODO cite intro to hott), vse
+izmed njih pa zahtevajo le preprosto uporabo eliminacije identifikacij.
+(TODO grupoidala struktura tipov, interpretacija identifikacij kot poti)
+
+Izkaže se, da smo s tako definicijo identifikacij zelo omejeni v konstruiranju identifikacij
+med funkcijami. Namesto tega lahko identifikacije med funkcijami nadomestimo s
+t.i.~\emph{homotopijami}, ki v mnogih primerih zadoščajo, konstruiramo pa jih veliko lažje.
+Homotopija med funkcijami zatrdi, da se ti ujemata na vsakem elementu domene.
+\begin{definicija}
+  Naj bosta \(A\) in \(B\) tipa ter \(f\) in \(g\) funkciji tipa \(A \to B\). Definiramo tip
+  \[f \sim g := \pitype{x}{A}{f(x) = g(x)},\]
+  imenovan \emph{tip homotopij med f in g}, njegove elemente pa imenujemo \emph{homotopije}.
+\end{definicija}
+
+\begin{opomba}
+  Na kratko komentiramo o podobnosti med homotopijami v teoriji tipov in homotopijami v
+  klasični topologiji. Naj bosta \(X\) in \(Y\) topološka prostora in
+  \(\defun{f, g}{X}{Y}\) zvezni
+  funkciji. Z \(I\) označimo interval \([0, 1]\). Homotopijo med funkcijama \(f\) in \(g\)
+  tedaj definiramo kot zvezno funkcijo \(\defun{H}{I \times X}{Y}\), za katero velja
+  \(H(0, x) = f(x)\) in \(H(1, x) = g(x)\). Ker pa je \(I\) lokalno kompakten prostor, so
+  zvezne funkcije \(\defun{H}{I \times X}{Y}\) v bijektivni korespondenci z zveznimi funkcijami
+  \(\defun{\hat{H}}{X}{\mathcal{C}(I, Y)}\), kjer je \(\mathcal{C}(I, Y)\) prostor zveznih funkcij med \(I\) in
+  \(Y\), opremljen s kompaktno-odprto topologijo. Zvezne funkcije \(\defun{\alpha}{I}{Y}\)
+  ustrezajo potem v \(Y\) med točkama \(\alpha(0)\) in \(\alpha(1)\). Če je torej \(H\)
+  homotopija med \(f\) in \(g\), za pripadajočo funkcijo \(\hat{H}\) velja, da je
+  \(\hat{H}(x)\) pot med točkama \(f(x)\) in \(g(x)\) za vsak \(x \in X\). To je analogno
+  definiciji homotopij med funkcijama \(f\) in \(g\) v teoriji tipov, ki vsaki točki
+  \(\typejudgment{x}{X}\) priredijo identifikacijo \(f(x) = g(x)\).
+\end{opomba}
+
+Operacije na identifikacijah lahko po elementih razširimo do operacij na homotopijah,
+za delo s homotopijami
+pa bomo potrebovali še operaciji (TODO whiskering?), s katerima lahko homotopije z leve ali
+z desne razširimo s funkcijo.
+
+\begin{trditev}
+  Naj bosta \(A\) in \(B\) tipa in \(\defun{f, g, h}{A}{B}\) funkcije. Denimo, da obstajata
+  homotopiji \(\homotopy{H}{f}{g}\) in \(\homotopy{K}{g}{h}\).
+
+  Tedaj obstajata homotopiji \(\homotopy{H^{-1}}{g}{f}\) in \(\homotopy{H \cdot K}{f}{h}\).
+\end{trditev}
+
+\begin{dokaz}
+  Če homotopiji H in K evaluiramo na elementu \(\typejudgment{x}{A}\), dobimo identifikaciji
+  \(\eqtype{H(x)}{f(x)}{g(x)}\) in \(\eqtype{K(x)}{g(x)}{h(x)}\). Homotopijo \(H^{-1}\) lahko
+  torej definiramo kot \(\lambda x. H(x)^{-1}\), homotopijo \(H \cdot K\) pa kot \(\lambda x.(H(x) \cdot K(x))\).
+\end{dokaz}
+
+\begin{trditev}
+  Naj bodo \(A, B, C\) in \(D\) tipi ter \(\defun{h}{A}{B}\), \(\defun{f, g}{B}{C}\) in
+  \(\defun{k}{C}{D}\) funkcije. Denimo, da obstaja homotopija \(\homotopy{H}{f}{g}\).
+  Tedaj obstajata homotopiji \(\homotopy{Hh}{f \circ h}{g \circ h}\) in
+  \(\homotopy{kH}{k \circ f}{k \circ g}\).
+\end{trditev}
+
+\begin{dokaz}
+  Homotopijo \(H\) zopet evaluiramo na elementu \(\typejudgment{y}{B}\) in dobimo
+  identifikacijo \(\eqtype{H(y)}{f(y)}{g(y)}\). Če sedaj nanjo apliciramo funkcijo \(h\),
+  dobimo identifikacijo \(\eqtype{\ap{h}(H(y))}{h(f(y))}{h(g(y))}\). Homotopijo \(kH\) lahko
+  torej definiramo kot
+  \(\lambda y. \typename{ap}_{k}(H(y))\).
+
+  Naj bo sedaj \(\typejudgment{x}{A}\). Homotopijo \(H\) lahko tedaj evaluiramo tudi
+  na elementu \(h(x)\) in tako dobimo identifikacijo
+  \(\eqtype{H(h(x))}{f(h(x))}{g(h(x))}\). Homotopijo \(Hh\) lahko torej definiramo kot
+  \(\lambda x.H(h(x))\).
+\end{dokaz}
+
+\subsection{Obrnljivost in ekvivalenca}
+
+
+\begin{definicija}
+  Za funkcijo \(f\) pravimo, da je \emph{obrnljiva} oziroma, da \emph{ima inverz},
+  če obstaja element tipa
+  \[\isinv(f) := \sumtype{g}{B \to A}{(f \circ g \sim id) \times (g \circ f \sim id)},\]
+  imenovanega \emph{tip inverzov funkcije f}.
+
+  Funkcije, pripadajoče elementom \(\isinv(f)\), imenujemo \emph{inverzi funkcije f}.
+\end{definicija}
+
+\begin{definicija}
+  Za funkcijo \(f\) pravimo, da \emph{ima prerez}, če obstaja element tipa
+  \[\sect(f) := \sumtype{g}{B \to A}{f \circ g \sim id},\]
+  imenovanega \emph{tip prerezov funkcije f}.
+
+  Funkcije, pripadajoče elementom tipa \(\sect f\) imenujemo \emph{prerezi funkcije f}.
+  Za funkcijo \(f\) pravimo, da \emph{ima retrakcijo}, če obstaja element tipa
+  \[\ret(f) := \sumtype{g}{B \to A}{g \circ f \sim id},\]
+  imenovanega \emph{tip retrakcij funkcije f}.
+
+  Funkcije, pripadajoče elementom tipa \(\ret f\) imenujemo \emph{retrakcije funkcije f}.
+\end{definicija}
+
+\begin{definicija}
+  Pravimo, da je funkcija \(f\) \emph{ekvivalenca}, če ima tako prerez kot retrakcijo,
+  torej, če obstaja element tipa \[\isequiv(f) := \sect(f) \times \ret(f).\]
+  Pravimo, da je tip \(A\) \emph{ekvivalenten} tipu \(B\), če obstaja ekvivalenca med
+  njima, torej element tipa \(A \simeq B := \sumtype{f}{A \to B}{\isequiv(f)}\). Funkcijo,
+  pripadajočo elementu \(\dequiv{e}{A}{B}\), označimo z \(\map e\).
+\end{definicija}
+
+\subsection{Osnovne lastnosti}
+
+V definiciji obrnljivosti smo zahtevali, da ima funkcija obojestranski inverz, v
+definiciji ekvivalence pa smo zahtevali le, da ima ločen levi in desni inverz.
+To bi nas lahko
+napeljalo k prepričanju, da je pojem obrnljivosti močnejši od pojma ekvivalence, vendar
+spodnja trditev pokaže da sta pravzaprav logično ekvivalentna. Pokazali bomo, da lahko
+prerez (ali simetrično, retrakcijo) ekvivalence \(f\) vedno izboljšamo do inverza,
+kar pokaže, da je \(f\) tudi obrnljiva.
+
+\begin{trditev}
+  \label{inv-of-equiv}
+  Funkcija je ekvivalenca natanko tedaj, ko je obrnljiva.
+\end{trditev}
+
+\begin{dokaz}
+  Denimo, da je funkcija \(f\) obrnljiva. Tedaj lahko njen inverz podamo tako kot njen
+  prerez, kot njeno retrakcijo, kar pokaže, da je ekvivalenca.
+
+  Obratno denimo, da je funkcija \(f\) ekvivalenca. Podan imamo njen prerez \(s\) s
+  homotopijo \(\homotopy{H}{f \circ s}{id}\) in njeno retrakcijo \(r\) s homotopijo
+  \(\homotopy{K}{r \circ f}{id}\), s katerimi lahko konstruiramo homotopijo tipa
+  \(s \circ f \sim id\) po sledečem izračunu:
+  \[s f \overset{K^{-1}sf}{\sim} r f s f \overset{rHf}{\sim} r f \overset{K}{\sim} id. \qedhere\]
+\end{dokaz}
+
+\begin{definicija}
+  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij.
+  Definiramo funkcijo
+  \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
+  \(\tot(f)(x, y) = (x, f(x)(y))\).
+\end{definicija}
+
+\begin{trditev}
+  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij
+  in denimo, da je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\). Tedaj je
+  ekvivalenca tudi funkcija \(\tot(f)\).
+\end{trditev}
+
+\begin{dokaz}
+  Ker je funkcija \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\),
+  lahko tvorimo družino funkcij
+  \(\typejudgment{s}{\pitype{x}{A}{\left(Cx \to Bx\right)}}\), kjer je \(s(x)\)
+  prerez funkcije \(f(x)\).
+  Trdimo, da je tedaj \(\tot(s)\) prerez funkcije \(\tot(f)\), saj
+  za vsak \(\typejudgment{(x, y)}{\sumtype{x}{A}{Cx}}\) velja enakost
+  \[\tot(f)(\tot(s)(x, y)) = \tot(f)(x, s(x)(y)) = (x, f(x)(s(x)(y))) = (x, y).\]
+  Analogno lahko konstruiramo retrakcijo funkcije \(\tot(f)\), kar zaključi dokaz.
+\end{dokaz}
+
+Zgornja trditev je pomembna, saj nam omogoči, da konstrukcijo ekvivalence med odvisnima
+vsotama z istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc,
+kar je pogosto veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
+
+\begin{posledica}
+  \label{equiv-tot}
+  Naj bo \(A\) tip, \(B\) in \(C\) družini tipov nad \(A\) in denimo, da velja
+  \(Bx \simeq Cx\) za vsak \(\typejudgment{x}{A}\).
+  Tedaj velja \(\sumtype{x}{A}{Bx} \simeq \sumtype{x}{A}{Cx}\).
+\end{posledica}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Najdovski-27191110-2023"
+%%% End:
