@@ -19,7 +19,7 @@ nje razlikuje v nekaj pomembnih pogledih.
 Prvič, v teoriji množic je relacija \(\in\) v določenem smislu \emph{globalna};
 vsak matematični objekt je kodiran kot določena množica in za poljubni množici \(A\) in
 \(B\) se lahko vprašamo, ali velja \(A \in B\). Tako je na primer vprašanje, ali za element
-\(g\) grupe \(\Z/_{5}\) velja \(g \in \mathcal{C}^{1}(\mathbb{R})\) povsem smiselno,
+\(g\) grupe \(\Z/_{5}\) velja \(g \in \mathcal{C}^{1}(\mathbb{R})\) formalno smiselno,
 vendar tudi povsem v nasprotju z matematično prakso.
 V nasprotju s tem so v teoriji tipov elementi nerazdružljivi od svojih tipov; če velja
 sodba \(\typejudgment{x}{A}\), potem vprašanja ``Ali velja \(\typejudgment{x}{B}\)?''
@@ -34,10 +34,11 @@ sodba \(\typejudgment{f(x)}{B}\), kar predstavlja uporabo funkcije \(f\)
 na elementu \(x\).
 
 Poleg sodb oblike \(\typejudgment{x}{A}\) v teoriji tipov obstajajo še tri vrste sodb.
-Prvič, obstaja sodba \(\type{A}\), s katero izrazimo, da je tip \(A\) dobro tvorjen.
+Prvič, obstaja sodba \(\type{A}\), s katero izrazimo, da je tip \(A\) dobro konstruiran.
 Primer pravila sklepanja s to sodbo bi bilo
 pravilo, ki pravi, da lahko iz sodb \(\type{A}\) in \(\type{B}\) sklepamo, da velja
-sodba \(\type{A \to B}\), kar predstavlja tvoritev tipa funkcij med tipoma \(A\) in \(B\).
+sodba \(\type{A \to B}\), kar predstavlja konstrukcijo tipa funkcij
+med tipoma \(A\) in \(B\).
 Drugič, obstajata še sodbi \(\typejudgment{x \doteq y}{A}\) in \(\type{A \doteq B}\),
 s katerima izražamo \emph{sodbeno enakost}. Za obe vrsti sodbene enakosti veljajo pravila
 sklepanja, preko katerih postaneta ekvivalenčni relaciji,
@@ -55,10 +56,10 @@ sodba velja.  To, da je \(\mathcal{J}\) sodba v kontekstu \(\Gamma\), zapišemo 
 Primer pravila sklepanja s sodbo v konstekstu bi bilo pravilo, ki pravi,
 da lahko iz sodbe
 \(\typejudgment{x}{A} \vdash \typejudgment{b}{B}\) sklepamo, da velja
-\(\emptyset \vdash \typejudgment{\lambda x.b(x)}{A \to B}\), kar predstavlja tvoritev
+\(\emptyset \vdash \typejudgment{\lambda x.b(x)}{A \to B}\), kar predstavlja konstrukcije
 anonimne funkcije z vezavo spremenljivke \(x\).
 
-Razpravo povzamemo v sledeči vzajemno rekurzivni definiciji sodb in kontekstov.
+Razpravo povzamemo v sledeči vzajemno rekurzivni definiciji sodb in kontekstov. To ni popolna definicija Martin-Löfove odvisne teorije tipov, vendar samo nastavek, s pomočjo katerega lahko izrazimo pravila za konstrukcijo različnih tipov in njihovih elementov.
 
 \begin{definicija}
   V Martin-Löfovi odvisni teoriji tipov obstajajo štiri vrste sodb:
@@ -91,11 +92,11 @@ videli na primerih, tu pa jih še dopolnimo in zberemo v definicijo.
   Naj bosta \(A\) in \(B\) tipa. Tedaj lahko tvorimo \emph{funkcijski tip} \(A \to B\),
   za katerega veljajo sledeča pravila sklepanja:
   \begin{enumerate}
-  \item Če veljata \(\typejudgment{x}{A}\) in \(\defun{f}{A}{B}\), velja
-    \(\typejudgment{f(x)}{B}\).
-  \item Če pod predpostavko \(\typejudgment{x}{A}\) velja \(\typejudgment{b(x)}{B}\),
-    velja \(\typejudgment{\lambda x.b(x)}{A \to B}\).
-  \item Za vsak \(\typejudgment{a}{A}\) velja enakost \((\lambda x.b(x))(a) \doteq b(a)\).
+  \item Iz \(\typejudgment{t}{A}\) in \(\defun{f}{A}{B}\) lahko tvorimo
+    \(\typejudgment{f(t)}{B}\).
+  \item Če lahko pod predpostavko \(\typejudgment{x}{A}\) tvorimo
+    \(\typejudgment{b(x)}{B}\), lahko tvorimo tudi \({\typejudgment{\lambda x.b(x)}{A \to B}}\).
+  \item Za vsak \(\typejudgment{t}{A}\) velja enakost \((\lambda x.b(x))(t) \doteq b(t)\).
   \item Za vsak \(\defun{f}{A}{B}\) velja enakost \(\lambda x.f(x) \doteq f\).
   \end{enumerate}
   Elemente funkcijskega tipa imenujemo \emph{funkcije}.
@@ -104,11 +105,11 @@ videli na primerih, tu pa jih še dopolnimo in zberemo v definicijo.
   Naj bosta \(A\) in \(B\) tipa. Tedaj lahko tvorimo \emph{produktni tip} \(A \times B\),
   za katerega veljajo sledeča pravila sklepanja.
   \begin{enumerate}
-  \item Če velja \(\typejudgment{t}{A \times B}\), veljata \(\typejudgment{\proj{1}(t)}{A}\) in
+  \item Iz \(\typejudgment{t}{A \times B}\) lahko tvorimo \(\typejudgment{\proj{1}(t)}{A}\) in
     \(\typejudgment{\proj{2}(t)}{B}\).
-  \item Če veljata \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B}\), velja
-    \(\typejudgment{(x, y)}{A \times B}\).
-  \item Za vsaka \(\typejudgment{x}{A}\) \(\typejudgment{y}{B}\) veljata enakosti
+  \item Iz \(\typejudgment{a}{A}\) in \(\typejudgment{b}{B}\) lahko tvorimo
+    \(\typejudgment{(a, b)}{A \times B}\).
+  \item Za vsaka \(\typejudgment{a}{A}\) in \(\typejudgment{b}{B}\) veljata enakosti
     \(\proj{1}(a, b) \doteq a\) in \(\proj{2}(a, b) \doteq b\).
   \item Za vsak \(\typejudgment{t}{A \times B}\) velja enakost
     \((\proj{1}(t), \proj{2}(t)) \doteq t\).
@@ -144,12 +145,13 @@ pripadajočega tipa \(B(x)\).
   \[\pitype{x}{A}{B(x)},\] imenovan \emph{odvisni produkt tipov A in B}.
   Zanj veljajo sledeča pravila sklepanja:
   \begin{enumerate}
-  \item Če veljata \(\typejudgment{x}{A}\) in
-    \(\typejudgment{f}{\pitype{x}{A}{B(x)}}\), velja
-    \(\typejudgment{f(x)}{B(x)}\).
-  \item Če pod predpostavko \(\typejudgment{x}{A}\) velja \(\typejudgment{b(x)}{B(x)}\),
-    velja \(\typejudgment{\lambda x.b(x)}{\pitype{x}{A}{B(x)}}\).
-  \item Za vsak \(\typejudgment{a}{A}\) velja enakost \((\lambda x.b(x))(a) \doteq b(a)\).
+  \item Iz \(\typejudgment{t}{A}\) in
+    \(\typejudgment{f}{\pitype{x}{A}{B(x)}}\) lahko tvorimo
+    \(\typejudgment{f(t)}{B(t)}\).
+  \item Če lahko pod predpostavko \(\typejudgment{x}{A}\) tvorimo
+    \(\typejudgment{b(x)}{B(x)}\), lahko tvorimo tudi
+    \(\typejudgment{\lambda x.b(x)}{\pitype{x}{A}{B(x)}}\).
+  \item Za vsak \(\typejudgment{t}{A}\) velja enakost \((\lambda x.b(x))(t) \doteq b(t)\).
   \item Za vsak \(\typejudgment{f}{\pitype{x}{A}{B(x)}}\) velja enakost \(\lambda x.f(x) \doteq f\).
   \end{enumerate}
 \end{definicija}
@@ -159,12 +161,12 @@ pripadajočega tipa \(B(x)\).
   \[\sumtype{x}{A}{B(x)},\] imenovan \emph{odvisna vsota tipov A in B}.
   Zanj veljajo sledeča pravila sklepanja
   \begin{enumerate}
-  \item Če velja \(\typejudgment{t}{\sumtype{x}{A}{B(x)}}\), veljata
+  \item Iz \(\typejudgment{t}{\sumtype{x}{A}{B(x)}}\) lahko tvorimo
     \(\typejudgment{\proj{1}(t)}{A}\) in
     \(\typejudgment{\proj{2}(t)}{B(\proj{1}(t))}\).
-  \item Če veljata \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B(x)}\), velja
-    \(\typejudgment{(x, y)}{\sumtype{x}{A}{B(x)}}\).
-  \item Za vsaka \(\typejudgment{x}{A}\) \(\typejudgment{y}{B(x)}\) veljata enakosti
+  \item Iz \(\typejudgment{a}{A}\) in \(\typejudgment{b}{B(a)}\) lahko tvorimo
+    \(\typejudgment{(a, b)}{\sumtype{x}{A}{B(x)}}\).
+  \item Za vsaka \(\typejudgment{a}{A}\) \(\typejudgment{b}{B(x)}\) veljata enakosti
     \(\proj{1}(a, b) \doteq a\) in \(\proj{2}(a, b) \doteq b\).
   \item Za vsak \(\typejudgment{t}{\sumtype{x}{A}{B(x)}}\) velja enakost
     \((\proj{1}(t), \proj{2}(t)) \doteq t\).
@@ -184,7 +186,7 @@ je \(A\) tip in \(B\) tip, neodvisen od \(A\), lahko nanj kljub temu gledamo kot
   S pomočjo odvisnih produktov lahko podamo specifikacijo tipa
   \emph{naravnih števil} \(\N\), za katera veljajo sledeča pravila sklepanja.
   \begin{enumerate}
-  \item Obstaja naravno število \(\typejudgment{\typename{0}}{\N}\).
+  \item \(\typejudgment{\typename{0}}{\N}\) je naravno število.
   \item Če velja \(\typejudgment{n}{\N}\),
     velja \(\typejudgment{\natsucc(n)}{\N}\).
   \item Velja sledeč \emph{princip indukcije}. Naj bo \(B\) družina tipov nad \(\N\) in
@@ -237,9 +239,120 @@ dokaz izjave \(P(x)\), zato lahko nanje gledamo kot na priče veljavnosti
 Definicije predikatov in formulacije trditev, ki jih bomo predstavili v preostanku dela, bomo
 izrazili v jeziku interpretacije \emph{izjave kot tipi}, kljub temu pa se lahko eksplicitnemu
 zapisu prič pogosto izognemo. V dokazih trditev bomo tako pogosto uporabljali naravni
-jezik sklepanja, vedno pa pravzaprav konstruiramo element določenega tipa, ki predstavlja trditev,
-ki jo dokazujemo.
+jezik sklepanja, vedno pa pravzaprav konstruiramo element določenega tipa, ki predstavlja trditev, ki jo dokazujemo.
 
+\subsection{Tip identifikacij}
+Osnovna motivacija za vpeljavo tipa identifikacij je dejstvo, da je pojem sodbene enakosti
+\emph{prestrog} in da prek nje pogosto ne moremo identificirati vseh izrazov, ki bi
+jih želeli. Poleg tega si v skladu z interpretacijo \emph{izjave kot tipi} želimo tip, elementi
+katerega bi predstavljali dokaze enakosti med dvema elementoma.
+
+Pomankljivost sodbene enakosti si lahko ogledamo na primeru
+komutativnosti naravnih števil.
+
+\begin{primer}
+  Seštevanje naravnih števil bomo definirali kot funkcijo
+  \[\defun{\typename{sum}}{\N}{(\N \to \N)},\] njeno evaluacijo \(\typename{sum}(m, n)\)
+  pa bomo kot običajno pisali kot \(m + n\).
+  Ker je tip \(\N \to (\N \to \N)\) po opombi \ref{neodvisna-vsota} sodbeno enak tipu
+  \(\pitype{n}{\N}{\N \to \N}\), lahko njegove elemente konstruiramo po indukcijskem
+  principu naravnih števil.
+  Izpuščajoč nekaj podrobnosti to pomeni, da želimo vrednost izraza \(m + n\) definirati z
+  indukcijo na \(n\), torej moramo v baznem primeru podati vrednost izraza \(m + \natzero\),
+  v primeru koraka pa moramo pod predpostavko, da poznamo vrednost izraza \(m + n\),
+  podati vrednost izraza \(m + \natsucc(n)\). Naravno je,
+  da izberemo \(m + \natzero :\doteq m\) in \(m + \natsucc(n) :\doteq\natsucc(m + n)\).
+  Za poljubni \emph{fiksni} naravni števili, recimo
+  \(\typename{4}\) in \(\typename{5}\), lahko sedaj z uporabo pravil sklepanja za naravna
+  števila pod točko \ref{naturals} dokažemo, da velja
+  \(\typename{4} + \typename{5} \doteq \typename{5} + \typename{4}\). Če pa sta po drugi strani
+  \(m\) in \(n\)
+  \emph{spremenljivki} tipa \(\N\), tedaj zaradi asimetričnosti definicije seštevanja
+  enakosti \(n + m \doteq m + n\) ne moremo
+  dokazati. Potrebujemo tip \emph{identifikacij} \(\Id{\N}\), z uporabo katerega bi
+  lahko z indukcijo pokazali, da velja \[\pitype{m, n}{\N}{\Id{\N}(n + m, m + n)}.\]
+\end{primer}
+
+\begin{definicija}
+  Naj bo \(A\) tip in \(\typejudgment{a, x}{A}\). Tedaj lahko tvorimo tip
+  \(\Id{A}(a, x)\),
+  imenovan \emph{tip identifikacij med elementoma a in x}. Zanj veljajo sledeča pravila
+  sklepanja:
+  \begin{enumerate}
+  \item Za vsak element \(\typejudgment{a}{A}\) obstaja identifikacija
+    \(\typejudgment{\refl{a}}{\Id{A}(a, a)}\).
+  \item Velja sledeč princip \emph{eliminacije identifikacij}.
+    Naj bo \(\typejudgment{a}{A}\) in \(B\) družina tipov, indeksirana z
+    \(\typejudgment{x}{A}\) ter \(\typejudgment{p}{\Id{A}(a, x)}\). Denimo, da velja
+    \(\typejudgment{r(a)}{B(a, \refl{a})}\). Tedaj velja
+    \[\typejudgment{\typename{ind}_{\Id{A}}(a, r(a))}
+      {\pitype{x}{A}{\pitype{p}{\Id{A}(a, x)}{B(x, p)}}}\]
+  \item Za vsak \(\typejudgment{a}{A}\) velja enakost
+    \(\typename{ind}_{\Id{A}}(a, r(a))(a, \refl{a}) \doteq r(a)\).
+  \end{enumerate}
+  Tip identifikacij \(\Id{A}(a, x)\) bomo od sedaj pisali kar kot \(a = x\) in za boljšo
+  berljivost izpuščali ekspliciten zapis tipa \(A\). Kadar je \(p\) identifikacija
+  med \(a\) in \(x\), bomo torej pisali \(\eqtype{p}{a}{x}\).
+
+  Konstruktor \(\eqtype{\refl{a}}{a}{a}\)
+  nam zagotavlja, da za vsak element \(\typejudgment{a}{A}\) obstaja kanonična
+  identifikacija elementa samega s sabo. Princip eliminacije identifikacij nato zatrdi,
+  da če želimo za vsako identifikacijo \(\eqtype{p}{a}{x}\) konstruirati element tipa
+  \(B(x, p)\), tedaj zadošča, da konstruiramo le element tipa \(B(a, \refl{a})\).
+  Pravimo tudi, da je družina tipov \(a = x\) \emph{induktivno definirana} s
+  konstruktorjem \(\refl{a}\).
+\end{definicija}
+
+Preko principa eliminacije identifikacij lahko dokažemo mnoge lastnosti, ki bi jih od enakosti pričakovali. Nekaj od teh vključuje:
+
+\begin{enumerate}
+\item Velja \emph{simetričnost}: za vsaka elementa \(\typejudgment{x, y}{A}\) obstaja
+  funkcija \[\defun{\typename{sym}}{(x = y)}{(y = x)}.\] Identifikacijo \(\typename{sym}(p)\)
+  imenujemo \emph{inverz} identifikacije \(p\) in ga pogosto označimo z \(p^{-1}\).
+\item Velja \emph{tranzitivnost}: za vsake elemente \(\typejudgment{x, y, z}{A}\) obstaja
+  funkcija \[\defun{\typename{concat}}{(x = y)}{((y = z) \to (x = z))},\] ki jo imenujemo
+  \emph{konkatenacija identifikacij}, \(\typename{concat}(p, q)\) pa pogosto označimo
+  z \(p \cdot q\).
+\item Funkcije ohranjajo identifikacije: za vsaka elementa \(\typejudgment{x, y}{A}\)
+  in vsako funkcijo \(\defun{f}{A}{B}\) obstaja funkcija
+  \[\defun{\typename{ap}_{f}}{(x = y)}{(f(x) = f(y))},\]
+  ki jo imenujemo \emph{aplikacija} funkcije \(f\) na identifikacije v \(A\).
+\item Družine tipov spoštujejo identifikacije: za vsaka elementa
+  \(\typejudgment{x, y}{A}\) in družino tipov
+  \(B\) nad \(A\) obstaja funkcija
+  \[\defun{\typename{tr}_{B}}{(x = y) \to B(x)}{B(y)},\]
+  imenovana \emph{transport vzdolž identifikacij}.
+  Ker sta elementa \(x\) in \(y\) identificirana, lahko preko transporta dokažemo, da sta
+  tudi tipa \(B(x)\) in \(B(y)\) v bijektivni korespondenci. Pokažemo lahko namreč, da
+  velja \(\transp{B}(p) \circ \transp{B}(p^{-1}) = \id{}\) in obratno.
+
+  V interpretaciji \emph{izjave kot tipi} nam transport pove tudi, da lahko znotraj
+  predikatov substituiramo identificirane elemente. Če je namreč \(P\) predikat
+  na \(A\) in velja identifikacija \(x = y\), tedaj \(P(x)\) velja natanko tedaj kot
+  \(P(y)\).
+
+\end{enumerate}
+Konstrukcije naštetih funkcij lahko poiščemo v 5.~poglavju (TODO cite intro to hott), vse
+izmed njih pa zahtevajo preprosto, a nekoliko tehnično, uporabo eliminacije identifikacij.
+
+\pagebreak
+
+V tem delu bomo pogosto imeli opravka z identifikacijami znotraj odvisnih vsot, torej z identifikacijami oblike \((x, y) = (x', y')\), kjer sta
+\(\typejudgment{(x, y), (x', y')}{\sumtype{x}{A}{B(x)}}\). Izkaže se, da imajo identifikacije te oblike preprostejšo karakterizacijo, ki se je bomo pogosto poslužili.
+Velja namreč naslednje:
+\begin{trditev}
+  Naj bosta \(\typejudgment{(x, y), (x', y')}{\sumtype{x}{A}{B(x)}}\). Identifikacije med \((x, y)\) in \((x', y')\) lahko tedaj karakteriziramo kot par identifikacij
+  \(\eqtype{p}{x}{x'}\) in \(\transp{B}(p, y) = y'\).
+\end{trditev}
+Formalna formulacija in uporaba te trditve je zunaj obsega tega dela. Namesto tega bomo identifikacije znotraj odvisnih vsot vedno preprosto nadomestili z pari identifikacij, kot opisano. Trditve tudi ne bomo dokazali, povemo pa lahko nekaj o njeni interpretaciji. TODO
+
+Vredno je omeniti sledeča posebna primera:
+\begin{enumerate}
+\item Funkcija transporta vzdolž identifikacije \(\refl{a}\) je sodbeno enaka identiteti na \(B(a)\) za vsak \(\typejudgment{a}{A}\). Če na prvi komponenti identifikacije znotraj odvisne vsote torej vzamemo \(\refl{a}\), nam na drugi komponenti ostanejo le identifikacije med \(y\) in \(y'\) v \(B(a)\).
+\item Če je tip \(B\) neodvisen od \(A\), je funkcija transporta
+  \(\defun{\transp{B}(p)}{B}{B}\) enaka identiteti za vsako identifikacijo \(p\) v \(A\).
+  Ker je odvisna vsota \(\sumtype{x}{A}{B}\) enaka produktu \(A \times B\), nam karakterizacija pove, da so identifikacije znotraj tipa \(A \times B\) sestavljene iz dveh neodvisnih identifikacij znotraj tipov \(A\) in \(B\).
+\end{enumerate}
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../Najdovski-27191110-2023"

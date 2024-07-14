@@ -1,5 +1,6 @@
 \usepackage{amsmath}
 \usepackage{comment}
+\usepackage{quiver}
 
 \newenvironment{konstrukcija}{\paragraph{Konstrukcija:}}{\hfill$\square$}
 
@@ -11,8 +12,10 @@
 \newcommand{\eqtype}[3]{#1 \,\colon #2 = #3}
 \newcommand{\homotopy}[3]{#1 \,\colon #2 \sim #3}
 \newcommand{\dequiv}[3]{#1 \,\colon #2 \simeq #3}
-\newcommand{\sumtype}[3]{\sum \left( \typejudgment{#1}{#2} \right) #3}
-\newcommand{\pitype}[3]{\prod \left( \typejudgment{#1}{#2} \right) #3}
+%\newcommand{\sumtype}[3]{\sum\left( \typejudgment{#1}{#2} \right) #3}
+%\newcommand{\pitype}[3]{\prod \left( \typejudgment{#1}{#2} \right) #3}
+\newcommand{\sumtype}[3]{\textstyle \sum_{\left( \typejudgment{#1}{#2} \right)} #3}
+\newcommand{\pitype}[3]{\textstyle \prod_{\left( \typejudgment{#1}{#2} \right)} #3}
 \newcommand{\typename}[1]{\textnormal{\textsf{#1}}}
 \newcommand{\emptytype}{\textnormal{\textbf{0}}}
 \newcommand{\unittype}{\textnormal{\textbf{1}}}
@@ -26,15 +29,18 @@
 
 %%%Common types
 \newcommand{\isinv}{\typename{is-invertible}}
+\newcommand{\iscohinv}{\typename{is-coh-invertible}}
 \newcommand{\isequiv}{\typename{is-equiv}}
 \newcommand{\iscontr}{\typename{is-contr}}
 \newcommand{\isprop}{\typename{is-prop}}
 \newcommand{\refl}[1]{\typename{refl}_{#1}}
 \newcommand{\map}{\typename{map}}
-\newcommand{\sect}{\typename{section}}
-\newcommand{\ret}{\typename{retraction}}
+\newcommand{\sect}{\typename{sec}}
+\newcommand{\ret}{\typename{ret}}
 \newcommand{\tot}{\typename{tot}}
+\newcommand{\transp}[1]{\typename{tr}_{#1}}
 \newcommand{\fib}[2]{\typename{fib}_{#1}\left(#2\right)}
+\newcommand{\sphere}[1]{\mathbb{S}^{#1}}
 
 %%% Local Variables:
 %%% mode: latex
