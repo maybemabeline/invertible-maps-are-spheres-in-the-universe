@@ -202,10 +202,7 @@ je \(A\) tip in \(B\) tip, neodvisen od \(A\), lahko nanj kljub temu gledamo kot
       b_{\natsucc}(n, \typename{ind}(b_{\natzero}, b_{\natsucc}, n)\).
   \end{enumerate}
   Princip indukcije nam pove, da če želimo za vsako naravno število \(\typejudgment{n}{\N}\)
-  konstruirati element tipa \(B(n)\), tedaj zadošča, da konstruiramo element tipa \(B(\natzero)\)
-  in pa da znamo za vsak \(\typejudgment{n}{\N}\) iz elementov tipa \(B(n)\) konstruirati elemente
-  tipa \(B(\natsucc(n))\), v čemer lahko prepoznamo podobnost z običajnim principom indukcije v
-  teoriji množic.
+  konstruirati element tipa \(B(n)\), da tedaj zadošča, da konstruiramo element tipa \(B(\natzero)\) in pa, da znamo za vsak \(\typejudgment{n}{\N}\) iz elementov tipa \(B(n)\) konstruirati elemente tipa \(B(\natsucc(n))\). V tem lahko prepoznamo podobnost z običajnim principom indukcije v teoriji množic.
 \end{primer}
 
 \subsection{Interpretacija \emph{izjave kot tipi}}
@@ -247,8 +244,7 @@ Osnovna motivacija za vpeljavo tipa identifikacij je dejstvo, da je pojem sodben
 jih želeli. Poleg tega si v skladu z interpretacijo \emph{izjave kot tipi} želimo tip, elementi
 katerega bi predstavljali dokaze enakosti med dvema elementoma.
 
-Pomankljivost sodbene enakosti si lahko ogledamo na primeru
-komutativnosti naravnih števil.
+Pomankljivost sodbene enakosti si lahko ogledamo na primeru komutativnosti seštevanja naravnih števil.
 
 \begin{primer}
   Seštevanje naravnih števil bomo definirali kot funkcijo

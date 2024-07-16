@@ -142,7 +142,7 @@ Spomnimo se, da v teoriji tipov želimo predikate na tipu \(A\) predstaviti z dr
 
 Drugače pogledano je to, da je tip \(\isinv(f)\) naseljen natanko tedaj kot tip \(\isequiv(f)\) ekvivalentno obstoju funkcij \(\isinv(f) \to \isequiv(f)\) in obratno. Taki funkciji smo v prešnji trditvi implicitno tudi konstruirali, ekvivalenca med tipoma \(\isinv(f)\) in \(\isequiv(f)\) pa bi pomenila, da sta si tudi ti funkciji med seboj tudi inverzni.
 
-Nekoliko presenetljivo se izkaže, da taka ekvivalenca za vsak \(f\) ne more obstajati, do tega pa pride zato, ker imata tipa v določenem smislu drugačno strukturo. Vpeljali bomo namreč lastnost \emph{propozicije} in pokazali, da jo tip \(\isequiv(f)\) izpolnjuje za vsak \(f\), za tip \(\isinv(f)\) pa je to odvisno od strukture tipov \(A\) in \(B\). Nadaljno bomo pokazali, da ekvivalnce ohranjajo lastnost propozicje, torej da za tipa \(A \simeq B\) velja, da tip \(A\) to lastnost izpolnjuje natanko tedaj kot tip \(B\). To bo zaključilo dokaz, saj bi obstoj ekvivalence med \(\isinv(f)\) in \(\isequiv(f)\) za vsak \(f\) skupaj z prejšnjimi trditvami pripeljal v protislovje.
+Nekoliko presenetljivo se izkaže, da taka ekvivalenca za vsak \(f\) ne more obstajati, do tega pa pride zato, ker imata tipa v določenem smislu drugačno strukturo. Vpeljali bomo namreč lastnost \emph{propozicije} in pokazali, da jo tip \(\isequiv(f)\) izpolnjuje za vsak \(f\), za tip \(\isinv(f)\) pa je to odvisno od strukture tipov \(A\) in \(B\). Nadaljno bomo pokazali, da ekvivalnce ohranjajo lastnost propozicje, torej da za tipa \(A \simeq B\) velja, da tip \(A\) to lastnost izpolnjuje natanko tedaj kot tip \(B\). Posledično ekvivalenca za tiste funkcije \(f\), za katere \(\isinv(f)\) ni propozicija, ne more obstajati.
 
 \subsection{Kontraktibilnost in propozicije}
 Na kratko se spomnimo pojma kontraktibilnosti iz klasične topologije. Naj bo torej \(X\) topološki prostor in \(x \in X\). Tedaj pravimo, da je prostor \(X\) \emph{kontraktibilen}, če obstaja homotopija med identiteto na \(X\) in konstantno funkcijo pri \(x\). S tem želimo izraziti, da prostor \(X\) homotopsko gledano nima nobene bistvene strukture in da ima do homotopije natanko samo eno točko, \(x\). V teoriji tipov lahko to lastnost izrazimo na sledeč način.
@@ -154,37 +154,47 @@ Na kratko se spomnimo pojma kontraktibilnosti iz klasične topologije. Naj bo to
 \end{definicija}
 Če naivno preberemo definicijo, se na prvi pogled zdi, kot da smo s tem zajeli le pojem povezanosti s potmi, saj smo zahtevali obstoj točke \(\typejudgment{c}{A}\), za katero velja, da je vsaka točka \(\typejudgment{x}{A}\) z njo identificirana. Razumeti pa moramo, da to ne ustreza le izboru poti \(c = x\) za vsak \(x\), temveč \emph{zveznemu} izboru takih poti. Tudi v klasični topologiji je obstoj zvezne funkcije \(X \to \mathcal{C}(I, X)\), ki vsaki točki \(x\) priredi pot med izbrano točko \(c\) in \(x\), ekvivalenten kontraktibilnosti \(X\).
 
-Če smo s pojmom kontraktibilnosti želeli izraziti, da ima tip \(A\) \emph{natanko} eno točko, želimo s pojmom propozicije izraziti, da ima tip \(A\) \emph{največ} eno točko. Drugače povedano želimo reči, da če je tip propozicija in vsebuje točko, da je ta tedaj tudi edina, torej, da je tip tedaj kontraktibilen.
+Če smo s pojmom kontraktibilnosti želeli izraziti, da ima tip \(A\) \emph{natanko} en element, želimo s pojmom propozicije izraziti, da ima tip \(A\) \emph{največ} en elemnt. Z drugimi besedami, poljubna elementa tipa \(A\) sta identificirana.
 
 \begin{definicija}
   Naj bo \(A\) tip. Pravimo, da je tip \(A\) \emph{propozicija}, če obstaja element tipa
-  \[\isprop(A) := A \to \iscontr(A).\]
+  \[\isprop(A) := \pitype{x, y}{A}{x = y}.\]
 \end{definicija}
 
-Najprej opazimo še, da če je tip \(A\) propozicija, da sta tedaj poljubna elementa \(\typejudgment{x, y}{A}\) identificirana. Res, katerikoli izmed njiju, denimo \(x\), bi zadoščal, da dobimo kontraktibilnost \(A\), posledično pa sta oba elementa identificirana z nekim središčem kontrakcije \(\typejudgment{c}{A}\). Če ti identifikaciji združimo, dobimo identifikacijo med \(x\) in \(y\). Opomnimo lahko, da to ne pomeni, da tip \(A\) nujno ima element, pomeni le, da sta poljubna, hipotetična elementa identificirana.
+Da ima tip \(A\) največ eno točko lahko izrazimo tudi na drugačen način, namreč, da če tip \(A\) ima točko, da je ta tedaj tudi edina, torej, da je tip \(A\) tedaj kontraktibilen. Ti formulaciji sta tudi logično ekvivalentni, ob različnih priložnosti pa je katera od njiju lahko bolj prikladna.
+
+\begin{trditev}
+  Naj bo \(A\) tip. Tedaj je \(A\) propozicija natanko tedaj, kot velja \(A \to \iscontr(A)\).
+\end{trditev}
+
+\begin{dokaz}
+  Denimo najprej, da je tip \(A\) propozicija. Konstruirati želimo funkcijo tipa \(A \to \iscontr(A)\), zato denimo, da je \(\typejudgment{a}{A}\). Za središče kontrakcije tipa \(A\) lahko tedaj izberemo kar ta element, konstruirati pa moramo še kontrakcijo, torej funkcijo tipa \(\pitype{x}{A}{a = x}\). To imamo, saj je tip \(A\) propozicija, le eno od krajišč družine identifikacij moramo fiksrati na element \(a\).
+
+  Obratno denimo, da velja \(A \to \iscontr(A)\). Dokazati moramo, da je sta tedaj poljubna elementa tipa \(A\) identificirana, zato denimo, da sta \(\typejudgment{x, y}{A}\). Kateri koli izmed njiju, recimo \(x\), bi tedaj zadoščal, da dobimo kontraktibilnost tipa \(A\). Posledično dobimo par identifikacij tipa \(c = x\) in \(c = y\) za neko središče kontrakcije \(\typejudgment{c}{A}\). Z inverzom in konkatenacijo ju lahko združimo v identifikacijo tipa \(x = y\), kar zaključi dokaz.
+\end{dokaz}
 
 Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Mimogrede lahko dokažemo tudi, da ekvivalence ohranjajo kontraktibilnost, vendar tega dejstva samega po sebi ne bomo potrebovali.
 
 \begin{trditev}
+  \label{equiv-preserves-prop}
   Naj bosta \(A\) in \(B\) tipa ter \(A \simeq B\). Tedaj je tip \(A\) propozicija natanko tedaj, kot tip \(B\).
 \end{trditev}
 
 \begin{dokaz}
-  Denimo, da velja \(\isprop(A)\). Konstruirati želimo funkcijo \(B \to \iscontr(B)\), torej denimo, da je \(\typejudgment{b}{B}\). Da bi dokazali \(\iscontr(B)\), bomo za središče kontrakcije izbrali kar \(b\), torej moramo konstruirati še kontrakcijo
-  \(\pitype{y}{B}{b = y}\). Denimo torej še, da je \(\typejudgment{y}{B}\).
+  Denimo, da je tip \(A\) propozicija. Dokazati moramo, da sta poljubna elementa tipa \(B\) identificirana, zato denimo, da sta \(\typejudgment{x, y}{B}\).
 
-  Ker sta \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
-  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Elementa \(b\) in \(y\) lahko torej s funkcijo \(g\) preslikamo v tip \(A\), zato je ta gotovo naseljen. Ker je tip \(A\) propozicija je zato tudi kontraktibilen in lahko dobimo identifikaciji \(c = g(b)\) in \(c = g(y)\) za neko središče kontrakcije \(\typejudgment{c}{A}\). Ti lahko z uporabo inverza in konkatenacije združimo v identifikacijo \(g(b) = g(y)\) in jo z aplikacijo funkcije \(f\) preslikamo nazaj v tip \(A\). Identifikacijo med \(b\) in \(y\) lahko tedaj dobimo preko konkatenacije
-  \[b = f(g(b)) = f(g(y)) = y.\]
+  Ker sta tipa \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
+  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Elementa \(x\) in \(y\) lahko torej s funkcijo \(g\) preslikamo v tip \(A\), ker pa je ta propozicija, dobimo identifikacijo \(g(x) = g(y)\). To lahko z aplikacijo funkcije \(f\) preslikamo nazaj v tip \(B\). Identifikacijo med \(x\) in \(y\) lahko tedaj dobimo preko konkatenacije
+  \[x = f(g(x)) = f(g(y)) = y.\]
   Obratno implikacijo dobimo povsem simetrično.
 \end{dokaz}
 
-Sedaj želimo pokazati, da je tip \(\isequiv(f)\) res propozicija za vsako funkcijo \(f\). Pod predpostavko, da je funkcija \(f\) ekvivalenca, moramo torej dokazati, da je tip \(\isequiv(f)\) kontraktibilen.
+Sedaj želimo pokazati, da je tip \(\isequiv(f)\) res propozicija za vsako funkcijo \(f\), za kar bomo uporabili alternativno formulacijo pojma propozicije. Pod predpostavko, da je funkcija \(f\) ekvivalenca, moramo torej dokazati, da je tip \(\isequiv(f)\) kontraktibilen.
 
 Dokaz sloni na dejstvu, da če je funkcija \(f\) ekvivalenca, da ima tedaj tudi enoličen prerez in enolično retrakcijo, oziroma, da sta tipa \(\sect(f)\) in \(\ret(f)\) tedaj kontraktibilna.
 Dokaz te trditve je precej tehničen in zunaj obsega tega dela, zato ga bomo le skicirali. Vredno pa je omeniti, da je predpostavka, da je \(f\) ekvivalenca, tukaj potrebna. V splošnem lahko seveda obstajajo funkcije z mnogo različnimi prerezi ali retrakcijami.
 
-Zadnje dejstvo, ki ga tedaj še potrebujemo, je to, da je produkt kontraktibilnih tipov kontraktibilen, saj je \(\isequiv(f) = \sect(f) \times \ret(f)\). Dokaz te trditve je zelo preprost, sloni pa na karakterizaciji tipa identifikacij v produktih.
+Zadnje dejstvo, ki ga tedaj še potrebujemo, je to, da je produkt kontraktibilnih tipov kontraktibilen, saj je \(\isequiv(f) = \sect(f) \times \ret(f)\). Dokaz te trdi1tve je zelo preprost, sloni pa na karakterizaciji tipa identifikacij v produktih.
 
 \begin{trditev}
   Naj bosta \(A\) in \(B\) tipa ter denimo, da sta kontraktibilna. Tedaj je kontraktibilen tudi tip \(A \times B\).
@@ -197,7 +207,7 @@ Zadnje dejstvo, ki ga tedaj še potrebujemo, je to, da je produkt kontraktibilni
 Sedaj bomo skicirali dokaz trditve, da imajo ekvivalence res kontraktibilen tip prerezov. Dokaz za retrakcije poteka povsem simetrično.
 
 \begin{trditev}
-  Naj bo \(\defun{f}{A}{B}\) ekvivalenca med tipoma \(A\) in \(B\). Tedaj je tip \(\sect(f)\) kontraktibilen.
+  Naj bo \(\defun{f}{A}{B}\) ekvivalenca med tipoma \(A\) in \(B\). Tedaj je tip prerezov funkcije \(f\) kontraktibilen.
 \end{trditev}
 
 \begin{dokaz}
@@ -211,13 +221,14 @@ Sedaj bomo skicirali dokaz trditve, da imajo ekvivalence res kontraktibilen tip 
     \[f \circ g \overset{fL^{-1}}{\sim} f \circ s \overset{H}{\sim} \id{}.\]
 
   \item Željeno identifikacijo najprej preoblikujemo v \(fL = H \cdot G^{-1}\). Ker je funkcija \(r\) retrakcija ekvivalence, lahko pokažemo, da je zaradi tega ekvivalenca tudi sama in zato v določenem smislu levo krajšljiva. Konstrukcija željene identifikacije je zato ekvivalentna kontrukciji identifikacije \[rfL = rH \cdot rG^{-1}.\]
-    Ker je homotopija \(Ks \cdot L \cdot K^{-1}g\) enaka homotopiji \(rH \cdot rG^{-1}\) po definiciji \(L\), zadošča dokazati, da velja identifikacija
-    \[rfL = Ks \cdot L \cdot K^{-1}g.\]
+    Ker je homotopija \(Ks \cdot L \cdot K^{-1}g\) enaka homotopiji \(rH \cdot rG^{-1}\) po definiciji \(L\), zadošča dokazati, da velja identifikacija \(rfL = Ks \cdot L \cdot K^{-1}g.\)
+    Ne nazadnje željeno identifikacijo preoblikujemo v
+    \[rfL \cdot Kg = Ks \cdot L.\]
 
   \item Za konstrukcijo zadnje identifikacije potrebujemo določeno splošnejšo trditev. Naj bodo namreč \(\defun{f, g}{A}{B}\) in \(\defun{h, k}{B}{C}\) funkcije in
     \(\homotopy{H}{f}{g}\) in \(\homotopy{K}{h}{k}\) homotopiji. Tedaj lahko z uporabo funkcijske ekstenzionalnosti in eliminacije identifikacij konstruiramo identifikacijo
-    \[Kf \cdot kH = hH \cdot Kg.\]
-    Homotopiji \(H\) in \(K\) lahko združimo v homotopijo med funkcijama \(h \circ f\) in \(k \circ g\) na dva različna načina, odvisno od tega ali najprej uporabimo homotopijo \(H\) ali homotopijo \(K\), trditev pa nam pove, da se načina pravzaprav skladata. Mimogrede to združitev imenujemo \emph{horizontalna kompozicija} homotopij \(H\) in \(K\), trditev pa tvori podlago za njeno dobro definiranost.
+    \[hH \cdot Kg = Kf \cdot kH.\]
+    Homotopiji \(H\) in \(K\) lahko v homotopijo med funkcijama \(h \circ f\) in \(k \circ g\) združimo na dva različna načina, odvisno od tega ali najprej uporabimo homotopijo \(H\) ali homotopijo \(K\), trditev pa nam pove, da se načina pravzaprav skladata. Mimogrede to združitev imenujemo \emph{horizontalna kompozicija} homotopij \(H\) in \(K\), trditev pa tvori podlago za njeno dobro definiranost.
 
 Željeno identifikacijo lahko nazadnje dobimo tako, da trditev uporabimo na homotopijah \(\homotopy{K}{r \circ f}{\id{}}\) in \(\homotopy{L}{s}{g}\).
 \end{enumerate}
@@ -228,6 +239,7 @@ To trditev je moč dokazati tudi na bolj eleganten način, vendar za to v tem de
 To podpoglavje zaključimo s tem, da diskusijo povzamemo v sledečem izreku:
 
 \begin{izrek}
+  \label{is-equiv-prop}
   Naj bo \(\defun{f}{A}{B}\) funkcija. Tedaj je tip \(\isequiv(f)\) propozicija.
 \end{izrek}
 
@@ -237,18 +249,21 @@ To podpoglavje zaključimo s tem, da diskusijo povzamemo v sledečem izreku:
 
 \subsection{Množice in krožnica \(\mathbb{S}^{1}\)}
 
-NObrnimo se sedaj nazaj h tipu \(\isinv(f)\). Kot omenjeno bomo pokazali, da je propozicionalnost (TODO reword) tega tipa lahko odvisna od lastnosti tipov \(A\) in \(B\). Ker med tipoma \(A\) in \(B\) obstaja obrnljiva funkcija, sta zato po trditvi \(\ref{inv-of-equiv}\) tipa \(A\) in \(B\) tudi ekvivaletna, torej se lahko osredotočimo na le enega izmed njiju.
+Obrnimo se nazaj h tipu \(\isinv(f)\). Omenili smo, da je propozicionalnost (TODO reword) tega tipa lahko odvisna od strukture tipov \(A\) in \(B\). Fiksirajmo torej funkcijo \(f\) in denimo, da je tip \(\isinv(f)\) propozicija. Razmislili bomo, ali lahko iz tega izpeljemo kak pogoj na tipa \(A\) in \(B\).
 
-Denimo torej, da je za določeno funkcijo \(f\) tip \(\isinv(f)\) res propozicija in razmislimo, ali lahko preko tega izpeljemo kako omejitev na tip \(B\).
-
-Denimo torej, da je funkcija \(f\) obrnljiva, torej da obstaja funkcija \(\defun{g}{B}{A}\) s pripadajočima homotopijama \(\homotopy{H}{f \circ g}{\id{}}\) in \(\homotopy{K}{g \circ f}{\id{}}\). Tedaj lahko na sledeč način konstruiramo drugačno homotopijo tipa \(g \circ f \sim \id{}\):
+Denimo najprej, da je funkcija \(f\) obrnljiva, torej, da obstaja funkcija \(\defun{g}{B}{A}\) s pripadajočima homotopijama \(\homotopy{H}{f \circ g}{\id{}}\) in \(\homotopy{K}{g \circ f}{\id{}}\). Tedaj lahko na sledeč način konstruiramo drugačno homotopijo tipa \(g \circ f \sim \id{}\):
 \[gf \overset{gfK^{-1}}{\sim} gfgf \overset{gHf}{\sim} gf \overset{K}{\sim} \id{}.\]
-Ker je po predpostavki tip \(\isinv(f)\) propozicija, sledi, da sta elementa \((g, H, K)\)
+Ker je po predpostavki tip \(\isinv(f)\) propozicija, sta elementa \((g, H, K)\)
 in \((g, H, gfK^{-1} \cdot gHf \cdot K)\) identificirana. Brez škode za splošnost lahko poskrbimo, da sta identifikaciji na prvih dveh komponentah enaki \(\refl{}\), zato na tretji komponenti dobimo identifikacijo tipa \[gfK^{-1} \cdot gHf \cdot K = K.\]
-Krajšamo lahko homotopijo \(K\) in nato funkcijo \(g\), tako da dobimo identifikacijo tipa
-\(Hf = fK\).
+Krajšamo lahko homotopijo \(K\) in nato funkcijo \(g\), tako da dobimo identifikacijo tipa \(Hf = fK\). Če povzamemo:
 
-S tem ko smo predpostavili obstoj dveh homotopij \(H\) in \(K\), ki obe govorita o funkcijah \(f\) in \(g\), sta nastali dve različni možnosti za homotopijo tipa \(f \circ g \circ f \sim f\), namreč \(Hf\) in \(fK\). Če bi bil tip \(\isinv(f)\) propozicija, pa bi bili ti dve možnosti identificirani. Ali pa taka identifikacija nujno vedno obstaja? Na prvi pogled ni očitno, da bi morali biti homotopiji \(H\) in \(K\) v kakeršnemkoli smislu skladni, saj sta povsem poljubni.
+\begin{trditev}
+  \label{inv-prop-coherence}
+  Naj bo \(\defun{f}{A}{B}\) funkcija in denimo, da je njen tip inverzov propozicija. Tedaj za vsak inverz \((g, H, K)\) velja identifikacija \(Hf = fK\).
+\end{trditev}
+
+
+Ker smo v strukturi inverza predpostavili obstoj dveh homotopij \(H\) in \(K\), ki obe govorita o funkcijah \(f\) in \(g\), sta nastali dve različni možnosti za homotopijo tipa \(f \circ g \circ f \sim f\), \(Hf\) in \(fK\), če pa bi bil tip \(\isinv(f)\) propozicija, bi bili možnosti identificirani. Ali pa taka identifikacija nujno vedno obstaja? Na prvi pogled ni očitno, da bi morali biti homotopiji \(H\) in \(K\) v kakeršnemkoli smislu skladni, saj sta povsem poljubni.
 
 Tu nastopi pogoj na tip \(B\), saj so homotopije med funkcijami s kodomeno \(B\) pravzaprav družine identifikacij v tipu \(B\). Če bi v tipu \(B\) med poljubnima točkama obstajala največ ena identifikacija, bi lahko pokazali, da tudi med poljubnima funkcijama s kodomeno \(B\) obstaja največ ena homotopija. Take tipe imenujemo \emph{množice}.
 
@@ -266,33 +281,89 @@ Dokažimo torej, da med funkcijama, katerih kodomena je množica, obstaja najve�
 \end{trditev}
 
 \begin{dokaz}
-  Naj bosta \(f\) in \(g\) funkciji in denimo, da velja \(\homotopy{H}{f}{g}\). Dokazujemo, da je tip \(f \sim g\) kontraktibilen. Za središče kontrakcije izberemo homotopijo \(H\) in denimo, da je \(K\) homotopija med \(f\) in \(g\). Konstruirati želimo homotopijo med homotopijama \(H\) in \(K\), torej funkcijo tipa
+  Naj bosta \(f\) in \(g\) funkciji in denimo, da sta \(H\) in \(K\) homotopiji tipa \(f \sim g\). Konstruirati želimo homotopijo med homotopijama \(H\) in \(K\), torej funkcijo tipa
   \(\pitype{x}{A}{H(x) = K(x)}\), ki bi jo z uporabo funkcijske ekstenzionalnosti spremenili v identifikacijo med \(H\) in \(K\). Naj bo torej \(\typejudgment{x}{A}\).
   Tako \(H(x)\) kot \(K(x)\) sta identifikaciji tipa \(f(x) = g(x)\), ker pa je tip \(B\) množica, je tip \(f(x) = g(x)\) propozicija. Sledi, da sta elementa \(H(x)\) in \(K(x)\) identificirana.
 \end{dokaz}
 
-Vrnimo se k prejšnji diskusiji. Če nadaljno predpostavimo, da je tip \(B\) množica, tedaj po prejšnji trditvi sledi, da je tip \(f \circ g \circ f \sim f\) propozicija, torej sta homotopiji \(Hf\) in \(fK\) identificirani. Izkaže se tudi, da je bila to edina omejitev za propozicionalnst (TODO reword) tipa \(\isinv(f)\). Dokaz poteka podobno kot dokaz, da imaja ekvivalence kontraktbilen tip prerezov, zato ga bomo izpustili.
+Vrnimo se k prejšnji diskusiji. Če nadaljno predpostavimo, da je tip \(B\) množica, tedaj po prejšnji trditvi sledi, da je tip \(f \circ g \circ f \sim f\) propozicija, torej sta homotopiji \(Hf\) in \(fK\) identificirani. Izkaže se tudi, da je bila to edina omejitev za propozicionalnst tipa \(\isinv(f)\) in še več, za ekvivalenco med tipoma \(\isequiv(f)\) in \(\isinv(f)\). Dokaz tega dejstva je podobno tehničen kot dokaz, da imajo ekvivalence kontraktibilen tip prerezov, zato ga bomo izpustili.
 
-Velja tudi več, vpeljemo lahko pojem \emph{koherentno obrnljivih funkcij}, namreč funkcij \(\defun{f}{A}{B}\), za katere obstaja element tipa
-\[\iscohinv(f) := \sumtype{g}{B \to A}{\sumtype{H}{f \circ g \sim \id{}}{\sumtype{K}{f \circ g \sim \id{}}{Hf = fK}}}.\]
-
-Zanje velja sledeči izrek:
+Omenimo lahko še, da je bila izbira tipa \(B\) kot tistega, za katerega smo izpeljali pogoj, arbitrarna. To sloni na dejstvu, da tudi za lastnost množice velja, da jo ekvivalence ohranjajo. Denimo namreč, da je tip \(A\) množica. Za dokaz propozicionalnosti \(\isinv(f)\) bomo zopet uporabili alternativno formulacijo propozicij, zato denimo, da je tip funkcija \(f\) obrnljiva. Dokazati želimo, da je tedaj tip \(\isinv(f)\) kontraktibilen. Ker je funkcija \(f\) obrnljiva, sta po trditi \ref{inv-of-equiv} tipa \(A\) in \(B\) tudi ekvivalentna, od koder sledi, da je tip \(B\) množica. Po prejšnji diskusiji je tedaj tip \(\isinv(f)\) propozicija, ker pa je po predpostavki tudi naseljen, je kontraktibilen. Velja torej sledeča trditev:
 
 \begin{izrek}
-  Za vsako funkcijo \(f\) sta tipa \(\isequiv(f)\) in \(\iscohinv(f)\) ekvivalentna.
+  Naj bo \(\defun{f}{A}{B}\) funkcija in denimo, da je vsaj eden izmed tipov \(A\) in \(B\) množica. Tedaj je tip \(\isinv(f)\) propozicija.
 \end{izrek}
 
-Po prejšnji diskusiji velja tudi naslednja posledica.
+Da bi poiskali funkcijo \(\defun{f}{A}{B}\), katere tip inverzov ni propozicija, jo moramo torej poiskati med funkcijami, katerih domena in kodomena nista množici. Izkaže pa se, da je obstoj tipov, ki niso množice, od Martin-Löfove teorije tipov neodvisen. Edini konstruktor za konstrukcijo identifikacij, ki ga imamo, je namreč \(\refl{}\), kljub temu pa obstoja drugih identifikacij ne moramo ne dokazati, ne ovreči.
 
-\begin{posledica}
-  Naj bo \(\defun{f}{A}{B}\) funkcija in denimo, da je tip \(B\) množica. Tedaj sta tipa \(\isequiv(f)\) in \(\isinv(f)\) ekvivalentna.
-\end{posledica}
+Teorijo tipov lahko zato razširimo na enega izmed dveh načinov: razširimo jo lahko z aksiomom UIP (ang. \emph{Uniqueness of Identity Proofs}), ki v grobem zatrdi, da za vsak tip \(A\) in vsak element \(\typejudgment{a}{A}\) velja, da je tip \(a = a\) kontraktibilen na element \(\refl{a}\). Od tod posledično sledi tudi, da je vsak tip množica. Alternativno lahko za razvoj sintetične homotopske teorije predpostavimo obstoj različnih tipov, imenovanih \emph{višji induktivni tipi}, ki poleg poleg običajnih konstruktorjev za elemente vsebujejo tudi konstruktorje za identifikacije. V tem delu bomo predstavili enega najpreprostejših primerov višjih induktivnih tipov, \emph{krožnico} \(\krog\), in pokazali, da za identitetno funkcijo \(\id{\krog}\) velja, da \(\isinv(\id{\krog})\) \emph{ni} propozicija.
+
+\pagebreak
+\begin{definicija}
+  \emph{Krožnica} \(\krog\) je podana s sledečimi pravili sklepanja:
+  \begin{enumerate}
+  \item Krožnica ima točko \(\typejudgment{\base}{\krog}\).
+  \item V krožnici velja identifikacija \(\typejudgment{\lop}{\base = \base}\).
+  \item Za krožnico velja sledeči princip indukcije. Naj bo \(B\) družina tipov nad \(\krog\) in denimo, da imamo element \(\typejudgment{u}{B(\base)}\) ter identifikacijo \(\typejudgment{p}{\transp{B}(\lop, u) = u}\). Tedaj velja
+    \[\typejudgment{\ind{\krog}(u, p)}{\pitype{x}{\krog}{B(x)}}.\]
+  \item Velja sodbena enakost \(\ind{\krog}(u, p)(\base) \doteq u\).
+  \item Velja določena sodbena enakost, ki vključuje identifikacijo \(p\) in aplikacijo funkcije \(\ind{\krog}(u, p)\) na identifikacijo \(\lop\).
+  \end{enumerate}
+\end{definicija}
+
+Zadnje pravilo sklepanja smo izpustili, saj njegova formulacija vključuje aplikacijo \emph{odvisnih} funkcij na identifikacije, ki je v tem delu nismo vpeljali. Kakorkoli tega pravila sklepanja ne bomo potrebovali.
+
+Če v tretjem pravilu sklepanja družino tipov \(B\) nadomestimo s tipom \(B\), neodvsnim od \(\krog\), se pravilo sklepanja poenostavi v trditev, da za konstrukcijo funkcije tipa \(\krog \to B\) zadošča, da podamo element \(\typejudgment{u}{B}\) in identifikacijo tipa \(u = u\). Zadošča torej, da smo v tipu \(B\) prepoznali instanco krožnice: bazno točko ter identifikacijo na njej. Splošno pravilo sklepanja lahko razumemo podobno, le da moramo v tem primeru krožnico prepoznati v totalnem prostoru družine tipov \(B\).
+
+Osredotočimo se sedaj na obrnljivost funkcije \(\defun{\id{\krog}}{\krog}{\krog}\). Za njen inverz lahko podamo kar funkcijo \(\id{\krog}\), podati pa moramo še dve homotopiji tipa \(\id{\krog} \circ \id{\krog} \sim \id{\krog}\), torej dve funkciji tipa \(\pitype{x}{\krog}{x = x}\). Prvo homotopijo, imenujmo jo \(H\), definiramo kot konstantno homotopijo \(\lambda x.\refl{x}\). V sledečem bomo konstruirali še homotopijo \(K\), ki v določenem smislu za vsako točko \(x\) poda identifikacijo med \(x\) in \(x\), ki enkrat zaokroži okoli krožnice. V posebnem velja \(K(\base) \doteq \lop\).
+
+Če bi bil tip \(\isinv(\id{\krog})\) propozicija, bi bili homotopiji \(H\) in \(K\) tedaj skladni in veljala bi identifikacija \(H\id{\krog} = \id{\krog}K\), kar pa lahko nadaljno poenostavimo v identifikacijo tipa \(H = K\). Posledično bi veljalo \(H \sim K\), torej bi veljala tudi identifikacija
+\[\refl{\base} \doteq H(\base) = K(\base) \doteq \lop,\]
+kar pa je protislovje.
+
+Preostane nam, da konstruiramo omenjeno homotopijo \(K\), za to pa najprej potrebujemo določeno lemo:
+
+\begin{lema}
+  \label{transp-lemma}
+  Naj bo \(A\) tip in \(\typejudgment{x, y}{A}\). Denimo, da imamo identifikacije \(\eqtype{p}{x}{y}\), \(\eqtype{q}{x}{x}\) in \(\eqtype{r}{y}{y}\), za katere velja identifikacija  \(q \cdot p = p \cdot r\). Tedaj velja identifikacija \(\transp{\lambda a. a = a}(p, q) = r\).
+\end{lema}
 
 \begin{dokaz}
-  Po prejšnjem izreku in tranzitivnosti ekvivalence zadošča pokazati, da sta ekvivalentna tipa \(\isinv(f)\) in \(\iscohinv(f)\).
-  Če je funkcija \(f\) koherentno obrnljiva, je tedaj očitno tudi obrnljiva. Ker pa je tip \(B\) množica, po trditvi \ref{is-prop-htpy-set}, sledi, da lahko tudi obrnljive funkcije izboljšamo do koherentno obrnljivih.
+  Prepričajmo se najprej, da je lema smiselna. Transport vzdolž identifikacije \(p\) se dogaja znotraj družine tipov \(a = a\), indeksirane z elementi \(\typejudgment{a}{A}\). Identifikaciji \(q\) in \(r\) sta torej elementa tipov te družine pri elementih \(x\) in \(y\).
+
+  Po principu eliminacije identifikacij zadošča pokazati, da lema velja za \(p \doteq \refl{x}\). Ker je \(\refl{}\) enota za konkatenacijo, se predpostavka poenostavi v identifikacijo \(q = r\), ker pa je transport vzdolž \(\refl{}\) identiteta, se v \(q = r\) poenostavi tudi željena identifikacija, kar zaključi dokaz.
 \end{dokaz}
 
+Sedaj lahko konstruiramo željeno homotopijo \(K\). Po indukcijskem principu za krožnico velja, da za konstrukcijo funkcije \(\pitype{x}{\krog}{x = x}\) zadošča, da podamo element \(\eqtype{u}{\base}{\base}\) ter identifikacijo \(\transp{\lambda x. x = x}(\lop, u) = u\). Veljala bo tudi sodbena enakost \(K(\base) \doteq u\).
+Podamo lahko \(\eqtype{\lop}{\base}{\base}\), ker pa očitno velja identifikacija \(\lop \cdot \lop = \lop \cdot \lop\), tedaj po prejšnji lemi sledi, da velja tudi željena identifikacija \(\transp{\lambda x. x = x}(\lop, \lop) = \lop.\)
+Kot željeno velja \(K(\base) = \lop\). Diskusijo povzemimo v sledeči trditvi.
+
+\begin{trditev}
+  \label{inv-circle-neg-prop}
+  Tip inverzov funkcije \(\defun{\id{\krog}}{\krog}{\krog}\) ni propozicija.
+\end{trditev}
+
+\begin{dokaz}
+  Denimo, da je tip inverzov funkcije \(\id{\krog}\) propozicija. Ker imamo identifikacijo \(\eqtype{\refl{}}{\lop \cdot \lop}{\lop \cdot \lop}\), imamo po lemi \ref{transp-lemma} tudi identifikacijo \(\eqtype{p}{\transp{}(\lop, \lop)}{\lop}\). Trojica
+  \((\id{\krog}, \lambda x. \refl{x}, \ind{\krog}(\lop, p)\)) je tedaj inverz funkcije \(\id{\krog}\), ker pa je \(\isinv(\id{\krog})\) propozicija, po trditvi \ref{inv-prop-coherence} sledi, da imamo identifikacijo med homotopijama
+  \(\lambda x.\refl{x}\) in \(\ind{\krog}(\lop, p)\). Če obe homotopiji evaluiramo pri elementu \(\base\), dobimo identifikacijo med identifikacija \(\refl{\base}\) in \(\lop\), kar pa je protislovje.
+\end{dokaz}
+
+Za konec tega poglavja imamo sledeči izrek:
+
+\begin{izrek}
+  Tipa \(\isequiv(f)\) in \(\isinv(f)\) nista ekvivalentna za vsako funkcijo \(f\).
+\end{izrek}
+
+\begin{dokaz}
+  Po izreku \ref{is-equiv-prop} je tip \(\isequiv(\id{\krog})\) propozicija, tip \(\isinv(\id\krog)\) pa po trditvi \ref{inv-circle-neg-prop} ni. Ker po trditvi \ref{equiv-preserves-prop} ekvivalence ohranjajo lastnost propozicij, tipa nista ekvivalentna.
+\end{dokaz}
+
+Še enkrat lahko poudarimo, da razlika med pojmoma ekvivalence in obrnljivosti leži izključno v višji strukturi identifikacij in homotopij. V strukturi ekvivalence sta homotopiji prereza in retrakcije druga od druge ločeni, zato tip ostane propozicija ne glede na strukturo tipov \(A\) in \(B\). Kot pa smo videli, sta homotopiji v strukturi inverza med seboj prepleteni, zato se tip inverzov lahko navzame višje strukture identifikacij, ki je prisotna v tipih \(A\) in \(B\).
+
+V tem poglavju smo na protiprimeru \emph{ene} funkcije predstavili razliko med pojmom obrnljivosti in pojmom ekvivalence, v sledečem poglavju pa se bomo bolj kvalitativno poglobili v povezavo med tipom \emph{vseh} obrnljivih funkcij in tipom \emph{vseh} ekvivalenc med tipoma \(A\) in \(B\).
+
+NAPISANO DO TUKAJ
 
 \begin{definicija}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij.
@@ -300,6 +371,8 @@ Po prejšnji diskusiji velja tudi naslednja posledica.
   \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
   \(\tot(f)(x, y) = (x, f(x)(y))\).
 \end{definicija}
+
+
 
 \begin{trditev}
   Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij
