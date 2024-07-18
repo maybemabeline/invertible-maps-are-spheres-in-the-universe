@@ -169,17 +169,17 @@ Nazadnje imamo še trditev, ki povezuje tipa funkcij in ošpičenih funkcij.
 
 Sedaj lahko predstavimo karakterizacijo. Vsakemu elementu tipa \(\invmap(A, B)\) ustreza enoličen element \(\dequiv{e}{A}{B}\) skupaj z zanko \(e = e\).
 
-\begin{izrek}
+\begin{trditev}
   \label{main-char}
   Tip obrnljivih funkcij med \(A\) in \(B\) je ekvivalenten tipu \(\sumtype{e}{A \simeq B}{e = e}\).
-\end{izrek}
+\end{trditev}
 
 Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \simeq B}\). Tedaj z \(\map(e)\) označimo funkcijo, pripadajočo elementu \(e\), z \(\sect(e)\) pa prerez funkcije \(\map(e)\). Naj bo še \(\typejudgment{\mathcal{I}}{\isinv(f)}\) za neko funkcijo \(f\). Tedaj z \(\map(\mathcal{I})\) označimo inverz funkcije \(f\). Oznaki \(\map\) sta pravzaprav samo preimenovanji prve projekcije, \(\sect\) pa je okrajšava za \(\proj{1} \circ \proj{2}\).
 
 \begin{dokaz}
   Konstruirati želimo ekvivalenco tipa
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq \sumtype{e}{A \simeq B}{(e = e)}.\]
-  Ker je po trditvi \ref{is-equiv-prop} \(\isequiv\) predikat in ker po trditvi \ref{inv-of-equiv}
+  Ker je po trditvi \ref{is-equiv-prop} \(\isequiv\) predikat na tipu \(A \to B\) in ker po trditvi \ref{inv-of-equiv}
   za vsako funkcijo \(f\) obstaja funkcija tipa
   \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
   trditvi \ref{full-subtype} velja ekvivalenca
@@ -194,7 +194,7 @@ Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \sim
   \[\sumtype{\mathcal{I}}{\sumtype{g}{B \to A}{\map(e) \circ g \sim \id{}}}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})},\]
   ta pa je po definiciji tipa prerezov sodbeno enak tipu
   \[\sumtype{\mathcal{I}}{\sect(\map(e))}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})}.\]
-  Po trditvi \ref{contr-sec-of-equiv} imajo ekvivalence kontraktibilen tip prerezov s središčem kontrakcije pri prerezu funkcije \(\map(e)\), funkciji \(\sect(e)\). Po trditvi \ref{sigma-contr-base} torej sledi, da velja ekvivalenca
+  Po trditvi \ref{contr-sec-of-equiv} ima ekvivalenca \(\map(e)\) kontraktibilen tip prerezov s središčem kontrakcije pri svojem prerezu, funkciji \(\sect(e)\). Po trditvi \ref{sigma-contr-base} torej sledi, da ga v odvisni vsoti lahko krajšamo, torej, da velja ekvivalenca
   \[\sumtype{\mathcal{I}}{\typename{section}(\map e)}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})} \simeq
     \left(\sect(e) \circ \map(e) \sim \id{}\right).\]
   Sledi, da velja ekvivalenca \(\isinv(\map (e)) \simeq (\sect(e) \circ \map(e) \sim \id{})\). Tip inverzov ekvivalence \(\map(e)\) je torej ekvivalenten tipu dokazov, da je prerez funkcije \(\map(e)\) tudi njena retrakcija.
@@ -244,7 +244,7 @@ Kot tipi pa imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Z
   Mislimo si lahko, da je tip \(A \simeq A\) ošpičen z elementom \(\id{A}\).
   Po trditvi \(\ref{circle-loop-space}\) je tip \(\id{A} = \id{A}\) zato ekvivalenten tipu \(\krog \to_{\ast} (A \simeq A)\), po aksiomu univalence pa je ta ekvivalenten tipu
   \(\krog \to_{\ast} (A = A)\), kjer je tip \(A = A\) ošpičen z elementom \(\refl{A}\).
-  Še en korak ošpičenosti višje recimo, da je svet \(\mathcal{U}\) ošpičen s tipom \(A\).
+  Še en korak ošpičenosti višje lahko rečemo, da je svet \(\mathcal{U}\) ošpičen s tipom \(A\).
   Po isti trditvi je tip \(A = A\) je zato ekvivalenten tipu \(\krog \to_{\ast} \mathcal{U}\).
   Združujoč ekvivalence sledi, da je tip \(\id{A} = \id{A}\) ekvivalenten tipu
   \(\krog \to_{\ast} (\krog \to_{\ast} \mathcal{U})\), ta pa je po trditvi (TODO sfere) ekvivalenten tipu \(\sphere{2} \to_{\ast} \mathcal{U}\).
