@@ -135,7 +135,7 @@ Naslednji trditvi spregovorita o povezavi med kontraktibilnostjo in odvisnimi vs
 
 Trditvi nam povesta, da lahko v določenem smislu pri konstrukciji ekvivalenc kontraktibilne tipe v odvisnih vsotah krajšamo tako z leve, kot z desne.
 
-Naslednja trditev spregovori o odvisni vsoti \emph{vseh} tipov identifikacij v danem tipu.
+Nazadnje imamo še trditev, ki spregovori o odvisni vsoti \emph{vseh} tipov identifikacij v danem tipu.
 
 \begin{trditev}
   \label{cover-contr}
@@ -150,20 +150,6 @@ Naslednja trditev spregovori o odvisni vsoti \emph{vseh} tipov identifikacij v d
 \end{dokaz}
 
 Poudarimo, da je za posamezna elementa \(\typejudgment{a, x}{A}\) tip \(a = x\) pogosto daleč od kontraktibilnosti. Trditev pove nekaj veliko šibkejšega, namreč, da je kontraktibilen totalni prostor vseh tipov \(a = x\).
-
-Nazadnje imamo še trditev, ki povezuje tipa funkcij in ošpičenih funkcij.
-
-\begin{trditev}
-  \label{pointed-map-family}
-  Naj bo \((A, a)\) ošpičen tip, \(B\) tip, \(C\) pa družina tipov nad \(B\).
-  Denimo, da za vsak \(\typejudgment{y}{B}\) velja ekvivalenca med tipoma \((A, a) \to_{\ast} (B, y)\) in \(C(y)\). Tedaj velja ekvivalenca med tipoma \(A \to B\) in \(\sumtype{y}{B}{C(y)}\).
-\end{trditev}
-
-\begin{dokaz}
-  Spomnimo se, da je tip \((A, a) \to_{\ast} (B, y)\) po definiciji sodbeno enak tipu \(\sumtype{f}{A \to B}{f(a) = y}\). Ker imamo po predpostavki družino ekvivalenc, po posledici \ref{equiv-tot} sledi, da imamo ekvivalenco med tipoma \(\sumtype{y}{B}{\sumtype{f}{A \to B}{f(a) = y}}\) in \(\sumtype{y}{B}{C(y)}\).
-  Zadošča torej, da konstruiramo ekvivalenca med prvim tipom in tipom \(A \to B\).
-  Tega do sedaj še nismo izpostavili, vendar ker je tip \(A \to B\) neodvisen od tipa \(B\), lahko v prvem tipu zamenjamo vrstni red odvisnih vsot in dobimo ekvivaleten tip \(\sumtype{f}{A \to B}{\sumtype{y}{B}{f(a) = y}}\). Po prejšnji trditvi je tip \(\sumtype{y}{B}{f(a) = y}\) kontraktibilen, zato ga lahko po trditvi \ref{sigma-contr-fam} krajšamo in preostane nam le tip \(A \to B\).
-\end{dokaz}
 
 \subsection{Konstrukcija}
 
@@ -205,11 +191,11 @@ Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \sim
 
 \subsection{Aksiom univalence in sfera \(\sphere{2}\)}
 
-Za konec dela bomo predstavili še tako imenovan \emph{aksiom univalence}, ki je za homotopsko teorijo tipov zelo pomemben, in ga uporabili za nadaljno izpeljavo z karakterizacijo iz prejšnjega podpoglavja. Da bi govorili o univalenci, pa moramo najprej spregovoriti o \emph{svetovih}.
+Za konec dela bomo predstavili še tako imenovani \emph{aksiom univalence}, ki je za homotopsko teorijo tipov zelo pomemben, in ga uporabili za nadaljno izpeljavo karakterizacije iz prejšnjega podpoglavja. Da bi lahko govorili o univalenci, pa moramo najprej spregovoriti o \emph{svetovih}.
 
 V grobem so svetovi tipi, katerih elementi so drugi tipi. Natančneje pravimo, da je tip \(\mathcal{U}\) svet, če iz sodbe \(\typejudgment{A}{\mathcal{U}}\) lahko sklepamo, da velja sodba \(\type{A}\). Formalno gledano elementi \(\mathcal{U}\) sicer niso tipi kot taki, vendar kode, katerim enolično ustrezajo tipi. V to sem v tem delu ne bomo spuščali, več o svetovih pa lahko preberemo v (TODO cite).
 
-Kot tipi pa imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Za vsaka tipa \(A\) in \(B\) v svetu \(\mathcal{U}\) torej obstaja tip identifikacij \(A =_{\mathcal{U}} B\). Aksiom univalence ta tip identifikacij karakterizira. V grobem namreč pove, da če sta tipa \(A\) in \(B\) ekvivalentna, da sta tedaj tudi identificirana. Bolj natančno:
+Kot tipi imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Za vsaka tipa \(A\) in \(B\) v svetu \(\mathcal{U}\) torej obstaja tip identifikacij \(A =_{\mathcal{U}} B\), aksiom univalence pa ta tip identifikacij karakterizira. V grobem namreč pove, da če sta tipa \(A\) in \(B\) ekvivalentna, da sta tedaj tudi identificirana. Bolj natančno:
 
 \begin{definicija}
   Za vsaka tipa \(A\) in \(B\) lahko konstruiramo funkcijo tipa \[A = B \to A \simeq B,\]
@@ -219,39 +205,49 @@ Kot tipi pa imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Z
   \emph{Aksiom univalence} zatrdi, da je funkcija \(\typename{id-to-equiv}\) ekvivalenca.
 \end{definicija}
 
-\begin{posledica}
-  \label{univ-contr}
-  Naj bo \(\mathcal{U}\) svet in \(\typejudgment{A}{\mathcal{U}}\). Tedaj je tip \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) kontraktibilen na element \((A, \id{A})\).
-\end{posledica}
+Da bi, lahko formulirali zadnji izrek, predstavimo še višji induktivni tip \emph{sfere} \(\sphere{2}\). Tako kot krožnica vsebuje točko \(\base\), namesto 1-dimenzionalne identifikacije \(\base = \base\) pa vsebuje 2-dimenzionalno identifikacijo \(\refl{\base} = \refl{\base}\). Njen indukcijski princip bomo predstavili le v nepopolni obliki neodvisne univerzalne lastnosti, saj ga potrebujemo le v tej splošnosti. Za njegovo formulacijo potrebujemo sledečo lemo:
+
+\begin{lema}
+  Naj bo \(\defun{f}{A}{B}\) funkcija, \(\typejudgment{x, y}{A}\), \(\eqtype{p, q}{x}{y}\) in \(\eqtype{r}{p}{q}\). Tedaj velja identifikacija
+  \[\eqtype{\typename{ap}_{f}^{2}\,r}{\ap{f}p}{\ap{f}q}.\]
+\end{lema}
 
 \begin{dokaz}
-  Po aksiomu univalence imamo družino ekvivalenc med tipi \(A \simeq B\) in \(A = B\), indeksirano z \(\typejudgment{B}{\mathcal{U}}\). Po posledici \ref{equiv-tot} imamo torej ekvivalenco med tipoma \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) in \(\sumtype{B}{\mathcal{U}}{A = B}\).
-  Po trditvi \ref{cover-contr} je drugi tip kontraktibilen s središčem kontrakcije \((A, \refl{A})\), ker pa po trditvi \ref{equiv-preserves-contr} ekvivalence ohranjajo kontraktibilnost, je tudi prvi tip kontraktibilen s središčem kontrakcije
-  \[(A, \typename{id-to-equiv}(\refl{A})) \doteq (A, \id{A}).\]
+  Po principu eliminacije identifikacije zadošča, da definiramo
+  \[\eqtype{\typename{ap}_{f}^{2}\,\refl{p}}{\ap{f}p}{\ap{f}p},\] za kar lahko podamo
+  \(\refl{\ap{f}p}\).
 \end{dokaz}
+
+\begin{definicija}
+  \emph{Sfera} \(\sphere{2}\) je podana s sledečimi pravili sklepanja:
+  \begin{itemize}
+  \item Sfera ima element \(\typejudgment{\base}{\sphere{2}}\).
+  \item V sferi velja identifikacija \(\eqtype{\surf}{\refl{\base}}{\base}\).
+  \item Naj bo \(B\) tip. Tedaj lahko definiramo funkcijo tipa
+    \[(\sphere{2} \to B) \to \sumtype{y}{B}{(\refl{y} = \refl{y})}\]
+    s predpisom \(\lambda f. (f(\base),\, \typename{ap}_{f}^{2}\,\surf)\). Element \(\typename{ap}_{f}^{2}\,\surf\) je namreč identifikacija tipa
+    \(\ap{f}\refl{\base} = \ap{f}\refl{\base}\), ker pa je aplikacija funkcij na \(\refl{}\) sodbeno enaka \(\refl{}\), je pravzaprav identifikacija tipa
+    \(\refl{f(\base)} = \refl{f(\base)}\).
+
+    Univerzalna lastnost sfere zatrdi, da je ta funkcija ekvivalenca.
+  \end{itemize}
+\end{definicija}
 
 \begin{izrek}
   Obrnljive funkcije so sfere v svetu. Natančneje, naj bo \(\mathcal{U}\) svet. Tedaj velja ekvivalenca med tipom vseh obrnljivih funkcij v svetu \(\mathcal{U}\), torej tipom \[{\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)}},\] in funkcijskim tipom \(\sphere{2} \to \mathcal{U}\).
 \end{izrek}
 
 \begin{dokaz}
-  Po trditvi \ref{main-char} za vsaka \(\typejudgment{A, B}{\mathcal{U}}\) velja ekvivalenca med tipom \(\invmap(A, B)\) in tipom \(\sumtype{e}{A \simeq B}{e = e}\). Imamo torej družino ekvivalenc, indeksirano z \(\typejudgment{B}{\mathcal{U}}\), zato po posledici \ref{equiv-tot} velja ekvivalenca
-  \[\sumtype{B}{\mathcal{U}}{\invmap(A, B)} \simeq \sumtype{B}{\mathcal{U}}{\sumtype{e}{A \simeq B}{e = e}}.\]
+  Po trditvi \ref{main-char} za vsaka \(\typejudgment{A, B}{\mathcal{U}}\) velja ekvivalenca med tipom \(\invmap(A, B)\) in tipom \(\sumtype{e}{A \simeq B}{e = e}\), iz aksioma univalence pa nadaljno sledi, da je drugi tip ekvivalenten tipu \(\sumtype{e}{A = B}{e = e}\). Imamo torej družino ekvivalenc, indeksirano z \(\typejudgment{B}{\mathcal{U}}\), zato po posledici \ref{equiv-tot} velja ekvivalenca
+  \[\sumtype{B}{\mathcal{U}}{\invmap(A, B)} \simeq \sumtype{B}{\mathcal{U}}{\sumtype{e}{A = B}{e = e}}.\]
   Po asociativnosti odvisnih vsot je desni tip ekvivalenten tipu
-  \[\sumtype{\mathcal{E}}{\sumtype{B}{\mathcal{U}}{A \simeq B}}{\proj{2}(\mathcal{E}) = \proj{2}(\mathcal{E})},\]
-  ker pa je po posledici \ref{univ-contr} tip \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) kontraktibilen na element \((A, \id{A})\), ga po trditvi \ref{sigma-contr-base} v odvisni vsoti lahko krajšamo in ostane nam le
-  \[(\proj{2}(A, \id{A}) = \proj{2}(A, \id{A})) \doteq (\id{A} = \id{A}).\]
-  Mislimo si lahko, da je tip \(A \simeq A\) ošpičen z elementom \(\id{A}\).
-  Po trditvi \(\ref{circle-loop-space}\) je tip \(\id{A} = \id{A}\) zato ekvivalenten tipu \(\krog \to_{\ast} (A \simeq A)\), po aksiomu univalence pa je ta ekvivalenten tipu
-  \(\krog \to_{\ast} (A = A)\), kjer je tip \(A = A\) ošpičen z elementom \(\refl{A}\).
-  Še en korak ošpičenosti višje lahko rečemo, da je svet \(\mathcal{U}\) ošpičen s tipom \(A\).
-  Po isti trditvi je tip \(A = A\) je zato ekvivalenten tipu \(\krog \to_{\ast} \mathcal{U}\).
-  Združujoč ekvivalence sledi, da je tip \(\id{A} = \id{A}\) ekvivalenten tipu
-  \(\krog \to_{\ast} (\krog \to_{\ast} \mathcal{U})\), ta pa je po trditvi (TODO sfere) ekvivalenten tipu \(\sphere{2} \to_{\ast} \mathcal{U}\).
-
-  Konstruirali smo torej družino ekvivalenc med tipi \(\sumtype{B}{\mathcal{U}}{\invmap(A, B)}\) in tipi \((\sphere{2}, \base) \to_{\ast} (\mathcal{U}, A),\) indeksirano z \(\typejudgment{A}{\mathcal{U}}\).
-  Nazadnje po trditvi \ref{pointed-map-family} sledi, da imamo tudi ekvivalenco tipa
-  \[\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)} \simeq (\sphere{2} \to \mathcal{U}).\]
+  \[\sumtype{\mathcal{E}}{\sumtype{B}{\mathcal{U}}{A = B}}{\proj{2}(\mathcal{E}) = \proj{2}(\mathcal{E})},\]
+  ker pa je po trditvi \ref{cover-contr} tip \(\sumtype{B}{\mathcal{U}}{A = B}\) kontraktibilen na element \((A, \refl{A})\), ga po trditvi \ref{sigma-contr-base} v odvisni vsoti lahko krajšamo in ostane nam le
+  \[(\proj{2}(A, \refl{A}) = \proj{2}(A, \refl{A})) \doteq (\refl{A} = \refl{A}).\]
+  Konstruirali smo torej družino ekvivalenc med tipi \(\sumtype{B}{\mathcal{U}}{\invmap(A, B)}\)
+  in tipi \(\refl{A} = \refl{A}\), indeksirano z \(\typejudgment{A}{\mathcal{U}}\). Po posledici \ref{equiv-tot} sledi, da velja tudi ekvivalenca
+  \[\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)} \simeq \sumtype{A}{\mathcal{U}}{(\refl{A} = \refl{A})},\]
+  po univerzalni lastnosti sfere pa je desni tip ekvivalenten tipu \(\sphere{2} \to \mathcal{U}\).
 \end{dokaz}
 
 %%% Local Variables:

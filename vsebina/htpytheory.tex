@@ -172,23 +172,7 @@ Da ima tip \(A\) največ eno točko lahko izrazimo tudi na drugačen način, nam
   Obratno denimo, da velja \(A \to \iscontr(A)\). Dokazati moramo, da je sta tedaj poljubna elementa tipa \(A\) identificirana, zato denimo, da sta \(\typejudgment{x, y}{A}\). Kateri koli izmed njiju, recimo \(x\), bi tedaj zadoščal, da dobimo kontraktibilnost tipa \(A\). Posledično dobimo par identifikacij tipa \(c = x\) in \(c = y\) za neko središče kontrakcije \(\typejudgment{c}{A}\). Z inverzom in konkatenacijo ju lahko združimo v identifikacijo tipa \(x = y\), kar zaključi dokaz.
 \end{dokaz}
 
-Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Najprej dokažimo, da ekvivalence ohranjajo tudi kontraktibilnost.
-
-\begin{trditev}
-  \label{equiv-preserves-contr}
-  Naj bosta \(A\) in \(B\) tipa ter \(A \simeq B\). Tedaj je tip \(A\) kontraktibilen natanko tedaj, kot tip \(B\). Še več, naj bo \(f\) ekvivalenca med \(A\) in \(B\) in \(\typejudgment{c}{A}\) središče kontrakcije tipa \(A\). Tedaj je \(f(c)\) središče kontrakcije tipa \(B\).
-\end{trditev}
-
-\begin{dokaz}
-  Denimo, da je tip \(A\) kontraktibilen s središčem kontrakcije \(\typejudgment{c}{A}\).
-
-  Ker sta tipa \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
-  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Za središče kontrakcije tipa \(B\) izberemo element \(f(c)\). Dokazati moramo, da za vsak \(\typejudgment{y}{B}\) obstaja identifikacija tipa \(f(c) = y\).
-
-  Naj bo torej \(\typejudgment{y}{B}\). S funkcijo \(g\) ga lahko presikamo v tip \(A\), ker pa je ta kontraktibilen, dobimo identifikacijo tipa \(c = g(y)\). Z aplikacijo funkcije \(f\) jo lahko preslikamo nazaj v tip \(B\) in dobimo identifikacijo tipa \(f(c) = f(g(y))\), ker pa velja tudi \(f(g(y)) = y\), s konkatenacijo dobimo željeno identifikacijo.
-
-  Drugi del trditve velja po konstrukciji, obratno smer pa dobimo povsem simetrično.
-\end{dokaz}
+Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Mimogrede lahko dokažemo tudi, da ekvivalence ohranjajo kontraktibilnost, vendar tega dejstva samega po sebi ne bomo potrebovali.
 
 \begin{trditev}
   \label{equiv-preserves-prop}
@@ -196,7 +180,12 @@ Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Najprej dokaž
 \end{trditev}
 
 \begin{dokaz}
-  Uporabili bomo alternativno formulacijo propozicij. Denimo torej, da velja \(A \to \iscontr(A)\). Konstruirati moramo funkcijo tipa \(B \to \iscontr(B)\), zato denimo, da velja \(\typejudgment{y}{B}\). Ker sta tipa \(A\) in \(B\) ekvivalentna, lahko \(y\) preslikamo v tip \(A\), od tod pa sledi, da je tip \(A\) naseljen in posledično kontraktibilen. Po prejšnji trditvi je tedaj kontraktibilen tudi tip \(B\).
+  Denimo, da velja \(\isprop(A)\). Konstruirati želimo funkcijo \(B \to \iscontr(B)\), torej denimo, da je \(\typejudgment{b}{B}\). Da bi dokazali \(\iscontr(B)\), bomo za središče kontrakcije izbrali kar \(b\), torej moramo konstruirati še kontrakcijo
+  \(\pitype{y}{B}{b = y}\). Denimo torej še, da je \(\typejudgment{y}{B}\).
+
+  Ker sta \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
+  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Elementa \(b\) in \(y\) lahko torej s funkcijo \(g\) preslikamo v tip \(A\), zato je ta gotovo naseljen. Ker je tip \(A\) propozicija je zato tudi kontraktibilen in lahko dobimo identifikaciji \(c = g(b)\) in \(c = g(y)\) za neko središče kontrakcije \(\typejudgment{c}{A}\). Ti lahko z uporabo inverza in konkatenacije združimo v identifikacijo \(g(b) = g(y)\) in jo z aplikacijo funkcije \(f\) preslikamo nazaj v tip \(A\). Identifikacijo med \(b\) in \(y\) lahko tedaj dobimo preko konkatenacije
+  \[b = f(g(b)) = f(g(y)) = y.\]
   Obratno implikacijo dobimo povsem simetrično.
 \end{dokaz}
 
@@ -310,7 +299,6 @@ Da bi poiskali funkcijo \(\defun{f}{A}{B}\), katere tip inverzov ni propozicija,
 
 Teorijo tipov lahko zato razširimo na enega izmed dveh načinov: razširimo jo lahko z aksiomom UIP (ang. \emph{Uniqueness of Identity Proofs}), ki v grobem zatrdi, da za vsak tip \(A\) in vsak element \(\typejudgment{a}{A}\) velja, da je tip \(a = a\) kontraktibilen na element \(\refl{a}\). Od tod posledično sledi tudi, da je vsak tip množica. Alternativno lahko za razvoj sintetične homotopske teorije predpostavimo obstoj različnih tipov, imenovanih \emph{višji induktivni tipi}, ki poleg poleg običajnih konstruktorjev za elemente vsebujejo tudi konstruktorje za identifikacije. V tem delu bomo predstavili enega najpreprostejših primerov višjih induktivnih tipov, \emph{krožnico} \(\krog\), in pokazali, da za identitetno funkcijo \(\id{\krog}\) velja, da \(\isinv(\id{\krog})\) \emph{ni} propozicija.
 
-\pagebreak
 \begin{definicija}
   \emph{Krožnica} \(\krog\) je podana s sledečimi pravili sklepanja:
   \begin{enumerate}
@@ -326,28 +314,6 @@ Teorijo tipov lahko zato razširimo na enega izmed dveh načinov: razširimo jo 
 Zadnje pravilo sklepanja smo izpustili, saj njegova formulacija vključuje aplikacijo \emph{odvisnih} funkcij na identifikacije, ki je v tem delu nismo vpeljali. Kakorkoli tega pravila sklepanja ne bomo potrebovali.
 
 Če v tretjem pravilu sklepanja družino tipov \(B\) nadomestimo s tipom \(B\), neodvsnim od \(\krog\), se pravilo sklepanja poenostavi v trditev, da za konstrukcijo funkcije tipa \(\defun{f}{\krog}{B}\) zadošča, da podamo element \(\typejudgment{u}{B}\) in identifikacijo \(\eqtype{p}{u}{u}\). Zadošča torej, da smo v tipu \(B\) prepoznali instanco krožnice: bazno točko ter identifikacijo na njej. Zadnje pravilo sklepanja tedaj zatrdi, da velja sodbena enakost \(\ap{f} p \doteq \lop\).
-
-Sledi kratek intermezzo o \emph{ošpičenih tipih} in \emph{ošpičenih funkcijah}.
-Pravimo, da je tip \(A\) ošpičen, če je opremljen z odlikovanim elementom \(\typejudgment{a}{A}\). Ošpičene tipe pogosto označimo tudi kot pare \((A, a)\). Pravimo, da je funkcija med ošpičenima tipoma ošpičena, če ohranja njuna odlikovana elementa.
-\begin{definicija}
-  Naj bosta \((A, a)\) in \((B, b)\) ošpičena tipa. Definiramo tip \emph{ošpičenih funkcij}
-  \[(A, a) \to_{\ast} (B, b) := \sumtype{f}{A \to B}{f(a) = b}.\]
-  Kadar sta odlikovani točki jasni, pogosto pišemo tudi \(A \to_{\ast} B\).
-\end{definicija}
-
-Pojem smo vpeljali, da lahko formuliramo sledečo trditev:
-\begin{trditev}
-  \label{circle-loop-space}
-  Naj bo \((A, a)\) ošpičen tip. Tedaj sta tipa \((\krog, \base) \to_{\ast} (A, a)\) in \(a = a\) ekvivalentna.
-\end{trditev}
-
-\begin{dokaz}
-  Naj bo \(\depfun{f}{(\krog, \base)}{(A, a)}\) ošpičena funkcija. Tedaj je \(\ap{f} \lop\) identifikacija tipa \(f(\base) = f(\base)\), ker pa je funkcija ošpičena, imamo tudi identifikacijo tipa \(f(\base) = a\). Združimo ju lahko v identifikacijo tipa \(a = a\).
-
-  Naj bo obratno \(\eqtype{p}{a}{a}\) identifikacija. Po indukcijskem principu krožnice je tedaj \(\ind{\krog}(a, p)\) funkcija tipa \(\krog \to A\), ker pa velja sodbena enakost \(\ind{\krog}(a, p)(\base) \doteq a\), je tudi primerno ošpičena.
-
-  Dokaz vzajemne inverznosti predpisov bomo izpustili, sloni pa na zadnjem pravilu sklepanja za krožinco.
-\end{dokaz}
 
 Osredotočimo se sedaj na obrnljivost funkcije \(\defun{\id{\krog}}{\krog}{\krog}\). Za njen inverz lahko podamo kar funkcijo \(\id{\krog}\), podati pa moramo še dve homotopiji tipa \(\id{\krog} \circ \id{\krog} \sim \id{\krog}\), torej dve funkciji tipa \(\pitype{x}{\krog}{x = x}\). Prvo homotopijo, imenujmo jo \(H\), definiramo kot konstantno homotopijo \(\lambda x.\refl{x}\). V sledečem bomo konstruirali še homotopijo \(K\), ki v določenem smislu za vsako točko \(x\) poda identifikacijo med \(x\) in \(x\), ki enkrat zaokroži okoli krožnice. V posebnem velja \(K(\base) \doteq \lop\).
 
