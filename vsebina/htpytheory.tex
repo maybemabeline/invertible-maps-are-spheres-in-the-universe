@@ -106,8 +106,7 @@ Naša alternativna definicija za obrnljivost bo pojem \emph{ekvivalence}. Pravim
   Pravimo, da je funkcija \(f\) \emph{ekvivalenca}, če ima tako prerez kot retrakcijo,
   torej, če obstaja element tipa \[\isequiv(f) := \sect(f) \times \ret(f).\]
   Pravimo, da je tip \(A\) \emph{ekvivalenten} tipu \(B\), če obstaja ekvivalenca med
-  njima, torej element tipa \(A \simeq B := \sumtype{f}{A \to B}{\isequiv(f)}\). Funkcijo,
-  pripadajočo elementu \(\dequiv{e}{A}{B}\), označimo z \(\map(e)\).
+  njima, torej element tipa \(A \simeq B := \sumtype{f}{A \to B}{\isequiv(f)}\).
 \end{definicija}
 
 V definiciji obrnljivosti smo zahtevali, da ima funkcija obojestranski inverz, v
@@ -173,7 +172,23 @@ Da ima tip \(A\) največ eno točko lahko izrazimo tudi na drugačen način, nam
   Obratno denimo, da velja \(A \to \iscontr(A)\). Dokazati moramo, da je sta tedaj poljubna elementa tipa \(A\) identificirana, zato denimo, da sta \(\typejudgment{x, y}{A}\). Kateri koli izmed njiju, recimo \(x\), bi tedaj zadoščal, da dobimo kontraktibilnost tipa \(A\). Posledično dobimo par identifikacij tipa \(c = x\) in \(c = y\) za neko središče kontrakcije \(\typejudgment{c}{A}\). Z inverzom in konkatenacijo ju lahko združimo v identifikacijo tipa \(x = y\), kar zaključi dokaz.
 \end{dokaz}
 
-Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Mimogrede lahko dokažemo tudi, da ekvivalence ohranjajo kontraktibilnost, vendar tega dejstva samega po sebi ne bomo potrebovali.
+Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Najprej dokažimo, da ekvivalence ohranjajo tudi kontraktibilnost.
+
+\begin{trditev}
+  \label{equiv-preserves-contr}
+  Naj bosta \(A\) in \(B\) tipa ter \(A \simeq B\). Tedaj je tip \(A\) kontraktibilen natanko tedaj, kot tip \(B\). Še več, naj bo \(f\) ekvivalenca med \(A\) in \(B\) in \(\typejudgment{c}{A}\) središče kontrakcije tipa \(A\). Tedaj je \(f(c)\) središče kontrakcije tipa \(B\).
+\end{trditev}
+
+\begin{dokaz}
+  Denimo, da je tip \(A\) kontraktibilen s središčem kontrakcije \(\typejudgment{c}{A}\).
+
+  Ker sta tipa \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
+  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Za središče kontrakcije tipa \(B\) izberemo element \(f(c)\). Dokazati moramo, da za vsak \(\typejudgment{y}{B}\) obstaja identifikacija tipa \(f(c) = y\).
+
+  Naj bo torej \(\typejudgment{y}{B}\). S funkcijo \(g\) ga lahko presikamo v tip \(A\), ker pa je ta kontraktibilen, dobimo identifikacijo tipa \(c = g(y)\). Z aplikacijo funkcije \(f\) jo lahko preslikamo nazaj v tip \(B\) in dobimo identifikacijo tipa \(f(c) = f(g(y))\), ker pa velja tudi \(f(g(y)) = y\), s konkatenacijo dobimo željeno identifikacijo.
+
+  Drugi del trditve velja po konstrukciji, obratno smer pa dobimo povsem simetrično.
+\end{dokaz}
 
 \begin{trditev}
   \label{equiv-preserves-prop}
@@ -181,11 +196,7 @@ Kot omenjeno bomo dokazali, da ekvivalence ohranjajo propozicije. Mimogrede lahk
 \end{trditev}
 
 \begin{dokaz}
-  Denimo, da je tip \(A\) propozicija. Dokazati moramo, da sta poljubna elementa tipa \(B\) identificirana, zato denimo, da sta \(\typejudgment{x, y}{B}\).
-
-  Ker sta tipa \(A\) in \(B\) ekvivalentna, imamo funkciji \(\defun{f}{A}{B}\) in
-  \(\defun{g}{B}{A}\), za kateri velja \(f \circ g \sim \id{B}\). Elementa \(x\) in \(y\) lahko torej s funkcijo \(g\) preslikamo v tip \(A\), ker pa je ta propozicija, dobimo identifikacijo \(g(x) = g(y)\). To lahko z aplikacijo funkcije \(f\) preslikamo nazaj v tip \(B\). Identifikacijo med \(x\) in \(y\) lahko tedaj dobimo preko konkatenacije
-  \[x = f(g(x)) = f(g(y)) = y.\]
+  Uporabili bomo alternativno formulacijo propozicij. Denimo torej, da velja \(A \to \iscontr(A)\). Konstruirati moramo funkcijo tipa \(B \to \iscontr(B)\), zato denimo, da velja \(\typejudgment{y}{B}\). Ker sta tipa \(A\) in \(B\) ekvivalentna, lahko \(y\) preslikamo v tip \(A\), od tod pa sledi, da je tip \(A\) naseljen in posledično kontraktibilen. Po prejšnji trditvi je tedaj kontraktibilen tudi tip \(B\).
   Obratno implikacijo dobimo povsem simetrično.
 \end{dokaz}
 
@@ -207,6 +218,7 @@ Zadnje dejstvo, ki ga tedaj še potrebujemo, je to, da je produkt kontraktibilni
 Sedaj bomo skicirali dokaz trditve, da imajo ekvivalence res kontraktibilen tip prerezov. Dokaz za retrakcije poteka povsem simetrično.
 
 \begin{trditev}
+  \label{contr-sec-of-equiv}
   Naj bo \(\defun{f}{A}{B}\) ekvivalenca med tipoma \(A\) in \(B\). Tedaj je tip prerezov funkcije \(f\) kontraktibilen.
 \end{trditev}
 
@@ -313,7 +325,29 @@ Teorijo tipov lahko zato razširimo na enega izmed dveh načinov: razširimo jo 
 
 Zadnje pravilo sklepanja smo izpustili, saj njegova formulacija vključuje aplikacijo \emph{odvisnih} funkcij na identifikacije, ki je v tem delu nismo vpeljali. Kakorkoli tega pravila sklepanja ne bomo potrebovali.
 
-Če v tretjem pravilu sklepanja družino tipov \(B\) nadomestimo s tipom \(B\), neodvsnim od \(\krog\), se pravilo sklepanja poenostavi v trditev, da za konstrukcijo funkcije tipa \(\krog \to B\) zadošča, da podamo element \(\typejudgment{u}{B}\) in identifikacijo tipa \(u = u\). Zadošča torej, da smo v tipu \(B\) prepoznali instanco krožnice: bazno točko ter identifikacijo na njej. Splošno pravilo sklepanja lahko razumemo podobno, le da moramo v tem primeru krožnico prepoznati v totalnem prostoru družine tipov \(B\).
+Če v tretjem pravilu sklepanja družino tipov \(B\) nadomestimo s tipom \(B\), neodvsnim od \(\krog\), se pravilo sklepanja poenostavi v trditev, da za konstrukcijo funkcije tipa \(\defun{f}{\krog}{B}\) zadošča, da podamo element \(\typejudgment{u}{B}\) in identifikacijo \(\eqtype{p}{u}{u}\). Zadošča torej, da smo v tipu \(B\) prepoznali instanco krožnice: bazno točko ter identifikacijo na njej. Zadnje pravilo sklepanja tedaj zatrdi, da velja sodbena enakost \(\ap{f} p \doteq \lop\).
+
+Sledi kratek intermezzo o \emph{ošpičenih tipih} in \emph{ošpičenih funkcijah}.
+Pravimo, da je tip \(A\) ošpičen, če je opremljen z odlikovanim elementom \(\typejudgment{a}{A}\). Ošpičene tipe pogosto označimo tudi kot pare \((A, a)\). Pravimo, da je funkcija med ošpičenima tipoma ošpičena, če ohranja njuna odlikovana elementa.
+\begin{definicija}
+  Naj bosta \((A, a)\) in \((B, b)\) ošpičena tipa. Definiramo tip \emph{ošpičenih funkcij}
+  \[(A, a) \to_{\ast} (B, b) := \sumtype{f}{A \to B}{f(a) = b}.\]
+  Kadar sta odlikovani točki jasni, pogosto pišemo tudi \(A \to_{\ast} B\).
+\end{definicija}
+
+Pojem smo vpeljali, da lahko formuliramo sledečo trditev:
+\begin{trditev}
+  \label{circle-loop-space}
+  Naj bo \((A, a)\) ošpičen tip. Tedaj sta tipa \((\krog, \base) \to_{\ast} (A, a)\) in \(a = a\) ekvivalentna.
+\end{trditev}
+
+\begin{dokaz}
+  Naj bo \(\depfun{f}{(\krog, \base)}{(A, a)}\) ošpičena funkcija. Tedaj je \(\ap{f} \lop\) identifikacija tipa \(f(\base) = f(\base)\), ker pa je funkcija ošpičena, imamo tudi identifikacijo tipa \(f(\base) = a\). Združimo ju lahko v identifikacijo tipa \(a = a\).
+
+  Naj bo obratno \(\eqtype{p}{a}{a}\) identifikacija. Po indukcijskem principu krožnice je tedaj \(\ind{\krog}(a, p)\) funkcija tipa \(\krog \to A\), ker pa velja sodbena enakost \(\ind{\krog}(a, p)(\base) \doteq a\), je tudi primerno ošpičena.
+
+  Dokaz vzajemne inverznosti predpisov bomo izpustili, sloni pa na zadnjem pravilu sklepanja za krožinco.
+\end{dokaz}
 
 Osredotočimo se sedaj na obrnljivost funkcije \(\defun{\id{\krog}}{\krog}{\krog}\). Za njen inverz lahko podamo kar funkcijo \(\id{\krog}\), podati pa moramo še dve homotopiji tipa \(\id{\krog} \circ \id{\krog} \sim \id{\krog}\), torej dve funkciji tipa \(\pitype{x}{\krog}{x = x}\). Prvo homotopijo, imenujmo jo \(H\), definiramo kot konstantno homotopijo \(\lambda x.\refl{x}\). V sledečem bomo konstruirali še homotopijo \(K\), ki v določenem smislu za vsako točko \(x\) poda identifikacijo med \(x\) in \(x\), ki enkrat zaokroži okoli krožnice. V posebnem velja \(K(\base) \doteq \lop\).
 
@@ -362,45 +396,6 @@ Za konec tega poglavja imamo sledeči izrek:
 Še enkrat lahko poudarimo, da razlika med pojmoma ekvivalence in obrnljivosti leži izključno v višji strukturi identifikacij in homotopij. V strukturi ekvivalence sta homotopiji prereza in retrakcije druga od druge ločeni, zato tip ostane propozicija ne glede na strukturo tipov \(A\) in \(B\). Kot pa smo videli, sta homotopiji v strukturi inverza med seboj prepleteni, zato se tip inverzov lahko navzame višje strukture identifikacij, ki je prisotna v tipih \(A\) in \(B\).
 
 V tem poglavju smo na protiprimeru \emph{ene} funkcije predstavili razliko med pojmom obrnljivosti in pojmom ekvivalence, v sledečem poglavju pa se bomo bolj kvalitativno poglobili v povezavo med tipom \emph{vseh} obrnljivih funkcij in tipom \emph{vseh} ekvivalenc med tipoma \(A\) in \(B\).
-
-NAPISANO DO TUKAJ
-
-\begin{definicija}
-  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij.
-  Definiramo funkcijo
-  \(\typejudgment{\tot(f)}{\sumtype{x}{A}{Bx}} \to \sumtype{x}{A}{Cx}\) s predpisom
-  \(\tot(f)(x, y) = (x, f(x)(y))\).
-\end{definicija}
-
-
-
-\begin{trditev}
-  Naj bo \(\typejudgment{f}{\pitype{x}{A}{\left(Bx \to Cx\right)}}\) družina funkcij
-  in denimo, da je \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\). Tedaj je
-  ekvivalenca tudi funkcija \(\tot(f)\).
-\end{trditev}
-
-\begin{dokaz}
-  Ker je funkcija \(f(x)\) ekvivalenca za vsak \(\typejudgment{x}{A}\),
-  lahko tvorimo družino funkcij
-  \(\typejudgment{s}{\pitype{x}{A}{\left(Cx \to Bx\right)}}\), kjer je \(s(x)\)
-  prerez funkcije \(f(x)\).
-  Trdimo, da je tedaj \(\tot(s)\) prerez funkcije \(\tot(f)\), saj
-  za vsak \(\typejudgment{(x, y)}{\sumtype{x}{A}{Cx}}\) velja enakost
-  \[\tot(f)(\tot(s)(x, y)) = \tot(f)(x, s(x)(y)) = (x, f(x)(s(x)(y))) = (x, y).\]
-  Analogno lahko konstruiramo retrakcijo funkcije \(\tot(f)\), kar zaključi dokaz.
-\end{dokaz}
-
-Zgornja trditev je pomembna, saj nam omogoči, da konstrukcijo ekvivalence med odvisnima
-vsotama z istim baznim tipom poenostavimo na konstrukcijo družine ekvivalenc,
-kar je pogosto veliko lažje. Uporabljali ga bomo v obliki sledeče posledice:
-
-\begin{posledica}
-  \label{equiv-tot}
-  Naj bo \(A\) tip, \(B\) in \(C\) družini tipov nad \(A\) in denimo, da velja
-  \(Bx \simeq Cx\) za vsak \(\typejudgment{x}{A}\).
-  Tedaj velja \(\sumtype{x}{A}{Bx} \simeq \sumtype{x}{A}{Cx}\).
-\end{posledica}
 
 %%% Local Variables:
 %%% mode: latex

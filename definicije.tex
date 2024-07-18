@@ -9,6 +9,7 @@
 
 \newcommand{\typejudgment}[2]{#1 : #2}
 \newcommand{\defun}[3]{#1 \,\colon #2 \to #3}
+\newcommand{\depfun}[3]{#1 \,\colon #2 \to_{\ast} #3}
 \newcommand{\eqtype}[3]{#1 \,\colon #2 = #3}
 \newcommand{\homotopy}[3]{#1 \,\colon #2 \sim #3}
 \newcommand{\dequiv}[3]{#1 \,\colon #2 \simeq #3}
@@ -25,7 +26,7 @@
 \newcommand{\natsucc}{\typename{S}}
 \newcommand{\id}[1]{\typename{id}_{#1}}
 \newcommand{\Id}[1]{\typename{Id}_{#1}}
-\newcommand{\ap}[1]{\typename{ap}_{#1}}
+\newcommand{\ap}[1]{\typename{ap}_{#1}\,}
 
 %%%Common types
 \newcommand{\isinv}{\typename{is-invertible}}
@@ -45,6 +46,7 @@
 \newcommand{\base}{\typename{base}}
 \newcommand{\lop}{\typename{loop}}
 \newcommand{\ind}[1]{\typename{ind}_{#1}}
+\newcommand{\invmap}{\typename{inv-map}}
 
 %%% Local Variables:
 %%% mode: latex

@@ -1,58 +1,258 @@
 \section{Karakterizacija obrnljivosti}
 
+Karakterizacije tipa \(\isinv(f)\) za povsem arbitrano funkcijo \(f\) nimamo, fiksiramo pa lahko tipa \(A\) in \(B\) in poskusimo karakterizirati tip vseh obrnljivih funkcij med njima. Tip ekvivalenc med tipoma \(A\) in \(B\) smo že označili z \(A \simeq B\), označimo pa sedaj še tip obrnljivih funkcij:
+\[\invmap(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.\]
+Raziskali bomo torej povezavo med tipoma \(A \simeq B\) in \(\invmap(A, B)\), najprej pa potrebujemo še nekaj pomožnih rezultatov.
+
+\subsection{Pomožni rezultati}
+
+Delali bomo s funkcijami in ekvivalencami med odvisnimi vsotami, zato najprej povejmo nekaj o družinah funkcij. V tem razdelku fiksirajmo tip \(A\) ter \(B\) in \(C\) družini tipov nad \(A\).
+
 \begin{definicija}
-  \emph{Prosta zanka} na tipu \(A\) je sestavljena iz elementa \(\typejudgment{x}{A}\) in
-  identifikacije \(x = x\). Tip prostih zank na tipu \(A\) označimo z
-  \[\typename{free-loop}(A) := \sumtype{x}{A}{x = x}.\]
+  Naj bo \(\typejudgment{F}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij.
+  Definiramo funkcijo
+  \(\typejudgment{\tot(F)}{\sumtype{x}{A}{B(x)}} \to \sumtype{x}{A}{C(x)}\) s predpisom
+  \(\tot(F)(x, y) = (x, F(x)(y))\).
 \end{definicija}
 
-\begin{izrek}
-  Tip obrnljivih funkcij med \(A\) in \(B\) je ekvivalenten tipu prostih zank
-  na tipu \(A \simeq B\).
-\end{izrek}
+\begin{trditev}
+  Naj bo \(\typejudgment{F}{\pitype{x}{A}{\left(B(x) \to C(x)\right)}}\) družina funkcij
+  in denimo, da je za vsak \(\typejudgment{x}{A}\) funkcija \(F(x)\) ekvivalenca. Tedaj je
+  ekvivalenca tudi funkcija \(\tot(F)\).
+\end{trditev}
 
 \begin{dokaz}
-  Želimo konstruirati ekvivalenco tipa
+  Ker je za vsak \(\typejudgment{x}{A}\) funkcija \(F(x)\) ekvivalenca, imamo tudi družino njihovih prerezov \(\defun{S(x)}{C(x)}{B(x)}\).
+  Trdimo, da je tedaj \(\tot(S)\) prerez funkcije \(\tot(F)\), saj
+  za vsak \(\typejudgment{(x, y)}{\sumtype{x}{A}{C(x)}}\) velja enakost
+  \[\tot(F)(\tot(S)(x, y)) = \tot(F)(x, S(x)(y)) = (x, F(x)(S(x)(y))) = (x, y).\]
+  Analogno konstruiramo tudi retrakcijo funkcije \(\tot(F)\), kar zaključi dokaz.
+\end{dokaz}
+
+Zgornja trditev nam omogoči, da konstrukcijo ekvivalence med odvisnima
+vsotama z istim baznim tipom reduciramo na konstrukcijo družine ekvivalenc,
+kar je pogosto veliko lažje. Uporabili ga bomo v obliki sledeče posledice:
+
+\begin{posledica}
+  \label{equiv-tot}
+  Denimo, da za vsak \(\typejudgment{x}{A}\) velja \(B(x) \simeq C(x)\). Tedaj velja tudi \(\sumtype{x}{A}{B(x)} \simeq \sumtype{x}{A}{C(x)}\).
+\end{posledica}
+
+Naslednja preprosta trditev, ki jo bomo nekajkrat potrebovali, je tako imenovana asociativnost odvisnih vsot.
+
+\begin{trditev}
+  \label{sigma-assoc}
+  Naj bo \(A\) tip, \(B\) družina tipov, indeksirana z \(\typejudgment{x}{A}\) in \(C\) družina tipov, indeksirana z \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B(x)}\).
+  Tedaj velja ekvivalenca:
+  \[\sumtype{x}{A}{\sumtype{y}{B(x)}{C(x, y)}} \simeq
+    \sumtype{t}{\sumtype{x}{A}{B(x)}}{C(t)}.\]
+\end{trditev}
+
+\begin{dokaz}
+  Za funkciji podamo \(\lambda (x, (y, z)).((x, y), z)\) in obratno. Ti sta očitno inverzni, zato ekvivalenca velja.
+\end{dokaz}
+
+Na kratko spregovorimo o podtipih. Naj bo \(A\) tip in \(P\) družina tipov nad \(A\), za katero velja, da je za vsak \(\typejudgment{x}{A}\) tip \(P(x)\) propozicija. Take družine tipov imenujemo tudi \emph{predikati} na tipu \(A\). Tip \(\sumtype{x}{A}{P(x)}\) tedaj imenujemo \emph{podtip} elementov tipa \(A\), ki izpolnjujejo predikat \(P\).
+
+Za vsak \(\typejudgment{x}{A}\) namreč do identifikacije natanko obstaja največ en element \(P(x)\), zato se tudi \(x\) v odvisni vsoti pojavi največ enkrat. Ta je torej podtip elementov \(\typejudgment{x}{A}\), za katere obstaja element \(P(x)\).
+
+S to terminologijo je torej tip \(A \simeq B\) podtip tipa \(A \to B\), tip \(\invmap(A, B)\) pa lahko na tipu \(A \to B\) predstavlja dodatno strukturo.
+
+Za podtipe velja sledeča trditev:
+
+\begin{trditev}
+  \label{full-subtype}
+  Naj bo \(A\) tip, \(P\) predikat na \(A\), \(B\) pa družina tipov nad \(A\).
+  Denimo, da obstaja družina funkcij tipa \(\pitype{x}{A}{(B(x) \to P(x))}\).
+  Tedaj velja ekvivalenca
+  \[\sumtype{x}{A}{Bx} \simeq \sumtype{t}{\sumtype{x}{A}{P(x)}}{B (\proj{1} t)}.\]
+\end{trditev}
+
+Trditev lahko interpretiramo na sledeč način. Predpostavka nam pove, da če za element \(\typejudgment{x}{A}\) obstaja elment tipa \(B(x)\), da tedaj \(x\) tudi izpolnjuje predikat \(P\). Za konstrukcijo odvisne vsote družine \(B\) nad \(A\) tedaj zadošča, da se omejimo na konstrukcijo odvisne vsote nad podtipom elementov \(A\), ki zadoščajo predikatu \(P\).
+
+\begin{dokaz}
+  Po asociativnosti odvisnih vsot je desna stran ekvivalence ekvivalentna tipu
+  \(\sumtype{x}{A}{\sumtype{p}{P(x)}{B(x)}} \doteq \sumtype{x}{A}{(P(x) \times B(x))}\).
+  Po posledici \ref{equiv-tot} torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
+  obstaja ekvivalenca \(B(x) \simeq P(x) \times B(x)\).
+
+  Naj bo torej \(\typejudgment{a}{A}\). Med tipoma konstruirajmo inverzni funkciji. Po predpostavki obstaja družina funkcij
+  \[\typejudgment{s}{\pitype{x}{A}{(B(x) \to P(x))}}.\]
+  Funkcijo \(\defun{f}{B(a)}{P(a) \times B(a)}\) lahko tedaj definiramo kot
+  \[\lambda \, y. \left(s(a,y),\, y\right),\] za funkcijo \(\defun{g}{P(a) \times B(a)}{B(a)}\) pa
+  vzemimo kar drugo projekcijo.
+
+  Za vsak \(\typejudgment{y}{B(a)}\) očitno velja sodbena enakost \(g(f(y)) \doteq y\). Naj bo sedaj \(\typejudgment{(p, y)}{P(a) \times B(a)}\). Ker je \(P\)
+  predikat, velja identifikacija \(s(a, y) = p\), zato pa velja tudi identifikacija
+  \[f(g\left(p, y\right)) \doteq \left(s(x, y), y\right) = \left(p, y\right).\]
+  Funkciji \(f\) in \(g\) sta torej inverzni, zato ekvivalenca velja.
+\end{dokaz}
+
+Brez dokaza predstavimo še sledečo trditev, ki pove, da se tip identifikacij v tipu \(\sumtype{x}{A}{P(x)}\) sklada s tipom identifikacij v tipu \(A\). Bolj natančno:
+
+\begin{trditev}
+  \label{subtype-id}
+  Naj bo \(A\) tip, \(P\) predikat na \(A\) in
+  \(\typejudgment{s, t}{\sumtype{x}{A}{P(x)}}\). Tedaj je tip \(s = t\) ekvivalenten tipu \(\proj{1}(s) = \proj{1}(t)\).
+\end{trditev}
+Z aplikacijo funkcije \(\proj{1}\) lahko za vsako identifikacijo tipa \(s = t\) dobimo tudi identifikacijo tipa \(\proj{1}(s) = \proj{1}(t)\), trditev pa nam pove, da v primeru podtipov obstaja tudi enoličen dvig v nasprotno smer.
+Trditev bi najlažje dokazali s tako imenovanim fundamentalnim izrekom o tipih identifikacij, vendar le tega v tem delu nismo razvili. Dokaz trditve lahko poiščemo tukaj (TODO cite)
+
+Naslednji trditvi spregovorita o povezavi med kontraktibilnostjo in odvisnimi vsotami.
+
+\begin{trditev}
+  \label{sigma-contr-base}
+  Naj bo \(A\) tip, \(B\) družina tipov nad \(A\) in denimo, da je tip \(A\) kontraktibilen s središčem kontrakcije \(\typejudgment{c}{A}\). Tedaj je tip \(\sumtype{x}{A}{B(x)}\) ekvivalenten tipu \(B(c)\).
+\end{trditev}
+
+\begin{dokaz}
+  Med tipoma konstruiramo inverzni funkciji.
+
+  Funkcijo \(\defun{f}{B(c)}{\sumtype{x}{A}{B(x)}}\) definiramo kot \(\lambda y. (c, y)\). Ker je tip \(A\) kontraktibilen, imamo kontrakcijo \(\typejudgment{C}{\pitype{x}{A}{c = x}}\).
+  Funkcijo \(\defun{g}{\sumtype{x}{A}{B(x)}}{B(c)}\) lahko torej definiramo kot
+  \[\lambda (x, y).\transp{B}(C(x)^{-1}, y).\]  \(C(x)\) je namreč identifikacija tipa \(c = x\), zato lahko element \(\typejudgment{y}{B(x)}\) transportiramo v tip \(B(c)\) vzdolž inverzne identifikacije \(C(x)^{-1}\).
+
+  Brez škode za splošnost lahko poskrbimo, da je \(C(c) \doteq \refl{c}\). Sledi, da velja sodbena enakost \(g(f(y)) \doteq \transp{B}(C(c)^{-1}, y) \doteq \transp{B}(\refl{c}^{-1}, y)\),  ker pa je inverz identifikacije \(\refl{}\) enak \(\refl{}\) in transport vzdolž identifikacije \(\refl{}\) enak identiteti, je \(g(f(y)) = y\) za vsak \(\typejudgment{y}{B(c)}\).
+
+  Obratno velja sodbena enakost \(f(g(x, y)) \doteq (c, \transp{B}(C(x)^{-1}, y))\). Po karakterizaciji identifikacij v odvisnih vsotah za konstrukcijo identifikacije tipa
+  \[(x, y) = (c, \transp{B}(C(x)^{-1}, y))\] zadošča, da podamo identifikaciji \(\eqtype{p}{x}{c}\) in \(\transp{B}(p, y) = \transp{B}(C(x)^{-1}, y)\). Podamo lahko \(C(x)^{-1}\) in \(\refl{\transp{B}(C(x)^{-1}, y)}\).
+\end{dokaz}
+
+\begin{trditev}
+  \label{sigma-contr-fam}
+  Naj bo \(A\) tip in \(B\) družina kontraktibilnih tipov nad \(A\). Tedaj je tip \(\sumtype{x}{A}{B(x)}\) ekvivalenten tipu \(A\).
+\end{trditev}
+
+\begin{dokaz}
+  Med tipoma konstruiramo inverzni funkciji.
+
+  Ker so z vsak \(\typejudgment{x}{A}\) tipi \(B(x)\) kontraktibilni, za vsak \(\typejudgment{x}{A}\) obstaja tudi središče kontrakcije \(\typejudgment{b(x)}{B(x)}\).
+  Funkcijo \(\defun{f}{A}{\sumtype{x}{A}{B(x)}}\) tedaj definiramo kot \(\lambda x. (x, b(x))\), za funkcijo \(\defun{g}{\sumtype{x}{A}{B(x)}}{A}\) pa vzamemo prvo projekcijo.
+
+  Očitno velja sodbena enakost \(g(f(x)) \doteq x\), ker pa imamo za vsak \(\typejudgment{y}{B(x)}\) identifikacijo \(b(x) = y\), imamo tudi identifikacijo
+  \[f(g(x, y)) \doteq (x, b(x)) = (x, y).\]
+\end{dokaz}
+
+Trditvi nam povesta, da lahko v določenem smislu pri konstrukciji ekvivalenc kontraktibilne tipe v odvisnih vsotah krajšamo tako z leve, kot z desne.
+
+Naslednja trditev spregovori o odvisni vsoti \emph{vseh} tipov identifikacij v danem tipu.
+
+\begin{trditev}
+  \label{cover-contr}
+  Naj bo \(A\) tip in \(\typejudgment{a}{A}\). Tedaj je tip \(\sumtype{x}{A}{a = x}\) kontraktibilen.
+\end{trditev}
+
+\begin{dokaz}
+  Za središče kontrakcije izberemo element \((a, \refl{a})\). Dokazati moramo, da imamo tedaj za vsaka \(\typejudgment{x}{A}\) in \(\typejudgment{p}{a = x}\) identifikacijo tipa
+  \[(a, \refl{a}) = (x, p).\]
+  Po principu eliminacije identifikacij zadošča, da podamo identifikacijo tipa
+  \[(a, \refl{a}) = (a, \refl{a}),\] za kar lahko podamo \(\refl{(a, \refl{a})}\).
+\end{dokaz}
+
+Poudarimo, da je za posamezna elementa \(\typejudgment{a, x}{A}\) tip \(a = x\) pogosto daleč od kontraktibilnosti. Trditev pove nekaj veliko šibkejšega, namreč, da je kontraktibilen totalni prostor vseh tipov \(a = x\).
+
+Nazadnje imamo še trditev, ki povezuje tipa funkcij in ošpičenih funkcij.
+
+\begin{trditev}
+  \label{pointed-map-family}
+  Naj bo \((A, a)\) ošpičen tip, \(B\) tip, \(C\) pa družina tipov nad \(B\).
+  Denimo, da za vsak \(\typejudgment{y}{B}\) velja ekvivalenca med tipoma \((A, a) \to_{\ast} (B, y)\) in \(C(y)\). Tedaj velja ekvivalenca med tipoma \(A \to B\) in \(\sumtype{y}{B}{C(y)}\).
+\end{trditev}
+
+\begin{dokaz}
+  Spomnimo se, da je tip \((A, a) \to_{\ast} (B, y)\) po definiciji sodbeno enak tipu \(\sumtype{f}{A \to B}{f(a) = y}\). Ker imamo po predpostavki družino ekvivalenc, po posledici \ref{equiv-tot} sledi, da imamo ekvivalenco med tipoma \(\sumtype{y}{B}{\sumtype{f}{A \to B}{f(a) = y}}\) in \(\sumtype{y}{B}{C(y)}\).
+  Zadošča torej, da konstruiramo ekvivalenca med prvim tipom in tipom \(A \to B\).
+  Tega do sedaj še nismo izpostavili, vendar ker je tip \(A \to B\) neodvisen od tipa \(B\), lahko v prvem tipu zamenjamo vrstni red odvisnih vsot in dobimo ekvivaleten tip \(\sumtype{f}{A \to B}{\sumtype{y}{B}{f(a) = y}}\). Po prejšnji trditvi je tip \(\sumtype{y}{B}{f(a) = y}\) kontraktibilen, zato ga lahko po trditvi \ref{sigma-contr-fam} krajšamo in preostane nam le tip \(A \to B\).
+\end{dokaz}
+
+\subsection{Konstrukcija}
+
+Sedaj lahko predstavimo karakterizacijo. Vsakemu elementu tipa \(\invmap(A, B)\) ustreza enoličen element \(\dequiv{e}{A}{B}\) skupaj z zanko \(e = e\).
+
+\begin{izrek}
+  \label{main-char}
+  Tip obrnljivih funkcij med \(A\) in \(B\) je ekvivalenten tipu \(\sumtype{e}{A \simeq B}{e = e}\).
+\end{izrek}
+
+Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \simeq B}\). Tedaj z \(\map(e)\) označimo funkcijo, pripadajočo elementu \(e\), z \(\sect(e)\) pa prerez funkcije \(\map(e)\). Naj bo še \(\typejudgment{\mathcal{I}}{\isinv(f)}\) za neko funkcijo \(f\). Tedaj z \(\map(\mathcal{I})\) označimo inverz funkcije \(f\). Oznaki \(\map\) sta pravzaprav samo preimenovanji prve projekcije, \(\sect\) pa je okrajšava za \(\proj{1} \circ \proj{2}\).
+
+\begin{dokaz}
+  Konstruirati želimo ekvivalenco tipa
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq \sumtype{e}{A \simeq B}{(e = e)}.\]
-  Ker je \(\isequiv\) predikat in ker po trditvi \ref{inv-of-equiv}
-  za vsako funkcijo \(f\) obstaja funkcija
+  Ker je po trditvi \ref{is-equiv-prop} \(\isequiv\) predikat in ker po trditvi \ref{inv-of-equiv}
+  za vsako funkcijo \(f\) obstaja funkcija tipa
   \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
   trditvi \ref{full-subtype} velja ekvivalenca
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq
-    \sumtype{e}{A \simeq B}{\isinv(\map e).}
+    \sumtype{e}{A \simeq B}{\isinv(\map(e)).}
   \]
-  Po posledici \ref{equiv-tot}
-  torej zadošča pokazati, da za vsak element \(\dequiv{e}{A}{B}\) obstaja ekvivalenca
-  \[\isinv(\map e) \simeq (e = e).\]
-  Oglejmo si tip \[\isinv(\map e) = \sumtype{g}{B \to A}{(\map e \circ g \sim id) \times (g \circ \map e \sim id)}.\]
-  Po asociativnosti odvisne vsote ta ekvivalenten tipu
-  \begin{align*}
-    & \sumtype{H}{\sumtype{g}{B \to A}{\map e \circ g \sim id}}{(\map H \circ \map e \sim id)} = \\
-    & \sumtype{H}{\typename{section}(\map e)}{(\map H \circ \map e \sim id)},
-  \end{align*}
-  ker pa imajo po trditvi TODO ekvivalence kontraktibilen tip prerezov, po trditvi
-  (TODO kontraktibilen bazni prostor) velja še ekvivalenca
-  \[\sumtype{H}{\typename{section}(\map e)}{(\map H \circ \map e \sim id)} \simeq
-    \left(\typename{sec} e \circ \map e \sim id\right).\]
-  Sledi, da velja \(\isinv(\map e) \simeq (\typename{sec} e \circ \map e \sim id)\), dokaz pa
-  zaključimo še z zaporedjem ekvivalenc, ki jih argumentiramo spodaj.
-  \begin{align*}
-    & (\typename{sec} e \circ \map e \sim id) \simeq \\
-    & (\map e \circ \typename{sec}e \circ \map e \sim \map e) \simeq \\
-    & (\map e \sim \map e) \simeq \\
-    & (\map e = \map e) \simeq \\
-    & (e = e)
-  \end{align*}
-  \begin{itemize}
-  \item Ker je \(e\) ekvivalenca, je po trditvi TODO ekvivalenca tudi delovanje \(\map e\)
-    na homotopije.
-  \item Funkcija \(\typename{sec}e\) je prerez funkcije \(\map e\).
-  \item TODO funext
-  \item Po trditvi \ref{subtype-id} lahko zanko na funkciji \(\map e\) dvignemo do
-    zanke na pripadajoči ekvivalenci \(e\).
-  \end{itemize}
+  Po posledici \ref{equiv-tot} torej zadošča, da za vsak element \(\dequiv{e}{A}{B}\) konstruiramo ekvivalenco tipa
+  \[\isinv(\map(e)) \simeq (e = e).\]
+  Oglejmo si tip
+  \[\isinv(\map(e)) \doteq \sumtype{g}{B \to A}{(\map(e) \circ g \sim \id{}) \times (g \circ \map(e) \sim \id{})}.\]
+  Po asociativnosti odvisnih vsot je ta ekvivalenten tipu
+  \[\sumtype{\mathcal{I}}{\sumtype{g}{B \to A}{\map(e) \circ g \sim \id{}}}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})},\]
+  ta pa je po definiciji tipa prerezov sodbeno enak tipu
+  \[\sumtype{\mathcal{I}}{\sect(\map(e))}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})}.\]
+  Po trditvi \ref{contr-sec-of-equiv} imajo ekvivalence kontraktibilen tip prerezov s središčem kontrakcije pri prerezu funkcije \(\map(e)\), funkciji \(\sect(e)\). Po trditvi \ref{sigma-contr-base} torej sledi, da velja ekvivalenca
+  \[\sumtype{\mathcal{I}}{\typename{section}(\map e)}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})} \simeq
+    \left(\sect(e) \circ \map(e) \sim \id{}\right).\]
+  Sledi, da velja ekvivalenca \(\isinv(\map (e)) \simeq (\sect(e) \circ \map(e) \sim \id{})\). Tip inverzov ekvivalence \(\map(e)\) je torej ekvivalenten tipu dokazov, da je prerez funkcije \(\map(e)\) tudi njena retrakcija.
+
+  Dokazati moramo torej še, da velja ekvivalenca med tipoma \(\sect(e) \circ \map(e) \sim \id{}\) in \(e = e\). V prejšnjem poglavju smo že uporabili dejstvo, da so ekvivalence levo krajšljive, sedaj pa ga zopet uporabimo v še bolj točnem smislu, namreč, da sta tipa \(\sect(e) \circ \map(e) \sim \id{}\) in \(\map(e) \circ \sect(e) \circ \map(e) \sim \map(e)\) ekvivalentna. Ker je \(\sect(e)\) prerez \(\map(e)\), je drugi tip ekvivalenten tipu \(\map(e) \sim \map(e)\), ta pa je po aksiomu funkcijske ekstenzionalnosti ekvivalenten tipu \(\map(e) = \map(e)\). Po trditvi \ref{subtype-id} je ta ekvivalenten tipu \(e = e\).
 \end{dokaz}
 
+
+\subsection{Aksiom univalence in sfera \(\sphere{2}\)}
+
+Za konec dela bomo predstavili še tako imenovan \emph{aksiom univalence}, ki je za homotopsko teorijo tipov zelo pomemben, in ga uporabili za nadaljno izpeljavo z karakterizacijo iz prejšnjega podpoglavja. Da bi govorili o univalenci, pa moramo najprej spregovoriti o \emph{svetovih}.
+
+V grobem so svetovi tipi, katerih elementi so drugi tipi. Natančneje pravimo, da je tip \(\mathcal{U}\) svet, če iz sodbe \(\typejudgment{A}{\mathcal{U}}\) lahko sklepamo, da velja sodba \(\type{A}\). Formalno gledano elementi \(\mathcal{U}\) sicer niso tipi kot taki, vendar kode, katerim enolično ustrezajo tipi. V to sem v tem delu ne bomo spuščali, več o svetovih pa lahko preberemo v (TODO cite).
+
+Kot tipi pa imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Za vsaka tipa \(A\) in \(B\) v svetu \(\mathcal{U}\) torej obstaja tip identifikacij \(A =_{\mathcal{U}} B\). Aksiom univalence ta tip identifikacij karakterizira. V grobem namreč pove, da če sta tipa \(A\) in \(B\) ekvivalentna, da sta tedaj tudi identificirana. Bolj natančno:
+
+\begin{definicija}
+  Za vsaka tipa \(A\) in \(B\) lahko konstruiramo funkcijo tipa \[A = B \to A \simeq B,\]
+  imenujmo jo \(\typename{id-to-equiv}\).
+  Po principu eliminacije identifikacij namreč zadošča, da podamo ekvivalenco tipa \(A \simeq A\), za kar lahko podamo identiteto \(\id{A}\).
+
+  \emph{Aksiom univalence} zatrdi, da je funkcija \(\typename{id-to-equiv}\) ekvivalenca.
+\end{definicija}
+
+\begin{posledica}
+  \label{univ-contr}
+  Naj bo \(\mathcal{U}\) svet in \(\typejudgment{A}{\mathcal{U}}\). Tedaj je tip \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) kontraktibilen na element \((A, \id{A})\).
+\end{posledica}
+
+\begin{dokaz}
+  Po aksiomu univalence imamo družino ekvivalenc med tipi \(A \simeq B\) in \(A = B\), indeksirano z \(\typejudgment{B}{\mathcal{U}}\). Po posledici \ref{equiv-tot} imamo torej ekvivalenco med tipoma \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) in \(\sumtype{B}{\mathcal{U}}{A = B}\).
+  Po trditvi \ref{cover-contr} je drugi tip kontraktibilen s središčem kontrakcije \((A, \refl{A})\), ker pa po trditvi \ref{equiv-preserves-contr} ekvivalence ohranjajo kontraktibilnost, je tudi prvi tip kontraktibilen s središčem kontrakcije
+  \[(A, \typename{id-to-equiv}(\refl{A})) \doteq (A, \id{A}).\]
+\end{dokaz}
+
+\begin{izrek}
+  Obrnljive funkcije so sfere v svetu. Natančneje, naj bo \(\mathcal{U}\) svet. Tedaj velja ekvivalenca med tipom vseh obrnljivih funkcij v svetu \(\mathcal{U}\), torej tipom \[{\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)}},\] in funkcijskim tipom \(\sphere{2} \to \mathcal{U}\).
+\end{izrek}
+
+\begin{dokaz}
+  Po trditvi \ref{main-char} za vsaka \(\typejudgment{A, B}{\mathcal{U}}\) velja ekvivalenca med tipom \(\invmap(A, B)\) in tipom \(\sumtype{e}{A \simeq B}{e = e}\). Imamo torej družino ekvivalenc, indeksirano z \(\typejudgment{B}{\mathcal{U}}\), zato po posledici \ref{equiv-tot} velja ekvivalenca
+  \[\sumtype{B}{\mathcal{U}}{\invmap(A, B)} \simeq \sumtype{B}{\mathcal{U}}{\sumtype{e}{A \simeq B}{e = e}}.\]
+  Po asociativnosti odvisnih vsot je desni tip ekvivalenten tipu
+  \[\sumtype{\mathcal{E}}{\sumtype{B}{\mathcal{U}}{A \simeq B}}{\proj{2}(\mathcal{E}) = \proj{2}(\mathcal{E})},\]
+  ker pa je po posledici \ref{univ-contr} tip \(\sumtype{B}{\mathcal{U}}{A \simeq B}\) kontraktibilen na element \((A, \id{A})\), ga po trditvi \ref{sigma-contr-base} v odvisni vsoti lahko krajšamo in ostane nam le
+  \[(\proj{2}(A, \id{A}) = \proj{2}(A, \id{A})) \doteq (\id{A} = \id{A}).\]
+  Mislimo si lahko, da je tip \(A \simeq A\) ošpičen z elementom \(\id{A}\).
+  Po trditvi \(\ref{circle-loop-space}\) je tip \(\id{A} = \id{A}\) zato ekvivalenten tipu \(\krog \to_{\ast} (A \simeq A)\), po aksiomu univalence pa je ta ekvivalenten tipu
+  \(\krog \to_{\ast} (A = A)\), kjer je tip \(A = A\) ošpičen z elementom \(\refl{A}\).
+  Še en korak ošpičenosti višje recimo, da je svet \(\mathcal{U}\) ošpičen s tipom \(A\).
+  Po isti trditvi je tip \(A = A\) je zato ekvivalenten tipu \(\krog \to_{\ast} \mathcal{U}\).
+  Združujoč ekvivalence sledi, da je tip \(\id{A} = \id{A}\) ekvivalenten tipu
+  \(\krog \to_{\ast} (\krog \to_{\ast} \mathcal{U})\), ta pa je po trditvi (TODO sfere) ekvivalenten tipu \(\sphere{2} \to_{\ast} \mathcal{U}\).
+
+  Konstruirali smo torej družino ekvivalenc med tipi \(\sumtype{B}{\mathcal{U}}{\invmap(A, B)}\) in tipi \((\sphere{2}, \base) \to_{\ast} (\mathcal{U}, A),\) indeksirano z \(\typejudgment{A}{\mathcal{U}}\).
+  Nazadnje po trditvi \ref{pointed-map-family} sledi, da imamo tudi ekvivalenco tipa
+  \[\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)} \simeq (\sphere{2} \to \mathcal{U}).\]
+\end{dokaz}
 
 %%% Local Variables:
 %%% mode: latex
