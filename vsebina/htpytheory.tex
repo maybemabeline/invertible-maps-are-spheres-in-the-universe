@@ -59,9 +59,9 @@ z desne razširimo s funkcijo.
 \begin{dokaz}
   Homotopijo \(H\) zopet evaluiramo na elementu \(\typejudgment{y}{B}\) in dobimo
   identifikacijo \(\eqtype{H(y)}{f(y)}{g(y)}\). Če sedaj nanjo apliciramo funkcijo \(h\),
-  dobimo identifikacijo \(\eqtype{\ap{h}(H(y))}{h(f(y))}{h(g(y))}\). Homotopijo \(kH\) lahko
+  dobimo identifikacijo \(\eqtype{\ap{h}H(y)}{h(f(y))}{h(g(y))}\). Homotopijo \(kH\) lahko
   torej definiramo kot
-  \(\lambda y. \typename{ap}_{h}(H(y))\).
+  \(\lambda y. \typename{ap}_{h}H(y)\).
 
   Naj bo sedaj \(\typejudgment{x}{A}\). Homotopijo \(H\) lahko tedaj evaluiramo tudi
   na elementu \(h(x)\) in tako dobimo identifikacijo
@@ -346,7 +346,7 @@ Kot željeno velja \(K(\base) = \lop\). Diskusijo povzemimo v sledeči trditvi.
 \begin{dokaz}
   Denimo, da je tip inverzov funkcije \(\id{\krog}\) propozicija. Ker imamo identifikacijo \(\eqtype{\refl{}}{\lop \cdot \lop}{\lop \cdot \lop}\), imamo po lemi \ref{transp-lemma} tudi identifikacijo \(\eqtype{p}{\transp{}(\lop, \lop)}{\lop}\). Trojica
   \((\id{\krog}, \lambda x. \refl{x}, \ind{\krog}(\lop, p)\)) je tedaj inverz funkcije \(\id{\krog}\), ker pa je \(\isinv(\id{\krog})\) propozicija, po trditvi \ref{inv-prop-coherence} sledi, da imamo identifikacijo med homotopijama
-  \(\lambda x.\refl{x}\) in \(\ind{\krog}(\lop, p)\). Če obe homotopiji evaluiramo pri elementu \(\base\), dobimo identifikacijo med identifikacija \(\refl{\base}\) in \(\lop\), kar pa je protislovje.
+  \(\lambda x.\refl{x}\) in \(\ind{\krog}(\lop, p)\). Če obe homotopiji evaluiramo pri elementu \(\base\), dobimo identifikacijo med identifikacijama \(\refl{\base}\) in \(\lop\), kar pa je protislovje.
 \end{dokaz}
 
 Za konec tega poglavja imamo sledeči izrek:
@@ -359,7 +359,7 @@ Za konec tega poglavja imamo sledeči izrek:
   Po izreku \ref{is-equiv-prop} je tip \(\isequiv(\id{\krog})\) propozicija, tip \(\isinv(\id\krog)\) pa po trditvi \ref{inv-circle-neg-prop} ni. Ker po trditvi \ref{equiv-preserves-prop} ekvivalence ohranjajo lastnost propozicij, tipa nista ekvivalentna.
 \end{dokaz}
 
-Še enkrat lahko poudarimo, da razlika med pojmoma ekvivalence in obrnljivosti leži izključno v višji strukturi identifikacij in homotopij. V strukturi ekvivalence sta homotopiji prereza in retrakcije druga od druge ločeni, zato tip ostane propozicija ne glede na strukturo tipov \(A\) in \(B\). Kot pa smo videli, sta homotopiji v strukturi inverza med seboj prepleteni, zato se tip inverzov lahko navzame višje strukture identifikacij, ki je prisotna v tipih \(A\) in \(B\).
+Še enkrat poudarimo, da razlika med pojmoma ekvivalence in obrnljivosti leži izključno v višji strukturi identifikacij in homotopij. V strukturi ekvivalence sta homotopiji prereza in retrakcije druga od druge ločeni, zato tip ostane propozicija ne glede na strukturo tipov \(A\) in \(B\). Kot pa smo videli, sta homotopiji v strukturi inverza med seboj prepleteni, zato se tip inverzov navzame višje strukture identifikacij, ki je lahko prisotna v tipih \(A\) in \(B\).
 
 V tem poglavju smo na protiprimeru \emph{ene} funkcije predstavili razliko med pojmom obrnljivosti in pojmom ekvivalence, v sledečem poglavju pa se bomo bolj kvalitativno poglobili v povezavo med tipom \emph{vseh} obrnljivih funkcij in tipom \emph{vseh} ekvivalenc med tipoma \(A\) in \(B\).
 
