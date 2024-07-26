@@ -13,6 +13,8 @@ open import 1Lab.Function.Embedding
 open is-iso
 ```
 
+## Pomožni rezultati
+
 ```agda
 restrict-to-subtype : {ℓ₁ ℓ₂ : Level} {A : Type ℓ₁} {B P : A → Type ℓ₂}
                     → ((x : A) → is-prop (P x)) → ((x : A) → B x → P x)
@@ -43,7 +45,35 @@ sigma-contr-base {B = B} c = Iso→Equiv the-iso
     subst (λ p → subst B p b ≡ b)
           (is-contr→is-set c (centre c) (centre c) refl (sym (paths c (centre c))))
           (transport-refl b)
+```
 
+## Sfera
+
+```agda
+data S² : Type where
+  base : S²
+  surf : refl {x = base} ≡ refl
+
+ap² : {ℓ₁ ℓ₂ : Level} {A : Type ℓ₁} {B : Type ℓ₂} (f : A → B) {x y : A} {p q : x ≡ y}
+    → (s : p ≡ q) → ap f p ≡ ap f q
+ap² f s i j = f (s i j)
+
+universal-property-sphere : {ℓ : Level} {A : Type ℓ}
+                          → (Σ[ x ∈ A ] (refl {x = x} ≡ refl)) ≃ (S² → A)
+universal-property-sphere {ℓ} = Iso→Equiv the-iso
+  where
+
+  the-iso : Iso _ _
+  the-iso .fst  (a , s) base = a
+  the-iso .fst  (a , s) (surf i j) = s i j
+  the-iso .snd .inv f = (f base) , ap² f surf
+  the-iso .snd .linv (a , s) = refl
+  the-iso .snd .rinv f = funext (λ { base → refl ; (surf i j) → refl})
+```
+
+## Konstrukcija
+
+```agda
 iso-is-looped-equiv : {ℓ : Level} {A B : Type ℓ}
                     → Iso A B ≃ (Σ[ e ∈ (A ≃ B)] (e ≡ e))
 iso-is-looped-equiv {A = A} {B = B} =
@@ -90,26 +120,6 @@ iso-is-looped-equiv {A = A} {B = B} =
       contract-sections : _
       contract-sections =
         sigma-contr-base (is-iso→is-contr-rinv (is-equiv→is-iso id-equiv))
-
-data S² : Type where
-  base : S²
-  surf : refl {x = base} ≡ refl
-
-ap² : {ℓ₁ ℓ₂ : Level} {A : Type ℓ₁} {B : Type ℓ₂} (f : A → B) {x y : A} {p q : x ≡ y}
-    → (s : p ≡ q) → ap f p ≡ ap f q
-ap² f s i j = f (s i j)
-
-universal-property-sphere : {ℓ : Level} {A : Type ℓ}
-                          → (Σ[ x ∈ A ] (refl {x = x} ≡ refl)) ≃ (S² → A)
-universal-property-sphere {ℓ} = Iso→Equiv the-iso
-  where
-
-  the-iso : Iso _ _
-  the-iso .fst  (a , s) base = a
-  the-iso .fst  (a , s) (surf i j) = s i j
-  the-iso .snd .inv f = (f base) , ap² f surf
-  the-iso .snd .linv (a , s) = refl
-  the-iso .snd .rinv f = funext (λ { base → refl ; (surf i j) → refl})
 
 
 isos-are-spheres : {ℓ : Level}
