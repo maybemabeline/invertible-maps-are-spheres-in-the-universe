@@ -1,0 +1,12 @@
+name: IsoSpheres
+include:
+	1lab/src
+	.
+flags:
+  --cubical
+  --no-load-primitives
+  --postfix-projections
+  --rewriting
+  --guardedness
+  --two-level
+  -W noUnsupportedIndexedMatch

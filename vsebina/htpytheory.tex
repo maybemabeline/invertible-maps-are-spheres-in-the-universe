@@ -4,8 +4,8 @@ Martin-Löfovo odvisno teorijo tipov bomo v tem poglavju uporabili za razvoj t.i
 V tem delu se bomo predvsem posvetili problemu definicije \emph{ekvivalence tipov}, ki je analogna homotopski ekvivalenci med pripadajočima prostoroma. Kot v definiciji tipa  identifikacij želimo definirati tip, elementi katerega bi predstavljali dokaze ekvivalence med dvema tipoma. Predstavili bomo dve možnosti za definicijo takega tipa in pokazali, da je nekoliko presenetljivo ena od njiju veliko manj primerna od druge. Da bi najbolje predstavili razliko med definicijama bomo vpeljali pojem \emph{kontraktibilnosti tipov}, ki je analogen pojmu kontraktibilnosti topoloških prostorov, in pa tip \(\sphere{1}\), ki je analogen topološki sferi.
 
 \subsection{Homotopije}
-Ekvivalenco tipov \(A\) in \(B\) bomo definirali kot obstoj funkcije \(\defun{f}{A}{B}\), ki
-je v primernem smislu obrnljiva, za to pa potrebujemo dobro karakterizacijo tipa identifikacij med funkcijami. V obravnavi obrnljivosti bomo namreč potrebovali identifikacije oblike \(f \circ g = \id{A}\).
+Ekvivalenco tipov \(A\) in \(B\) definiramo kot funkcijo \(\defun{f}{A}{B}\), ki
+je v primernem smislu obrnljiva, za to pa potrebujemo dobro karakterizacijo tipa identifikacij med funkcijami. V obravnavi obrnljivosti namreč potrebujemo identifikacije oblike \(f \circ g = \id{A}\).
 
 Izkaže pa se, da smo v možnostih za konstrukcijo identifikacij med funkcijami pogosto zelo omejeni, zato jih bomo nadomestili t.i.~\emph{homotopijami}. Te so v večini primerov zadostne, konstruiramo pa jih veliko lažje. Homotopijo med funkcijama definiramo kot odvisno funkcijo, ki zatrdi, da se ti ujemata na vsakem elementu domene.
 \begin{definicija}
@@ -124,8 +124,7 @@ Dokaz je preprost in v mnogih pogledih analogen dokazem v algebri, recimo v teor
 \end{trditev}
 
 \begin{dokaz}
-  Denimo, da je funkcija \(f\) obrnljiva. Tedaj lahko njen inverz podamo tako kot njen
-  prerez, kot njeno retrakcijo, kar pokaže, da je ekvivalenca.
+  Denimo, da je funkcija \(f\) obrnljiva. Tedaj je njen inverz tako njen prerez, kot njena retrakcija, kar pokaže, da je ekvivalenca.
 
   Obratno sedaj denimo, da je funkcija \(f\) ekvivalenca. Podan imamo torej njen prerez
   \(s\) s homotopijo \(\homotopy{H}{f \circ s}{\id{}}\) in njeno retrakcijo \(r\) s homotopijo
