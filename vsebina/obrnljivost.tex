@@ -2,7 +2,7 @@
 
 Karakterizacije tipa \(\isinv(f)\) za povsem arbitrano funkcijo \(f\) nimamo, fiksiramo pa lahko tipa \(A\) in \(B\) in poskusimo karakterizirati tip vseh obrnljivih funkcij med njima. Tip ekvivalenc med tipoma \(A\) in \(B\) smo že označili z \(A \simeq B\), označimo pa sedaj še tip obrnljivih funkcij:
 \[\invmap(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.\]
-Raziskali bomo torej povezavo med tipoma \(A \simeq B\) in \(\invmap(A, B)\), najprej pa potrebujemo še nekaj pomožnih rezultatov.
+Raziskali bomo torej povezavo med tipoma \(A \simeq B\) in \(\invmap(A, B)\), najprej pa potrebujemo še nekaj pomožnih rezultatov. Ti so zelo standardni, zato se v njihovo motivacijo ne bomo poglabljali.
 
 \subsection{Pomožni rezultati}
 
@@ -52,9 +52,8 @@ Naslednja preprosta trditev, ki jo bomo nekajkrat potrebovali, je tako imenovana
   Za funkciji podamo \(\lambda (x, (y, z)).((x, y), z)\) in obratno. Ti sta očitno inverzni, zato ekvivalenca velja.
 \end{dokaz}
 
-Na kratko spregovorimo o podtipih. Naj bo \(A\) tip in \(P\) družina tipov nad \(A\), za katero velja, da je za vsak \(\typejudgment{x}{A}\) tip \(P(x)\) propozicija. Take družine tipov imenujemo tudi \emph{predikati} na tipu \(A\). Tip \(\sumtype{x}{A}{P(x)}\) tedaj imenujemo \emph{podtip} elementov tipa \(A\), ki izpolnjujejo predikat \(P\).
-
-Za vsak \(\typejudgment{x}{A}\) namreč do identifikacije natanko obstaja največ en element \(P(x)\), zato se tudi \(x\) v odvisni vsoti pojavi največ enkrat. Ta je torej podtip elementov \(\typejudgment{x}{A}\), za katere obstaja element \(P(x)\).
+Na kratko spregovorimo o podtipih. Naj bo \(A\) tip in \(P\) predikat na \(A\). Tip \(\sumtype{x}{A}{P(x)}\) tedaj imenujemo \emph{podtip} elementov tipa \(A\), ki izpolnjujejo predikat \(P\).
+Za vsak \(\typejudgment{x}{A}\) namreč do identifikacije natanko obstaja največ en element \(P(x)\), zato se tudi \(x\) v odvisni vsoti pojavi največ enkrat.
 
 S to terminologijo je torej tip \(A \simeq B\) podtip tipa \(A \to B\), tip \(\invmap(A, B)\) pa lahko na tipu \(A \to B\) predstavlja dodatno strukturo.
 
@@ -96,7 +95,7 @@ Brez dokaza predstavimo še sledečo trditev, ki pove, da se tip identifikacij v
   \(\typejudgment{s, t}{\sumtype{x}{A}{P(x)}}\). Tedaj je tip \(s = t\) ekvivalenten tipu \(\proj{1}(s) = \proj{1}(t)\).
 \end{trditev}
 Z aplikacijo funkcije \(\proj{1}\) lahko za vsako identifikacijo tipa \(s = t\) dobimo tudi identifikacijo tipa \(\proj{1}(s) = \proj{1}(t)\), trditev pa nam pove, da v primeru podtipov obstaja tudi enoličen dvig v nasprotno smer.
-Trditev bi najlažje dokazali s tako imenovanim fundamentalnim izrekom o tipih identifikacij, vendar le tega v tem delu nismo razvili. Dokaz trditve lahko poiščemo tukaj (TODO cite)
+Trditev bi najlažje dokazali s tako imenovanim fundamentalnim izrekom o tipih identifikacij, vendar le tega v tem delu nismo razvili. Dokaz trditve in več o podtipih lahko poiščemo v \cite[Poglavje II.12.2]{rijke2022introduction}.
 
 Naslednj trditev spregovori o povezavi med kontraktibilnostjo in odvisnimi vsotami.
 
@@ -118,7 +117,7 @@ Naslednj trditev spregovori o povezavi med kontraktibilnostjo in odvisnimi vsota
   \[(x, y) = (c, \transp{B}(C(x)^{-1}, y))\] zadošča, da podamo identifikaciji \(\eqtype{p}{x}{c}\) in \(\transp{B}(p, y) = \transp{B}(C(x)^{-1}, y)\). Podamo lahko \(C(x)^{-1}\) in \(\refl{\transp{B}(C(x)^{-1}, y)}\).
 \end{dokaz}
 
-Trditev nam pove, da lahko pri konstrukciji ekvivalenc kontraktibilne tipe v odvisnih vsotah v določenem smislu krajšamo.
+Trditev nam pove, da lahko v konstrukciji ekvivalenc kontraktibilne tipe v odvisnih vsotah v določenem smislu krajšamo.
 
 Nazadnje imamo še trditev, ki spregovori o odvisni vsoti \emph{vseh} tipov identifikacij v danem tipu.
 
@@ -138,7 +137,7 @@ Poudarimo, da je za posamezna elementa \(\typejudgment{a, x}{A}\) tip \(a = x\) 
 
 \subsection{Konstrukcija}
 
-Sedaj lahko predstavimo karakterizacijo. Vsakemu elementu tipa \(\invmap(A, B)\) ustreza enoličen element \(\dequiv{e}{A}{B}\) skupaj z zanko \(e = e\).
+Sedaj lahko predstavimo karakterizacijo tipa obrnljivih funkcij med tipoma \(A\) in \(B\). V prvi trditvi fiksiramo tipa \(A\) in \(B\) ter pokažemo povezavo med tipom obrnljivih funkcij in tipom ekvivalenc med njima, za tem pa trditev uporabimo za to, da pokažemo povezavo med tipom \emph{vseh} obrnljivih funkcij v danem svetu \(\mathcal{U}\) in višjim induktivnim tipom \emph{sfere} \(\sphere{2}\).
 
 \begin{trditev}
   \label{main-char}
@@ -165,32 +164,15 @@ Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \sim
   \[\sumtype{\mathcal{I}}{\sumtype{g}{B \to A}{\map(e) \circ g \sim \id{}}}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})},\]
   ta pa je po definiciji tipa prerezov sodbeno enak tipu
   \[\sumtype{\mathcal{I}}{\sect(\map(e))}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})}.\]
-  Po trditvi \ref{contr-sec-of-equiv} ima ekvivalenca \(\map(e)\) kontraktibilen tip prerezov s središčem kontrakcije pri svojem prerezu, funkciji \(\sect(e)\). Po trditvi \ref{sigma-contr-base} torej sledi, da ga v odvisni vsoti lahko krajšamo, torej, da velja ekvivalenca
+  Po trditvi \ref{contr-sec-of-equiv} ima ekvivalenca \(\map(e)\) kontraktibilen tip prerezov s središčem kontrakcije pri funkciji \(\sect(e)\), svojem prerezu. Po trditvi \ref{sigma-contr-base} torej sledi, da ga v odvisni vsoti lahko krajšamo, torej, da velja ekvivalenca
   \[\sumtype{\mathcal{I}}{\typename{section}(\map e)}{(\map(\mathcal{I}) \circ \map(e) \sim \id{})} \simeq
     \left(\sect(e) \circ \map(e) \sim \id{}\right).\]
-  Sledi, da velja ekvivalenca \(\isinv(\map (e)) \simeq (\sect(e) \circ \map(e) \sim \id{})\). Tip inverzov ekvivalence \(\map(e)\) je torej ekvivalenten tipu dokazov, da je prerez funkcije \(\map(e)\) tudi njena retrakcija.
+  Sledi, da velja ekvivalenca \(\isinv(\map (e)) \simeq (\sect(e) \circ \map(e) \sim \id{})\). Tip inverzov ekvivalence \(\map(e)\) je torej ekvivalenten tipu dokazov, da je prerez funkcije \(\map(e)\) hkrati tudi njena retrakcija.
 
-  Dokazati moramo torej še, da velja ekvivalenca med tipoma \(\sect(e) \circ \map(e) \sim \id{}\) in \(e = e\). V prejšnjem poglavju smo že uporabili dejstvo, da so ekvivalence levo krajšljive, sedaj pa ga zopet uporabimo v še bolj točnem smislu, namreč, da sta tipa \(\sect(e) \circ \map(e) \sim \id{}\) in \(\map(e) \circ \sect(e) \circ \map(e) \sim \map(e)\) ekvivalentna. Ker je \(\sect(e)\) prerez \(\map(e)\), je drugi tip ekvivalenten tipu \(\map(e) \sim \map(e)\), ta pa je po aksiomu funkcijske ekstenzionalnosti ekvivalenten tipu \(\map(e) = \map(e)\). Po trditvi \ref{subtype-id} je ta ekvivalenten tipu \(e = e\).
+  Dokazati moramo še, da velja ekvivalenca med tipoma \(\sect(e) \circ \map(e) \sim \id{}\) in \(e = e\). V prejšnjem poglavju smo že uporabili dejstvo, da so ekvivalence levo krajšljive, sedaj pa ga zopet uporabimo v še bolj točnem smislu, namreč, da sta tipa \(\sect(e) \circ \map(e) \sim \id{}\) in \(\map(e) \circ \sect(e) \circ \map(e) \sim \map(e)\) ekvivalentna. Ker je \(\sect(e)\) prerez \(\map(e)\), je drugi tip ekvivalenten tipu \(\map(e) \sim \map(e)\), ta pa je po aksiomu funkcijske ekstenzionalnosti ekvivalenten tipu \(\map(e) = \map(e)\). Po trditvi \ref{subtype-id} je ta ekvivalenten tipu \(e = e\).
 \end{dokaz}
 
-
-\subsection{Aksiom univalence in sfera \(\sphere{2}\)}
-
-Za konec dela bomo predstavili še tako imenovani \emph{aksiom univalence}, ki je za homotopsko teorijo tipov zelo pomemben, in ga uporabili za nadaljno izpeljavo karakterizacije iz prejšnjega podpoglavja. Da bi lahko govorili o univalenci, pa moramo najprej spregovoriti o \emph{svetovih}.
-
-V grobem so svetovi tipi, katerih elementi so drugi tipi. Natančneje pravimo, da je tip \(\mathcal{U}\) svet, če iz sodbe \(\typejudgment{A}{\mathcal{U}}\) lahko sklepamo, da velja sodba \(\type{A}\). Formalno gledano elementi \(\mathcal{U}\) sicer niso tipi kot taki, vendar kode, katerim enolično ustrezajo tipi. V to sem v tem delu ne bomo spuščali, več o svetovih pa lahko preberemo v (TODO cite).
-
-Kot tipi imajo svetovi \(\mathcal{U}\) tudi pripadajoči tip identifikacij. Za vsaka tipa \(A\) in \(B\) v svetu \(\mathcal{U}\) torej obstaja tip identifikacij \(A =_{\mathcal{U}} B\), aksiom univalence pa ta tip identifikacij karakterizira. V grobem namreč pove, da če sta tipa \(A\) in \(B\) ekvivalentna, da sta tedaj tudi identificirana. Bolj natančno:
-
-\begin{definicija}
-  Za vsaka tipa \(A\) in \(B\) lahko konstruiramo funkcijo tipa \[A = B \to A \simeq B,\]
-  imenujmo jo \(\typename{id-to-equiv}\).
-  Po principu eliminacije identifikacij namreč zadošča, da podamo ekvivalenco tipa \(A \simeq A\), za kar lahko podamo identiteto \(\id{A}\).
-
-  \emph{Aksiom univalence} zatrdi, da je funkcija \(\typename{id-to-equiv}\) ekvivalenca.
-\end{definicija}
-
-Da bi, lahko formulirali zadnji izrek, predstavimo še višji induktivni tip \emph{sfere} \(\sphere{2}\). Tako kot krožnica vsebuje točko \(\base\), namesto 1-dimenzionalne identifikacije \(\base = \base\) pa vsebuje 2-dimenzionalno identifikacijo \(\refl{\base} = \refl{\base}\). Njen indukcijski princip bomo predstavili le v nepopolni obliki neodvisne univerzalne lastnosti, saj ga potrebujemo le v tej splošnosti. Za njegovo formulacijo potrebujemo sledečo lemo:
+Da bi lahko formulirali zadnji izrek, predstavimo še višji induktivni tip \emph{sfere} \(\sphere{2}\). Tako kot krožnica vsebuje točko \(\base\), namesto 1-dimenzionalne identifikacije \(\base = \base\) pa vsebuje 2-dimenzionalno identifikacijo \(\refl{\base} = \refl{\base}\). Njen indukcijski princip bomo predstavili le v nepopolni obliki neodvisne univerzalne lastnosti, saj ga potrebujemo le v tej splošnosti. Za njegovo formulacijo potrebujemo sledečo lemo:
 
 \begin{lema}
   Naj bo \(\defun{f}{A}{B}\) funkcija, \(\typejudgment{x, y}{A}\), \(\eqtype{p, q}{x}{y}\) in \(\eqtype{r}{p}{q}\). Tedaj velja identifikacija
@@ -218,8 +200,10 @@ Da bi, lahko formulirali zadnji izrek, predstavimo še višji induktivni tip \em
   \end{itemize}
 \end{definicija}
 
+Več o sferi in tudi o krožnici lahko poiščemo v \cite[Poglavje II.6.4]{hottbook}.
+
 \begin{izrek}
-  Obrnljive funkcije so sfere v svetu. Natančneje, naj bo \(\mathcal{U}\) svet. Tedaj velja ekvivalenca med tipom vseh obrnljivih funkcij v svetu \(\mathcal{U}\), torej tipom \[{\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)}},\] in funkcijskim tipom \(\sphere{2} \to \mathcal{U}\).
+  Obrnljive funkcije so sfere v svetu. Natančneje, za vsak svet \(\mathcal{U}\) velja ekvivalenca med tipom obrnljivih funkcij v svetu \(\mathcal{U}\), torej tipom \[{\sumtype{A, B}{\mathcal{U}}{\invmap(A, B)}},\] in funkcijskim tipom \(\sphere{2} \to \mathcal{U}\).
 \end{izrek}
 
 \begin{dokaz}
@@ -227,7 +211,7 @@ Da bi, lahko formulirali zadnji izrek, predstavimo še višji induktivni tip \em
   \[\sumtype{B}{\mathcal{U}}{\invmap(A, B)} \simeq \sumtype{B}{\mathcal{U}}{\sumtype{e}{A = B}{e = e}}.\]
   Po asociativnosti odvisnih vsot je desni tip ekvivalenten tipu
   \[\sumtype{\mathcal{E}}{\sumtype{B}{\mathcal{U}}{A = B}}{\proj{2}(\mathcal{E}) = \proj{2}(\mathcal{E})},\]
-  ker pa je po trditvi \ref{cover-contr} tip \(\sumtype{B}{\mathcal{U}}{A = B}\) kontraktibilen na element \((A, \refl{A})\), ga po trditvi \ref{sigma-contr-base} v odvisni vsoti lahko krajšamo in ostane nam le
+  ker pa je po trditvi \ref{cover-contr} tip \(\sumtype{B}{\mathcal{U}}{A = B}\) kontraktibilen s središčem kontrakcije \((A, \refl{A})\), ga po trditvi \ref{sigma-contr-base} v odvisni vsoti krajšamo in nam ostane le
   \[(\proj{2}(A, \refl{A}) = \proj{2}(A, \refl{A})) \doteq (\refl{A} = \refl{A}).\]
   Konstruirali smo torej družino ekvivalenc med tipi \(\sumtype{B}{\mathcal{U}}{\invmap(A, B)}\)
   in tipi \(\refl{A} = \refl{A}\), indeksirano z \(\typejudgment{A}{\mathcal{U}}\). Po posledici \ref{equiv-tot} sledi, da velja tudi ekvivalenca

@@ -30,31 +30,35 @@
 % - povzetek v slovenščini
 %   V povzetku na kratko opišite vsebinske rezultate dela. Sem ne sodi razlaga
 %   organizacije dela, torej v katerem razdelku je kaj, pač pa le opis vsebine.
-\povzetek{V povzetku na kratko opišemo vsebinske rezultate dela. Sem ne sodi
-razlaga organizacije dela -- v katerem poglavju/razdelku je kaj, pač pa le opis
-vsebine.}
+\povzetek{Predstavimo definicijo sodb in kontekstov ter pokažemo njihovo uporabo za definicijo konstrukcij tipov v Martin-Löfovi odvisni teoriji tipov.
+
+  Na funkcijah vpeljemo pojma obrnljivosti in ekvivalence ter pokažemo, da sta logično ekvivalentna. Na tipih vpeljemo pojma kontraktibilnosti in propozicij ter pokažemo, da je pojem ekvivalence propozicija. Vpeljemo tip krožnice in aksiom univalence ter ju uporabimo kot protiprimer, da pokažemo, da pojem obrnljivosti ni vedno propozicija. Posledično pojma obrnljivosti in ekvivalence nista ekvivalentna, saj pokažemo, da ekvivalence ohranjajo propozicionalnost. Na tipih vpeljemo še pojem množic in skiciramo razlog, zakaj sta pojma obrnljivosti in ekvivalence na funkcijah med množicami ekvivalentna.
+
+  Predstavimo še nekaj standardnih trditev homotopske teorije tipov in predstavimo karakterizacijo obrnljivosti, ki jo poveže z ekvivalenco. Karakterizacijo uporabimo, da pokažemo povezavo med obrnljivostjo in tipom sfere.}
 
 % - povzetek v angleščini
-\abstract{Prevod slovenskega povzetka v angleščino.}
+\abstract{We present the definition of judgments and contexts and use them to show the definitions of type formers in Martin-Löf dependent type theory.
+
+  We introduce the notions of invertibility and equivalence of functions and show that they are logically equivalent. We introduce the notions contractibility and propositionality of types and show that the notion of equivalence always forms a proposition. We introduce the circle type and the univalence axiom and use them as a counterexample to show that the notion of invertibility need not always be a proposition. Consequently, the notions of invertibility and equivalence cannot be equivalent, since we show that equivalences preserve propositionality.
+
+  We present a few standard results of homotopy type theory and present a characterisation of invertibility that connects it with equivalence. We use this characterisation to show a connection between invertibility and the sphere type.}
 
 % - klasifikacijske oznake, ločene z vejicami
 %   Oznake, ki opisujejo področje dela, so dostopne na strani https://www.ams.org/msc/
-\klasifikacija{74B05, 65N99}
+\klasifikacija{03B38}
 
 % - ključne besede, ki nastopajo v delu, ločene s \sep
-\kljucnebesede{naravni logaritem\sep nenaravni algoritem}
+\kljucnebesede{homotopska teorija tipov, obrnljivost, ekvivalenca, sfera}
 
 % - angleški prevod ključnih besed
-\keywords{natural logarithm\sep unnatural algorithm} % angleški prevod ključnih besed
+\keywords{homotopy type theory, invertibility, equivalence, sphere} % angleški prevod ključnih besed
 
 % - angleško-slovenski slovar strokovnih izrazov
 \slovar{
-  \geslo{dependent type theory}{odvisna teorija tipov}
   \geslo{type}{tip}
   \geslo{judgment}{sodba}
   \geslo{rule of inference}{pravilo sklepanja}
   \geslo{judgmental equality}{sodbena enakost}
-  \geslo{context}{kontekst}
   \geslo{function type}{funkcijski tip}
   \geslo{dependent type}{odvisen tip}
   \geslo{type family}{družina tipov}
@@ -62,38 +66,25 @@ vsebine.}
   \geslo{dependent function}{odvisna funkcija}
   \geslo{dependent sum}{odvisna vsota}
   \geslo{induction principle}{princip indukcije}
-  \geslo{propositions as types}{izjave kot tipi}
-  \geslo{witness}{priča}
   \geslo{identity type}{tip identifikacij}
   \geslo{identification elimination, path induction}{eliminacija identifikacij}
-  \geslo{constructor}{konstruktor}
-  \geslo{transport along identification}{transport vzdolž identifikacije}
-  \geslo{synthetic homotopy theory}{sintetična homotopska teorija}
-  \geslo{homotopy type theory}{homotopska teorija tipov}
   \geslo{homotopy}{homotopija}
   \geslo{function extensionality}{funkcijska ekstenzionalnost}
-  \geslo{invertible}{obrnljiva}
   \geslo{section}{prerez}
   \geslo{retraction}{retrakcija}
-  \geslo{equivalence}{ekvivalenca}
   \geslo{mere proposition, h-proposition}{propozicija}
   \geslo{contractible}{kontraktibilen}
-  \geslo{center of contraction}{središče kontrakcije}
-  \geslo{contraction}{kontrakcija}
   \geslo{h-set}{množica}
   \geslo{higher inductive type}{višji induktivni tip}
-  \geslo{circle}{krožnica}
   \geslo{subtype}{podtip}
   \geslo{universe}{svet}
   \geslo{univalence}{univalenca}
-  \geslo{universal property}{univerzalna lastnost}
-  \geslo{sphere}{sfera}
 }
 
 % - ime datoteke z viri (vključno s končnico .bib), če uporabljate BibTeX
 \literatura{literatura.bib}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%c%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DODATNE DEFINICIJE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -105,6 +96,7 @@ vsebine.}
 
 \begin{document}
 
+\input{vsebina/uvod.tex}
 \input{vsebina/osnove.tex}
 \input{vsebina/htpytheory.tex}
 \input{vsebina/obrnljivost.tex}

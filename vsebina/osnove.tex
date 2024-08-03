@@ -1,6 +1,6 @@
 \section{Osnove Martin-Löfove odvisne teorije tipov}
 
-Sledeč (TODO cite intro to hott) bomo v tem poglavju predstavili osnovne koncepte
+Sledeč \cite{rijke2022introduction} bomo v tem poglavju predstavili osnovne koncepte
 Martin-Löfove odvisne teorije tipov. Zaradi velike razsežnosti in dokajšnje tehničnosti
 formalne predstavitve teorije tipov se ne bomo do potankosti spustili v njene podrobnosti,
 vendar bomo koncepte predstavili v nekoliko neformalnem slogu, osredotočajoč se na
@@ -50,7 +50,7 @@ da vsaka sodba nastopa v določenem \emph{konstekstu}. Konteksti so končni sezn
 deklariranih spremenljivk \(\typejudgment{x_k}{A_{k}}\), ki jih sodbe v tem kontekstu
 lahko vsebujejo, razumemo pa jih lahko tudi kot nabor predpostavk, pod katerimi določena
 sodba velja.  To, da je \(\mathcal{J}\) sodba v kontekstu \(\Gamma\), zapišemo kot \(\Gamma \vdash \mathcal{J}\).
-Kontekste najpogosteje potrebujemo za tvoritev elementov funkcijskega tipa, kar storimo s tako imenovano \emph{lambda abstrakcijo}. Če na primer velja sodba \(\typejudgment{x}{A} \vdash \typejudgment{b}{B}\), lahko spremenljivko \(\typejudgment{x}{A}\) \emph{vežemo} in tvorimo sodbo \(\bullet \vdash \typejudgment{\lambda x.b(x)}{A \to B}\).
+Kontekste najpogosteje potrebujemo za tvoritev elementov funkcijskega tipa, kar storimo s tako imenovano \emph{lambda abstrakcijo}. Če namreč velja sodba \(\Gamma, \typejudgment{x}{A} \vdash \typejudgment{b}{B}\), lahko spremenljivko \(\typejudgment{x}{A}\) \emph{vežemo} in tvorimo sodbo \(\Gamma \vdash \typejudgment{\lambda x.b(x)}{A \to B}\).
 
 Razpravo povzamemo v sledeči vzajemno rekurzivni definiciji sodb in kontekstov. To ni popolna definicija Martin-Löfove odvisne teorije tipov, vendar samo nastavek, s pomočjo katerega lahko izrazimo pravila za konstrukcijo različnih tipov in njihovih elementov.
 
@@ -62,6 +62,7 @@ Razpravo povzamemo v sledeči vzajemno rekurzivni definiciji sodb in kontekstov.
   kar izrazimo z \[\Gamma \vdash \type{A \doteq B}.\]
 \item \(x\) je element tipa \(A\) v kontekstu \(\Gamma\), kar izrazimo z
   \[\Gamma \vdash \typejudgment{x}{A}.\]
+  Kadar velja sodba \(\typejudgment{x}{A}\) pogosto pravimo tudi, da je tip \(A\) \emph{naseljen}.
 \item \(x\) in \(y\) sta \emph{sodbeno enaka elementa} v kontekstu \(\Gamma\), kar izrazimo z
   \[\Gamma \vdash \typejudgment{x \doteq y}{A}.\]
 \end{enumerate}
@@ -215,18 +216,18 @@ Dokazi trditve \(P \wedge Q\) so sestavljeni
 iz parov dokazov posameznih trditev \(P\) in \(Q\), zato lahko trditev \(P \wedge Q\) predstavimo s produktom tipov \(P \times Q\). Ker pa dokaze implikacije \(P \Rightarrow Q\) lahko razumemo kot predpise, ki iz dokazov \(P\) konstruirajo dokaze \(Q\), lahko trditev \(P \Rightarrow Q\) predstavimo s tipom \(P \to Q\). Uporaba funkcije tipa \(P \to Q\)
 tako ustreza pravilu \emph{modus ponens}, ki pravi, da lahko iz veljavnosti izjav \(P\) in \(P \Rightarrow Q\) sklepamo veljavnost izjave \(Q\).
 
+Kadar veljata tako \(P \to Q\) kot \(Q \to P\) pravimo, da sta tipa \(P\) in \(Q\) \emph{logično ekvivalentna}. To terminologijo vpeljemo zato, ker med tipi kasneje definiramo tudi močnejši pojem ekvivalence.
+
 Denimo sedaj, da je \(A\) tip in \(P\) družina tipov nad \(A\), vsak od katerih predstavlja določeno trditev. Tako družino tipov imenujemo tudi \emph{predikat na A}.
 Tedaj lahko logično interpretacijo podamo tudi odvisni vsoti in odvisnemu produktu;
 ustrezata namreč eksistenčni in univerzalni kvantifikaciji. Elementi odvisne vsote
-\(\sumtype{x}{A}{P(x)}\) so namreč pari \((x, p)\), kjer je \(p\) dokaz trditve \(P(x)\), zato lahko nanje gledamo kot na dokaze veljavnosti trditve \(\exists \typejudgment{x}{A} P(x)\). Elementi odvisnega produkta
+\(\sumtype{x}{A}{P(x)}\) so namreč pari \((x, p)\), kjer je \(p\) dokaz trditve \(P(x)\), zato lahko nanje gledamo kot na dokaze veljavnosti trditve \(\exists\, \typejudgment{x}{A}. P(x)\). Elementi odvisnega produkta
 \(\pitype{x}{A}{P(x)}\) so predpisi, ki vsakemu elementu \(\typejudgment{x}{A}\) priredijo
 dokaz izjave \(P(x)\), zato lahko nanje gledamo kot na dokaze veljavnosti
 \(\forall \typejudgment{x}{A}.P(x)\).
 
-Definicije predikatov in formulacije trditev, ki jih bomo predstavili v preostanku dela, bomo
-izrazili v jeziku interpretacije \emph{izjave kot tipi}, kljub temu pa se lahko eksplicitnemu
-zapisu prič pogosto izognemo. V dokazih trditev bomo tako pogosto uporabljali naravni
-jezik sklepanja, vedno pa pravzaprav konstruiramo element določenega tipa, ki predstavlja trditev, ki jo dokazujemo.
+V skladu z interpretacijo \emph{izjave kot tipi} bomo v tem delu definicije in trditve formuliramo kot tipe.
+V dokazih trditev bomo kljub temu pogosto uporabljali naravni jezik sklepanja, vedno pa pravzaprav konstruiramo element določenega tipa, ki predstavlja trditev, ki jo dokazujemo.
 
 \subsection{Tip identifikacij}
 Osnovna motivacija za vpeljavo tipa identifikacij je dejstvo, da je pojem sodbene enakosti
@@ -247,7 +248,7 @@ Pomankljivost sodbene enakosti si lahko ogledamo na primeru komutativnosti sešt
   indukcijo na \(n\), torej moramo v baznem primeru podati vrednost izraza \(m + \natzero\),
   v primeru koraka pa moramo pod predpostavko, da poznamo vrednost izraza \(m + n\),
   podati vrednost izraza \(m + \natsucc(n)\). Naravno je,
-  da izberemo \(m + \natzero :\doteq m\) in \(m + \natsucc(n) :\doteq\natsucc(m + n)\).
+  da izberemo \(m + \natzero := m\) in \(m + \natsucc(n) := \natsucc(m + n)\).
   Za poljubni \emph{fiksni} naravni števili, recimo
   \(\typename{4}\) in \(\typename{5}\), lahko sedaj z uporabo pravil sklepanja za naravna
   števila pod točko \ref{naturals} dokažemo, da velja
@@ -256,7 +257,8 @@ Pomankljivost sodbene enakosti si lahko ogledamo na primeru komutativnosti sešt
   \emph{spremenljivki} tipa \(\N\), tedaj zaradi asimetričnosti definicije seštevanja
   enakosti \(n + m \doteq m + n\) ne moremo
   dokazati. Potrebujemo tip \emph{identifikacij} \(\Id{\N}\), z uporabo katerega bi
-  lahko z indukcijo pokazali, da velja \[\pitype{m, n}{\N}{\Id{\N}(n + m, m + n)}.\]
+  lahko z indukcijo pokazali, za vsaki naravni števili \(n\) in \(m\) velja identifikacija med izrazoma \(n + m\) in \(m + n\), torej konstruirali element tipa
+  \[\pitype{m, n}{\N}{\Id{\N}(n + m, m + n)}.\]
 \end{primer}
 
 \begin{definicija}
@@ -314,7 +316,7 @@ Preko principa eliminacije identifikacij lahko dokažemo mnoge lastnosti, ki bi 
 
   V interpretaciji \emph{izjave kot tipi} nam transport pove tudi, da lahko znotraj
   predikatov substituiramo identificirane elemente. Če je namreč \(P\) predikat
-  na \(A\) in velja identifikacija \(x = y\), tedaj \(P(x)\) implicira \(P(y)\). Ker velja tudi obratna identifikacija \(y = x\), velja tudi obratna implikacija.
+  na \(A\) in velja identifikacija \(\eqtype{p}{x}{y}\), sta tedaj tipa \(P(x)\) in \(P(y)\) logično ekvivalentna. Transport vzdolž identifikacije \(p\) nam da eno implikacijo, transport vzdolž njenega inverza pa drugo.
 \end{enumerate}
 
 V tem delu bomo pogosto imeli opravka z identifikacijami znotraj odvisnih vsot, torej z identifikacijami oblike \((x, y) = (x', y')\), kjer sta
@@ -324,7 +326,7 @@ Velja namreč naslednje:
   Naj bosta \(\typejudgment{(x, y), (x', y')}{\sumtype{x}{A}{B(x)}}\). Identifikacije med \((x, y)\) in \((x', y')\) lahko tedaj karakteriziramo kot pare identifikacij
   \(\eqtype{p}{x}{x'}\) in \(\transp{B}(p, y) = y'\).
 \end{trditev}
-Formalna formulacija in uporaba te trditve je zunaj obsega tega dela. Namesto tega bomo identifikacije znotraj odvisnih vsot vedno preprosto nadomestili z pari identifikacij, kot opisano. Trditve tudi ne bomo dokazali, povemo pa lahko nekaj o njeni interpretaciji. TODO
+Formalna formulacija in uporaba te trditve je zunaj obsega tega dela. Namesto tega bomo identifikacije znotraj odvisnih vsot vedno preprosto nadomestili z pari identifikacij, kot opisano. Več o karakterizaciji identifikacij v odvisnih vsotah lahko poiščemo v \cite[Poglavje II.9.3]{rijke2022introduction}
 
 Vredno je omeniti sledeča posebna primera:
 \begin{enumerate}
