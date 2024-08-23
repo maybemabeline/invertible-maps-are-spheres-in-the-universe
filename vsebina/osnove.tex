@@ -33,7 +33,7 @@ lahko iz sodb \(\typejudgment{x}{A}\) in \(\defun{f}{A}{B}\) sklepamo, da velja
 sodba \(\typejudgment{f(x)}{B}\), kar predstavlja uporabo funkcije \(f\)
 na elementu \(x\).
 
-Poleg sodb oblike \(\typejudgment{x}{A}\) v teoriji tipov obstajajo še tri vrste sodb.
+Poleg sodb oblike \(\typejudgment{x}{A}\) v lahko teoriji tipov tvorimo še tri vrste sodb.
 Tvorimo lahko sodbo \(\type{A}\), s katero izrazimo, da je \(A\) tip, konstruiran po veljavnih pravilih sklepanja.
 Primer pravila sklepanja s to sodbo bi bilo pravilo, ki pravi, da lahko iz sodb \(\type{A}\) in \(\type{B}\) sklepamo, da velja sodba \(\type{A \to B}\). Tako lahko na primer tvorimo tip funkcij med tipoma \(A\) in \(B\).
 Tvorimo lahko še sodbi \(\typejudgment{x \doteq y}{A}\) in \(\type{A \doteq B}\),
@@ -283,8 +283,8 @@ Pomankljivost sodbene enakosti si lahko ogledamo na primeru komutativnosti sešt
   med \(a\) in \(x\), bomo torej pisali \(\eqtype{p}{a}{x}\).
 
   Konstruktor \(\eqtype{\refl{a}}{a}{a}\)
-  nam zagotavlja, da za vsak element \(\typejudgment{a}{A}\) obstaja kanonična
-  identifikacija elementa samega s sabo. Princip eliminacije identifikacij nato zatrdi,
+  nam zagotavlja, da lahko za vsak element \(\typejudgment{a}{A}\) tvorimo kanonično
+  identifikacijo elementa samega s sabo. Princip eliminacije identifikacij nato zatrdi,
   da če želimo za vsako identifikacijo \(\eqtype{p}{a}{x}\) konstruirati element tipa
   \(B(x, p)\), tedaj zadošča, da konstruiramo le element tipa \(B(a, \refl{a})\).
   Pravimo tudi, da je družina tipov \(a = x\) \emph{induktivno definirana} s
@@ -294,24 +294,24 @@ Pomankljivost sodbene enakosti si lahko ogledamo na primeru komutativnosti sešt
 Preko principa eliminacije identifikacij lahko dokažemo mnoge lastnosti, ki bi jih od enakosti pričakovali. Nekaj od teh vključuje:
 
 \begin{enumerate}
-\item Velja \emph{simetričnost}: za vsaka elementa \(\typejudgment{x, y}{A}\) obstaja
-  funkcija \[\defun{\typename{sym}}{(x = y)}{(y = x)}.\] Identifikacijo \(\typename{sym}(p)\)
+\item Velja \emph{simetričnost}: za vsaka elementa \(\typejudgment{x, y}{A}\) lahko tvorimo
+  funkcijo \[\defun{\typename{sym}}{(x = y)}{(y = x)}.\] Identifikacijo \(\typename{sym}(p)\)
   imenujemo \emph{inverz} identifikacije \(p\) in ga pogosto označimo z \(p^{-1}\).
   Po principu eliminacije identifikacij zadošča, da za vsak \(\typejudgment{x}{A}\) definiramo \(\typejudgment{\refl{x}^{-1}}{x = x}\), za kar podamo \(\refl{x}\).
-\item Velja \emph{tranzitivnost}: za vsake elemente \(\typejudgment{x, y, z}{A}\) obstaja
-  funkcija \[\defun{\typename{concat}}{(x = y)}{((y = z) \to (x = z))},\] ki jo imenujemo
+\item Velja \emph{tranzitivnost}: za vsake elemente \(\typejudgment{x, y, z}{A}\) lahko tvorimo
+  funkcijo  \[\defun{\typename{concat}}{(x = y)}{((y = z) \to (x = z))},\] imenovano
   \emph{konkatenacija identifikacij}, \(\typename{concat}(p, q)\) pa pogosto označimo
   z \(p \cdot q\). Po principu eliminacije identifikacij zadošča, da za vsake \(\typejudgment{y, z}{A}\) in \(\eqtype{q}{y}{z}\) definiramo \(\refl{y}\cdot q\), za kar podamo \(q\). Dokažemo lahko tudi, da velja identifikacija tipa \(q \cdot \refl{z} = q\).
 \item Funkcije ohranjajo identifikacije: za vsaka elementa \(\typejudgment{x, y}{A}\)
-  in vsako funkcijo \(\defun{f}{A}{B}\) obstaja funkcija
+  in vsako funkcijo \(\defun{f}{A}{B}\) lahko tvorimo funkcijo
   \[\defun{\typename{ap}_{f}}{(x = y)}{(f(x) = f(y))},\]
-  ki jo imenujemo \emph{aplikacija} funkcije \(f\) na identifikacije v \(A\). Po principu eliminacije identifikacij zadošča, da za vsak \(\typejudgment{x}{A}\) definiramo
+  imenovano \emph{aplikacija} funkcije \(f\) na identifikacije v \(A\). Po principu eliminacije identifikacij zadošča, da za vsak \(\typejudgment{x}{A}\) definiramo
   \(\typejudgment{\ap{f}\refl{x}}{f(x) = f(x)}\), za kar podamo \(\refl{f(x)}\).
 \item Družine tipov spoštujejo identifikacije: za vsaka elementa
   \(\typejudgment{x, y}{A}\) in družino tipov
-  \(B\) nad \(A\) obstaja funkcija
+  \(B\) nad \(A\) lahko tvorimo funkcijo
   \[\defun{\typename{tr}_{B}}{(x = y) \to B(x)}{B(y)},\]
-  imenovana \emph{transport vzdolž identifikacij}.
+  imenovano \emph{transport vzdolž identifikacij}.
   Po principu eliminacije identifikacij zadošča, da z vsak \(\typejudgment{x}{A}\) definiramo funkcijo \(\defun{\transp{B}(\refl{x})}{B(x)}{B(x)}\), za kar podamo \(\id{B}\).
 
   V interpretaciji \emph{izjave kot tipi} nam transport pove tudi, da lahko znotraj

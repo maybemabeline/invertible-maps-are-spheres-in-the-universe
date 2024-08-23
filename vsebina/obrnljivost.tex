@@ -2,9 +2,11 @@
 
 Karakterizacije tipa \(\isinv(f)\) za povsem arbitrano funkcijo \(f\) nimamo, fiksiramo pa lahko tipa \(A\) in \(B\) in poskusimo karakterizirati tip vseh obrnljivih funkcij med njima. Tip ekvivalenc med tipoma \(A\) in \(B\) smo že označili z \(A \simeq B\), označimo pa sedaj še tip obrnljivih funkcij:
 \[\invmap(A, B) := \sumtype{f}{A \to B}{\isinv(f)}.\]
-Raziskali bomo torej povezavo med tipoma \(A \simeq B\) in \(\invmap(A, B)\), najprej pa potrebujemo še nekaj pomožnih rezultatov. Ti so zelo standardni, zato se v njihovo motivacijo ne bomo poglabljali.
+Raziskali bomo torej povezavo med tipoma \(A \simeq B\) in \(\invmap(A, B)\), najprej pa potrebujemo še nekaj pomožnih rezultatov.
 
 \subsection{Pomožni rezultati}
+
+V tem razdelku predstavimo nekaj rezultatov iz homotopske teorije tipov, ki jih bomo v konstrukciji potrebovali. Ti so zelo standardni, zato se v njihovo motivacijo ne bomo poglabljali.
 
 Delali bomo s funkcijami in ekvivalencami med odvisnimi vsotami, zato najprej povejmo nekaj o družinah funkcij. V tem razdelku fiksirajmo tip \(A\) ter \(B\) in \(C\) družini tipov nad \(A\).
 
@@ -42,7 +44,7 @@ Naslednja preprosta trditev, ki jo bomo nekajkrat potrebovali, je tako imenovana
 
 \begin{trditev}
   \label{sigma-assoc}
-  Naj bo \(A\) tip, \(B\) družina tipov, indeksirana z \(\typejudgment{x}{A}\) in \(C\) družina tipov, indeksirana z \(\typejudgment{x}{A}\) in \(\typejudgment{y}{B(x)}\).
+  Naj bo \(A\) tip, \(B\) družina tipov, indeksirana z \(A\) in \(C\) družina tipov, indeksirana z \(\typejudgment{x}{A}\) in \(B(x)\).
   Tedaj velja ekvivalenca:
   \[\sumtype{x}{A}{\sumtype{y}{B(x)}{C(x, y)}} \simeq
     \sumtype{t}{\sumtype{x}{A}{B(x)}}{C(t)}.\]
@@ -73,9 +75,9 @@ Trditev lahko interpretiramo na sledeč način. Predpostavka nam pove, da če za
   Po asociativnosti odvisnih vsot je desna stran ekvivalence ekvivalentna tipu
   \(\sumtype{x}{A}{\sumtype{p}{P(x)}{B(x)}} \doteq \sumtype{x}{A}{(P(x) \times B(x))}\).
   Po posledici \ref{equiv-tot} torej zadošča pokazati, da za vsak \(\typejudgment{x}{A}\)
-  obstaja ekvivalenca \(B(x) \simeq P(x) \times B(x)\).
+  velja ekvivalenca \(B(x) \simeq P(x) \times B(x)\).
 
-  Naj bo torej \(\typejudgment{a}{A}\). Med tipoma konstruirajmo inverzni funkciji. Po predpostavki obstaja družina funkcij
+  Naj bo torej \(\typejudgment{a}{A}\). Med tipoma konstruirajmo inverzni funkciji. Po predpostavki imamo družino funkcij
   \[\typejudgment{s}{\pitype{x}{A}{(B(x) \to P(x))}}.\]
   Funkcijo \(\defun{f}{B(a)}{P(a) \times B(a)}\) lahko tedaj definiramo kot
   \[\lambda \, y. \left(s(a,y),\, y\right),\] za funkcijo \(\defun{g}{P(a) \times B(a)}{B(a)}\) pa
@@ -94,8 +96,8 @@ Brez dokaza predstavimo še sledečo trditev, ki pove, da se tip identifikacij v
   Naj bo \(A\) tip, \(P\) predikat na \(A\) in
   \(\typejudgment{s, t}{\sumtype{x}{A}{P(x)}}\). Tedaj je tip \(s = t\) ekvivalenten tipu \(\proj{1}(s) = \proj{1}(t)\).
 \end{trditev}
-Z aplikacijo funkcije \(\proj{1}\) lahko za vsako identifikacijo tipa \(s = t\) dobimo tudi identifikacijo tipa \(\proj{1}(s) = \proj{1}(t)\), trditev pa nam pove, da v primeru podtipov obstaja tudi enoličen dvig v nasprotno smer.
-Trditev bi najlažje dokazali s tako imenovanim fundamentalnim izrekom o tipih identifikacij, vendar le tega v tem delu nismo razvili. Dokaz trditve in več o podtipih lahko poiščemo v \cite[Poglavje II.12.2]{rijke2022introduction}.
+Z aplikacijo funkcije \(\proj{1}\) lahko za vsako identifikacijo tipa \(s = t\) dobimo tudi identifikacijo tipa \(\proj{1}(s) = \proj{1}(t)\), trditev pa nam pove, da lahko v primeru podtipov konstruiramo tudi enoličen dvig v nasprotno smer.
+Trditev bi najlažje dokazali s tako imenovanim osnovnim izrekom o tipih identifikacij, vendar le tega v tem delu nismo razvili. Dokaz trditve in več o podtipih lahko poiščemo v \cite[Poglavje II.12.2]{rijke2022introduction}.
 
 Naslednj trditev spregovori o povezavi med kontraktibilnostjo in odvisnimi vsotami.
 
@@ -149,8 +151,7 @@ Za boljšo berljivost vpeljemo sledeče oznake: Naj bo \(\typejudgment{e}{A \sim
 \begin{dokaz}
   Konstruirati želimo ekvivalenco tipa
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq \sumtype{e}{A \simeq B}{(e = e)}.\]
-  Ker je po trditvi \ref{is-equiv-prop} \(\isequiv\) predikat na tipu \(A \to B\) in ker po trditvi \ref{inv-of-equiv}
-  za vsako funkcijo \(f\) obstaja funkcija tipa
+  Ker je po trditvi \ref{is-equiv-prop} \(\isequiv\) predikat na tipu \(A \to B\) in ker po trditvi \ref{inv-of-equiv} vsaka funkcija \(f\) porodi funkcija tipa
   \(\typename{is-invertible}(f) \to \typename{is-equiv}(f)\), najprej opazimo, da po
   trditvi \ref{full-subtype} velja ekvivalenca
   \[\sumtype{f}{A \to B}{\isinv(f)} \simeq

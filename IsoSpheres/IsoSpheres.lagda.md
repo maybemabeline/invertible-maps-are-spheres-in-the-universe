@@ -64,8 +64,8 @@ universal-property-sphere {ℓ} = Iso→Equiv the-iso
   where
 
   the-iso : Iso _ _
-  the-iso .fst  (a , s) base = a
-  the-iso .fst  (a , s) (surf i j) = s i j
+  the-iso .fst (a , s) base = a
+  the-iso .fst (a , s) (surf i j) = s i j
   the-iso .snd .inv f = (f base) , ap² f surf
   the-iso .snd .linv (a , s) = refl
   the-iso .snd .rinv f = funext (λ { base → refl ; (surf i j) → refl})
